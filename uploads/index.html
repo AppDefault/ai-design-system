@@ -25,7 +25,6 @@ a:hover { color: #fde047; }
 input, textarea, button { font-family: 'Manrope', sans-serif; }
 input::placeholder, textarea::placeholder { color: rgba(255,255,255,.35); }
 @keyframes blink { 0%, 80%, 100% { opacity: .25; } 40% { opacity: 1; } }
-@keyframes pulse-dot { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .45; transform: scale(.8); } }
 button, *[style*="cursor:pointer"] { transition: transform .13s cubic-bezier(.34,1.56,.64,1), filter .13s ease, opacity .13s ease, background-color .13s ease, border-color .13s ease, color .13s ease, padding-left .13s ease; }
 button:hover, *[style*="cursor:pointer"]:hover { filter: brightness(1.22); }
 button:active, *[style*="cursor:pointer"]:active { filter: brightness(.94); }
@@ -122,67 +121,29 @@ button:active, *[style*="cursor:pointer"]:active { filter: brightness(.94); }
     <!-- EXPLORE -->
     <sc-if value="{{ isExplore }}" hint-placeholder-val="{{ true }}">
       <div data-screen-label="Explore" style="flex:1; min-height:0; overflow:auto;">
-        <div style="padding:{{ heroPad }}; max-width:1400px; margin:0 auto;">
-          <div style="margin-bottom:{{ heroTitleMb }};">
-            <div style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:#facc15; margin-bottom:{{ heroKickerMb }};">{{ t.kicker }}</div>
+        <div style="padding:clamp(22px,4vw,34px) clamp(16px,3vw,40px) 22px; max-width:1400px; margin:0 auto;">
+          <div style="margin-bottom:20px;">
+            <div style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:#facc15; margin-bottom:10px;">{{ t.kicker }}</div>
             <h1 style="font-family:'Newsreader',serif; font-weight:500; font-size:clamp(26px,3.4vw,36px); line-height:1.12; margin:0; letter-spacing:-.015em; color:#fff; text-wrap:balance;">{{ t.heroT1 }} {{ t.heroT2 }}</h1>
           </div>
-          <div style="display:flex; gap:12px; margin-bottom:{{ heroTitleMb }}; max-width:820px;">
-            <div style="flex:1; min-width:0; display:flex; align-items:center; gap:14px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.14); border-radius:14px; padding:0 {{ searchBoxPadX }};">
-              <span style="color:rgba(255,255,255,.45); display:flex; flex-shrink:0;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg></span>
-              <input value="{{ search }}" onChange="{{ onSearch }}" placeholder="{{ t.searchPh }}" style="flex:1; min-width:0; background:transparent; border:none; outline:none; color:#fff; font-size:{{ searchFontSize }}; padding:{{ searchInputPad }};">
+          <div style="display:flex; gap:12px; margin-bottom:20px; max-width:820px;">
+            <div style="flex:1; display:flex; align-items:center; gap:14px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.14); border-radius:14px; padding:0 20px;">
+              <span style="color:rgba(255,255,255,.45); font-size:19px;">⌕</span>
+              <input value="{{ search }}" onChange="{{ onSearch }}" placeholder="{{ t.searchPh }}" style="flex:1; min-width:0; background:transparent; border:none; outline:none; color:#fff; font-size:17px; padding:18px 0;">
             </div>
-            <button style="cursor:pointer; border:none; background:#facc15; color:#07060a; font-weight:700; font-size:{{ searchBtnFontSize }}; padding:0 {{ searchBtnPad }}; border-radius:14px; flex-shrink:1; white-space:nowrap;" style-hover="background:#fde047;">{{ t.searchBtn }}</button>
+            <button style="cursor:pointer; border:none; background:#facc15; color:#07060a; font-weight:700; font-size:16px; padding:0 clamp(18px,2.5vw,30px); border-radius:14px;" style-hover="background:#fde047;">{{ t.searchBtn }}</button>
           </div>
-          <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
           <div style="display:flex; gap:clamp(18px,3vw,28px); flex-wrap:wrap;">
             <div><span style="font-family:'Newsreader',serif; font-size:17px;">12,400+</span> <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:rgba(255,255,255,.4);">{{ t.statChars }}</span></div>
             <div><span style="font-family:'Newsreader',serif; font-size:17px;">48M</span> <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:rgba(255,255,255,.4);">{{ t.statChats }}</span></div>
-            <div style="display:flex; align-items:center; gap:6px;"><span style="width:7px; height:7px; border-radius:99px; background:#4ade80; animation:pulse-dot 1.6s ease-in-out infinite; flex-shrink:0;"></span><span style="font-family:'Newsreader',serif; font-size:17px; color:#facc15;">Live</span> <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:rgba(255,255,255,.4);">{{ onlineNowText }}</span></div>
+            <div><span style="font-family:'Newsreader',serif; font-size:17px; color:#facc15;">Live</span> <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:rgba(255,255,255,.4);">{{ t.online247 }}</span></div>
           </div>
-          </sc-if>
         </div>
-        <div style="display:flex; align-items:center; gap:10px; padding:0 clamp(16px,3vw,40px) {{ filterRowPadBottom }}; max-width:1400px; margin:0 auto; flex-wrap:wrap;">
+        <div style="display:flex; align-items:center; gap:10px; padding:0 clamp(16px,3vw,40px) 28px; max-width:1400px; margin:0 auto; flex-wrap:wrap;">
           <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; min-width:0;">
-          <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
-          <sc-for list="{{ filterChips }}" as="f" hint-placeholder-count="5">
-            <span onClick="{{ f.pick }}" style="cursor:pointer; white-space:nowrap; font-size:14px; font-weight:{{ f.fw }}; color:{{ f.fg }}; background:{{ f.bg }}; border:1px solid {{ f.bd }}; padding:8px 18px; border-radius:999px; flex-shrink:0;" style-hover="transform:translateY(-3px); border-color:rgba(250,204,21,.6);">{{ f.label }}</span>
-          </sc-for>
-          <div style="position:relative; flex-shrink:0;">
-            <span onClick="{{ toggleMoreMenu }}" style="cursor:pointer; white-space:nowrap; font-size:14px; font-weight:{{ moreFw }}; color:{{ moreFg }}; background:{{ moreBg }}; border:1px solid {{ moreBd }}; padding:8px 18px; border-radius:999px; display:inline-flex; align-items:center; gap:6px;" style-hover="transform:translateY(-3px); border-color:rgba(250,204,21,.6);">{{ moreLabel }} ▾</span>
-            <sc-if value="{{ moreMenuOpen }}" hint-placeholder-val="{{ false }}">
-              <div style="position:absolute; top:calc(100% + 6px); left:0; background:#0a0910; border:1px solid rgba(255,255,255,.12); border-radius:12px; padding:5px; display:flex; flex-direction:column; gap:2px; min-width:190px; max-height:260px; box-shadow:0 12px 32px rgba(0,0,0,.5); z-index:60;">
-                <input value="{{ moreQuery }}" onChange="{{ onMoreQuery }}" placeholder="{{ t.tagSearchPh }}" style="width:100%; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:8px; padding:8px 10px; font-size:13px; color:#fff; outline:none; margin-bottom:2px;">
-                <div style="overflow:auto; max-height:210px; display:flex; flex-direction:column; gap:2px;">
-                <sc-for list="{{ moreOptions }}" as="mo2" hint-placeholder-count="8">
-                  <span onClick="{{ mo2.pick }}" style="cursor:pointer; font-size:13px; padding:9px 12px; border-radius:8px; color:{{ mo2.fg }}; background:{{ mo2.bg }}; display:flex; align-items:center; gap:8px;" style-hover="background:rgba(255,255,255,.08);">{{ mo2.label }}<sc-if value="{{ mo2.active }}" hint-placeholder-val="{{ false }}"><span style="margin-left:auto;">✓</span></sc-if></span>
-                </sc-for>
-                <sc-if value="{{ noMoreResults }}" hint-placeholder-val="{{ false }}">
-                  <span style="font-size:13px; padding:9px 12px; color:rgba(255,255,255,.35);">{{ t.noTagsFound }}</span>
-                </sc-if>
-                </div>
-              </div>
-            </sc-if>
-          </div>
-          </sc-if>
-          <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
-          <div style="position:relative; flex-shrink:0;">
-            <span onClick="{{ toggleFilterMenu }}" style="cursor:pointer; white-space:nowrap; font-size:14px; font-weight:{{ filterFw }}; color:{{ filterFg }}; background:{{ filterBg }}; border:1px solid {{ filterBd }}; padding:8px 16px; border-radius:999px; display:inline-flex; align-items:center; gap:8px;" style-hover="border-color:rgba(250,204,21,.6);">{{ filterIcon }} {{ filterLabel }} ▾</span>
-            <sc-if value="{{ filterMenuOpen }}" hint-placeholder-val="{{ false }}">
-              <div style="position:absolute; top:calc(100% + 6px); left:0; background:#0a0910; border:1px solid rgba(255,255,255,.12); border-radius:12px; padding:5px; display:flex; flex-direction:column; gap:2px; min-width:210px; max-height:280px; box-shadow:0 12px 32px rgba(0,0,0,.5); z-index:60;">
-                <input value="{{ filterQuery }}" onChange="{{ onFilterQuery }}" placeholder="{{ t.tagSearchPh }}" style="width:100%; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:8px; padding:8px 10px; font-size:13px; color:#fff; outline:none; margin-bottom:2px;">
-                <div style="overflow:auto; max-height:230px; display:flex; flex-direction:column; gap:2px;">
-                <sc-for list="{{ filterOptions }}" as="fo" hint-placeholder-count="8">
-                  <span onClick="{{ fo.pick }}" style="cursor:pointer; font-size:13px; padding:9px 12px; border-radius:8px; color:{{ fo.fg }}; background:{{ fo.bg }}; display:flex; align-items:center; gap:8px;" style-hover="background:rgba(255,255,255,.08);">{{ fo.label }}<sc-if value="{{ fo.active }}" hint-placeholder-val="{{ false }}"><span style="margin-left:auto;">✓</span></sc-if></span>
-                </sc-for>
-                <sc-if value="{{ noFilterResults }}" hint-placeholder-val="{{ false }}">
-                  <span style="font-size:13px; padding:9px 12px; color:rgba(255,255,255,.35);">{{ t.noTagsFound }}</span>
-                </sc-if>
-                </div>
-              </div>
-            </sc-if>
-          </div>
-          </sc-if>
+            <sc-for list="{{ filterChips }}" as="f" hint-placeholder-count="6">
+              <span onClick="{{ f.pick }}" style="cursor:pointer; white-space:nowrap; font-size:14px; font-weight:{{ f.fw }}; color:{{ f.fg }}; background:{{ f.bg }}; border:1px solid {{ f.bd }}; padding:8px 18px; border-radius:999px; flex-shrink:0;" style-hover="transform:translateY(-3px); border-color:rgba(250,204,21,.6);">{{ f.label }}</span>
+            </sc-for>
           </div>
           <div style="position:relative; margin-left:auto; flex-shrink:0; padding-left:10px;">
             <span onClick="{{ toggleSortMenu }}" style="cursor:pointer; font-family:'JetBrains Mono',monospace; font-size:13px; color:rgba(255,255,255,.65); white-space:nowrap; display:inline-flex; align-items:center; gap:6px; border:1px solid rgba(255,255,255,.14); padding:8px 14px; border-radius:999px;" style-hover="border-color:#facc15; color:#fff; background:rgba(250,204,21,.1); transform:translateY(-1px);">{{ sortIcon }} {{ sortLabel }} ▾</span>
@@ -195,9 +156,9 @@ button:active, *[style*="cursor:pointer"]:active { filter: brightness(.94); }
             </sc-if>
           </div>
         </div>
-        <div ref="{{ gridRef }}" style="display:grid; grid-template-columns:{{ gridTemplateCols }}; gap:{{ gridGapCss }}; padding:0 clamp(16px,3vw,40px) 48px; max-width:1400px; margin:0 auto;">
+        <div ref="{{ gridRef }}" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(min(220px,46vw),1fr)); gap:clamp(18px,2.4vw,26px); padding:0 clamp(16px,3vw,40px) 48px; max-width:1400px; margin:0 auto;">
           <sc-for list="{{ gridChars }}" as="c" hint-placeholder-count="10">
-            <div onClick="{{ c.open }}" style="cursor:pointer; visibility:{{ c.vis }}; display:flex; flex-direction:column; gap:11px; min-width:0; transition:transform .18s;" style-hover="transform:translateY(-4px);">
+            <div onClick="{{ c.open }}" style="cursor:pointer; visibility:{{ c.vis }}; display:flex; flex-direction:column; gap:11px; transition:transform .18s;" style-hover="transform:translateY(-4px);">
               <sc-if value="{{ c.notFiller }}" hint-placeholder-val="{{ true }}">
               <div style="position:relative; aspect-ratio:4/5; border-radius:12px; overflow:hidden; border:1px solid rgba(255,255,255,.08); background:repeating-linear-gradient(135deg,rgba(255,255,255,.03) 0 2px,transparent 2px 10px),linear-gradient(160deg,#1b1626,#0d0b12); display:flex; align-items:center; justify-content:center;">
                 <span style="font-family:'Newsreader',serif; font-size:84px; color:rgba(255,255,255,.055); font-weight:600;">{{ c.initial }}</span>
@@ -211,14 +172,12 @@ button:active, *[style*="cursor:pointer"]:active { filter: brightness(.94); }
                   <h3 style="font-family:'Newsreader',serif; font-weight:500; font-size:18px; margin:0; letter-spacing:-.01em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ c.name }}</h3>
                   <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:#facc15; white-space:nowrap;">{{ c.cat }}</span>
                 </div>
-                <p style="font-size:12.5px; line-height:1.45; color:rgba(255,255,255,.52); margin:6px 0 10px; display:-webkit-box; -webkit-line-clamp:{{ blurbClamp }}; -webkit-box-orient:vertical; overflow:hidden;">{{ c.blurb }}</p>
-                <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+                <p style="font-size:12.5px; line-height:1.45; color:rgba(255,255,255,.52); margin:6px 0 10px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">{{ c.blurb }}</p>
                 <div style="display:flex; gap:7px; flex-wrap:wrap;">
                   <sc-for list="{{ c.tags }}" as="tag" hint-placeholder-count="2">
                     <span style="font-size:12px; color:rgba(255,255,255,.6); border:1px solid rgba(255,255,255,.14); padding:3px 10px; border-radius:999px;">{{ tag }}</span>
                   </sc-for>
                 </div>
-                </sc-if>
               </div>
               </sc-if>
             </div>
@@ -278,7 +237,7 @@ button:active, *[style*="cursor:pointer"]:active { filter: brightness(.94); }
           <div>
             <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:rgba(255,255,255,.35); margin-bottom:14px;">{{ t.getAppLbl }}</div>
             <a href="#" style="display:inline-flex; align-items:center; gap:10px; border:1px solid rgba(255,255,255,.16); border-radius:10px; padding:9px 16px; color:#fff;" style-hover="border-color:rgba(255,255,255,.35);">
-              <span style="display:flex; color:#fff;"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M4 3.3v17.4a1 1 0 0 0 1.53.85l14.2-8.7a1 1 0 0 0 0-1.7L5.53 2.45A1 1 0 0 0 4 3.3z" fill="currentColor"></path></svg></span>
+              <span style="font-size:20px; line-height:1;">▶</span>
               <span style="display:flex; flex-direction:column; line-height:1.3;">
                 <span style="font-size:10px; color:rgba(255,255,255,.5);">{{ t.getItOn }}</span>
                 <span style="font-size:15px; font-weight:600;">Google Play</span>
@@ -316,7 +275,7 @@ button:active, *[style*="cursor:pointer"]:active { filter: brightness(.94); }
             <div style="display:flex; align-items:center; gap:12px; padding:12px clamp(14px,2vw,24px); border-bottom:1px solid rgba(255,255,255,.06); flex-shrink:0;">
               <span onClick="{{ back }}" style="cursor:pointer; color:rgba(255,255,255,.5); font-size:22px; padding:6px 10px;" style-hover="color:#fff;">‹</span>
               <div style="width:40px; height:40px; border-radius:11px; background:linear-gradient(160deg,#241c32,#120e18); display:flex; align-items:center; justify-content:center; font-family:'Newsreader',serif; font-size:18px; color:rgba(255,255,255,.6);">{{ activeChar.initial }}</div>
-              <div style="min-width:0;"><div style="font-family:'Newsreader',serif; font-size:20px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ activeChar.name }}</div><div style="font-size:12px; color:#4ade80; display:flex; align-items:center; gap:5px;"><span style="width:6px; height:6px; border-radius:99px; background:#4ade80; animation:pulse-dot 1.6s ease-in-out infinite; flex-shrink:0;"></span>{{ onlineLabelText }}</div></div>
+              <div style="min-width:0;"><div style="font-family:'Newsreader',serif; font-size:20px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ activeChar.name }}</div><div style="font-size:12px; color:#4ade80;">{{ t.onlineLbl }}</div></div>
               <div style="margin-left:auto; display:flex; align-items:center; gap:10px;">
                 <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ false }}">
                   <div style="position:relative;">
@@ -700,7 +659,6 @@ class Component extends DCLogic {
     const w = typeof window !== 'undefined' ? window.innerWidth : 1280;
     this.state = {
       route: (props.skipOnboarding ?? false) ? 'explore' : 'onboarding',
-      liveOnline: 247, filterQuery: '', filterMenuOpen: false, moreQuery: '', moreMenuOpen: false,
       obStep: 0, obDenied: false,
       lang: props.defaultLang ?? 'en',
       menuOpen: false, paywallOpen: false, billing: 'mo3', premium: false, premiumTier: null,
@@ -721,9 +679,6 @@ class Component extends DCLogic {
     this.onR = () => { this.setState({ w: window.innerWidth }); this.measureGrid(); };
     window.addEventListener('resize', this.onR);
     requestAnimationFrame(() => this.measureGrid());
-    this.onlineTmr = setInterval(() => {
-      this.setState(s => ({ liveOnline: Math.max(210, Math.min(280, s.liveOnline + Math.round((Math.random() - 0.5) * 7))) }));
-    }, 2600);
   }
   measureGrid() {
     if (!this.gridEl || !this.gridEl.children.length) return;
@@ -736,7 +691,7 @@ class Component extends DCLogic {
     const cols = Math.max(1, Math.round((gridW + gap) / (cardW + gap)));
     if (cols !== this.state.measuredCols) this.setState({ measuredCols: cols });
   }
-  componentWillUnmount() { window.removeEventListener('resize', this.onR); clearTimeout(this.tmr); clearTimeout(this.tmr2); clearInterval(this.onlineTmr); }
+  componentWillUnmount() { window.removeEventListener('resize', this.onR); clearTimeout(this.tmr); clearTimeout(this.tmr2); }
   componentDidUpdate() { if (this.msgEl) this.msgEl.scrollTop = this.msgEl.scrollHeight; }
 
   chars() {
@@ -834,7 +789,7 @@ class Component extends DCLogic {
         obEnter: "I'm 18 or older — Enter", obLeave: 'Leave', obDeniedTxt: "Come back when you're 18.",
         signTitle: 'Sign in', cont: 'Continue', or: 'or', google: 'Continue with Google', apple: 'Continue with Apple',
         terms: 'By continuing you accept the Terms of Service and confirm that you are 18 or older.',
-        filters: { All: 'All', Anime: 'Anime', Movie: 'Movie', Celebrity: 'Celebrity', Original: 'Original', Fantasy: 'Fantasy', Story: 'Story', Game: 'Game' }, moreLabel: 'More',
+        filters: { All: 'All', Anime: 'Anime', Movie: 'Movie', Celebrity: 'Celebrity', Original: 'Original', Fantasy: 'Fantasy' },
         ofPages: 'of 2,600 pages', journalLbl: 'From the journal', contactLbl: 'Contact us', legalName: 'Legal Name: Signlab Studio Corp', legalAddr: '30 N Gould St Ste R, Sheridan, WY',
         infoLbl: 'Information', termsLink: 'Terms of Use', privacyLink: 'Privacy Policy', refundLink: 'Refund Policy', aboutLink: 'About',
         joinLbl: 'Join us', affiliateLink: 'Affiliate Program', copyright: '© 2023–2026 AI Girlfriend #1',
@@ -868,12 +823,12 @@ class Component extends DCLogic {
         obEnter: 'Мне есть 18 — Войти', obLeave: 'Выйти', obDeniedTxt: 'Возвращайся, когда исполнится 18.',
         signTitle: 'Вход', cont: 'Продолжить', or: 'или', google: 'Войти через Google', apple: 'Войти через Apple',
         terms: 'Продолжая, ты принимаешь условия сервиса и подтверждаешь, что тебе есть 18 лет.',
-        filters: { All: 'Все', Anime: 'Аниме', Movie: 'Кино', Celebrity: 'Звёзды', Original: 'Авторские', Fantasy: 'Фэнтези', Story: 'Истории', Game: 'Игры' }, moreLabel: 'Ещё'
+        filters: { All: 'Все', Anime: 'Аниме', Movie: 'Кино', Celebrity: 'Звёзды', Original: 'Авторские', Fantasy: 'Фэнтези' }
       },
       de: {
         explore: 'Entdecken', chats: 'Meine Chats', create: 'Erstellen', profile: 'Profil', premiumBtn: '✦ Premium',
         kicker: '18+ · Chat & Rollenspiel', heroT1: 'Triff einen Charakter,', heroT2: 'mit dem du reden willst.',
-        searchPh: 'Suche nach Name oder Stimmung…', searchBtn: 'Suchen', statChars: 'Charaktere', statChats: 'Chats gestartet', online247: '247 jetzt online', trending: 'Im Trend',
+        searchPh: 'Suche nach Name oder Stimmung…', searchBtn: 'Suchen', statChars: 'Charaktere', statChats: 'Chats gestartet', online247: '247 jetzt online', trending: '🔥 Im Trend',
         newChat: '+ Neuer Chat', recentLbl: 'Zuletzt', onlineLbl: '● online', disclaimer: 'Dies ist ein KI-Chatbot. Alle Gespräche sind fiktiv.', msgPh: 'Nachricht an',
         editChar: '✎ Bearbeiten', restartLbl: '↻ Neu starten', reportLbl: '⚑ Melden',
         studio: 'Studio', createTitle: 'Erstelle deinen Charakter', guideLink: 'Zum Guide', basics: 'Basis', personality: 'Persönlichkeit', visibilityLbl: 'Sichtbarkeit',
@@ -895,12 +850,12 @@ class Component extends DCLogic {
         obEnter: 'Ich bin 18 oder älter — Eintreten', obLeave: 'Verlassen', obDeniedTxt: 'Komm wieder, wenn du 18 bist.',
         signTitle: 'Anmelden', cont: 'Weiter', or: 'oder', google: 'Mit Google fortfahren', apple: 'Mit Apple fortfahren',
         terms: 'Mit dem Fortfahren akzeptierst du die Nutzungsbedingungen und bestätigst, dass du 18+ bist.',
-        filters: { All: 'Alle', Anime: 'Anime', Movie: 'Film', Celebrity: 'Stars', Original: 'Original', Fantasy: 'Fantasy', Story: 'Geschichte', Game: 'Spiel' }, moreLabel: 'Mehr'
+        filters: { All: 'Alle', Anime: 'Anime', Movie: 'Film', Celebrity: 'Stars', Original: 'Original', Fantasy: 'Fantasy' }
       },
       es: {
         explore: 'Explorar', chats: 'Mis chats', create: 'Crear', profile: 'Perfil', premiumBtn: '✦ Premium',
         kicker: '18+ · Chat y roleplay', heroT1: 'Conoce a un personaje con quien', heroT2: 'hablar toda la noche.',
-        searchPh: 'Busca por nombre o estado de ánimo…', searchBtn: 'Buscar', statChars: 'personajes', statChats: 'chats iniciados', online247: '247 en línea ahora', trending: 'Tendencias',
+        searchPh: 'Busca por nombre o estado de ánimo…', searchBtn: 'Buscar', statChars: 'personajes', statChats: 'chats iniciados', online247: '247 en línea ahora', trending: '🔥 Tendencias',
         newChat: '+ Nuevo chat', recentLbl: 'Recientes', onlineLbl: '● en línea', disclaimer: 'Esto es un chatbot de IA. Las conversaciones son ficticias.', msgPh: 'Mensaje a',
         editChar: '✎ Editar personaje', restartLbl: '↻ Reiniciar chat', reportLbl: '⚑ Reportar',
         studio: 'Estudio', createTitle: 'Crea tu personaje', guideLink: 'Leer la guía', basics: 'Básicos', personality: 'Personalidad', visibilityLbl: 'Visibilidad',
@@ -922,12 +877,12 @@ class Component extends DCLogic {
         obEnter: 'Tengo 18 o más — Entrar', obLeave: 'Salir', obDeniedTxt: 'Vuelve cuando tengas 18.',
         signTitle: 'Iniciar sesión', cont: 'Continuar', or: 'o', google: 'Continuar con Google', apple: 'Continuar con Apple',
         terms: 'Al continuar aceptas los Términos y confirmas que tienes 18+.',
-        filters: { All: 'Todos', Anime: 'Anime', Movie: 'Cine', Celebrity: 'Famosos', Original: 'Originales', Fantasy: 'Fantasía', Story: 'Historia', Game: 'Juego' }, moreLabel: 'Más'
+        filters: { All: 'Todos', Anime: 'Anime', Movie: 'Cine', Celebrity: 'Famosos', Original: 'Originales', Fantasy: 'Fantasía' }
       },
       fr: {
         explore: 'Explorer', chats: 'Mes chats', create: 'Créer', profile: 'Profil', premiumBtn: '✦ Premium',
         kicker: '18+ · Chat & roleplay', heroT1: 'Rencontre un personnage avec qui', heroT2: 'parler toute la nuit.',
-        searchPh: 'Recherche par nom ou humeur…', searchBtn: 'Chercher', statChars: 'personnages', statChats: 'chats lancés', online247: '247 en ligne', trending: 'Tendances',
+        searchPh: 'Recherche par nom ou humeur…', searchBtn: 'Chercher', statChars: 'personnages', statChats: 'chats lancés', online247: '247 en ligne', trending: '🔥 Tendances',
         newChat: '+ Nouveau chat', recentLbl: 'Récents', onlineLbl: '● en ligne', disclaimer: 'Ceci est un chatbot IA. Les conversations sont fictives.', msgPh: 'Message à',
         editChar: '✎ Modifier', restartLbl: '↻ Recommencer', reportLbl: '⚑ Signaler',
         studio: 'Studio', createTitle: 'Crée ton personnage', guideLink: 'Lire le guide', basics: 'Base', personality: 'Personnalité', visibilityLbl: 'Visibilité',
@@ -949,12 +904,12 @@ class Component extends DCLogic {
         obEnter: 'J’ai 18 ans ou plus — Entrer', obLeave: 'Quitter', obDeniedTxt: 'Reviens quand tu auras 18 ans.',
         signTitle: 'Connexion', cont: 'Continuer', or: 'ou', google: 'Continuer avec Google', apple: 'Continuer avec Apple',
         terms: 'En continuant, tu acceptes les Conditions et confirmes avoir 18 ans ou plus.',
-        filters: { All: 'Tous', Anime: 'Anime', Movie: 'Films', Celebrity: 'Stars', Original: 'Originaux', Fantasy: 'Fantasy', Story: 'Histoire', Game: 'Jeu' }, moreLabel: 'Plus'
+        filters: { All: 'Tous', Anime: 'Anime', Movie: 'Films', Celebrity: 'Stars', Original: 'Originaux', Fantasy: 'Fantasy' }
       },
       tr: {
         explore: 'Keşfet', chats: 'Sohbetlerim', create: 'Oluştur', profile: 'Profil', premiumBtn: '✦ Premium',
         kicker: '18+ · Sohbet ve roleplay', heroT1: 'Bu gece konuşmaya değer', heroT2: 'bir karakterle tanış.',
-        searchPh: 'İsme veya ruh haline göre ara…', searchBtn: 'Ara', statChars: 'karakter', statChats: 'sohbet başlatıldı', online247: 'şu an 247 çevrimiçi', trending: 'Trendler',
+        searchPh: 'İsme veya ruh haline göre ara…', searchBtn: 'Ara', statChars: 'karakter', statChats: 'sohbet başlatıldı', online247: 'şu an 247 çevrimiçi', trending: '🔥 Trendler',
         newChat: '+ Yeni sohbet', recentLbl: 'Son sohbetler', onlineLbl: '● çevrimiçi', disclaimer: 'Bu bir yapay zekâ sohbet botudur. Konuşmalar kurgusaldır.', msgPh: 'Mesaj:',
         editChar: '✎ Düzenle', restartLbl: '↻ Yeniden başlat', reportLbl: '⚑ Şikâyet et',
         studio: 'Stüdyo', createTitle: 'Karakterini oluştur', guideLink: 'Rehberi oku', basics: 'Temel', personality: 'Kişilik', visibilityLbl: 'Görünürlük',
@@ -976,12 +931,12 @@ class Component extends DCLogic {
         obEnter: '18 yaşındayım veya büyüğüm — Gir', obLeave: 'Çık', obDeniedTxt: '18 olduğunda geri gel.',
         signTitle: 'Giriş yap', cont: 'Devam', or: 'veya', google: 'Google ile devam et', apple: 'Apple ile devam et',
         terms: 'Devam ederek Koşulları kabul eder ve 18+ olduğunu onaylarsın.',
-        filters: { All: 'Tümü', Anime: 'Anime', Movie: 'Film', Celebrity: 'Ünlüler', Original: 'Orijinal', Fantasy: 'Fantezi', Story: 'Hikaye', Game: 'Oyun' }, moreLabel: 'Daha fazla'
+        filters: { All: 'Tümü', Anime: 'Anime', Movie: 'Film', Celebrity: 'Ünlüler', Original: 'Orijinal', Fantasy: 'Fantezi' }
       },
       zh: {
         explore: '探索', chats: '我的聊天', create: '创建', profile: '个人资料', premiumBtn: '✦ Premium',
         kicker: '18+ · 聊天与角色扮演', heroT1: '遇见一个今晚', heroT2: '值得倾谈的角色。',
-        searchPh: '按名字或心情搜索…', searchBtn: '搜索', statChars: '个角色', statChats: '次聊天', online247: '247 人在线', trending: '热门',
+        searchPh: '按名字或心情搜索…', searchBtn: '搜索', statChars: '个角色', statChats: '次聊天', online247: '247 人在线', trending: '🔥 热门',
         newChat: '+ 新聊天', recentLbl: '最近', onlineLbl: '● 在线', disclaimer: '这是 AI 聊天机器人，所有对话均为虚构。', msgPh: '发消息给',
         editChar: '✎ 编辑角色', restartLbl: '↻ 重新开始', reportLbl: '⚑ 举报',
         studio: '工作室', createTitle: '创建你的角色', guideLink: '查看完整指南', basics: '基础', personality: '性格', visibilityLbl: '可见性',
@@ -1003,7 +958,7 @@ class Component extends DCLogic {
         obEnter: '我已年满 18 — 进入', obLeave: '离开', obDeniedTxt: '满 18 岁再来吧。',
         signTitle: '登录', cont: '继续', or: '或', google: '使用 Google 继续', apple: '使用 Apple 继续',
         terms: '继续即表示你接受服务条款并确认已年满 18 岁。',
-        filters: { All: '全部', Anime: '动漫', Movie: '电影', Celebrity: '名人', Original: '原创', Fantasy: '奇幻', Story: '故事', Game: '游戏' }, moreLabel: '更多'
+        filters: { All: '全部', Anime: '动漫', Movie: '电影', Celebrity: '名人', Original: '原创', Fantasy: '奇幻' }
       }
     };
   }
@@ -1042,8 +997,6 @@ class Component extends DCLogic {
     const dicts = this.T();
     const d = dicts[s.lang] || {};
     const t = { ...dicts.en, ...d, filters: { ...dicts.en.filters, ...(d.filters || {}) } };
-    const onlineNowText = t.online247.replace(/^\d+/, String(s.liveOnline));
-    const onlineLabelText = t.onlineLbl.replace(/^\u25cf\s*/, '');
     const totalPages = 6;
     const pageItems = Array.from({ length: totalPages }, (_, i) => i + 1).map(n => ({
       label: String(n), fw: n === s.page ? '700' : '400', fg: n === s.page ? '#07060a' : 'rgba(255,255,255,.6)', bg: n === s.page ? '#facc15' : 'transparent',
@@ -1055,15 +1008,6 @@ class Component extends DCLogic {
       { title: t.blog3T, excerpt: t.blog3E }
     ];
     const isMobile = s.w < 768, isDesktop = s.w >= 768, isWide = s.w >= 1180;
-    const heroPad = isMobile ? '16px 16px 12px' : 'clamp(22px,4vw,34px) clamp(16px,3vw,40px) 22px';
-    const heroTitleMb = isMobile ? '12px' : '20px';
-    const heroKickerMb = isMobile ? '6px' : '10px';
-    const searchBoxPadX = isMobile ? '14px' : '20px';
-    const searchInputPad = isMobile ? '11px 0' : '18px 0';
-    const searchFontSize = isMobile ? '15px' : '17px';
-    const filterRowPadBottom = isMobile ? '16px' : '28px';
-    const searchBtnFontSize = isMobile ? '14px' : '16px';
-    const searchBtnPad = isMobile ? '14px' : 'clamp(18px,2.5vw,30px)';
     const chars = this.chars();
     const active = chars.find(c => c.id === s.activeId) || chars[0];
     const q = s.search.trim().toLowerCase();
@@ -1078,55 +1022,21 @@ class Component extends DCLogic {
     const gridGap = 22;
     const gridMinCol = Math.min(220, 0.46 * s.w);
     const gridColsEstimate = Math.max(1, Math.floor((gridAvail + gridGap) / (gridMinCol + gridGap)));
-    const gridCols = isMobile ? 2 : (s.measuredCols || gridColsEstimate);
-    const gridTemplateCols = isMobile ? 'repeat(2, 1fr)' : 'repeat(auto-fill,minmax(min(220px,46vw),1fr))';
-    const gridGapCss = isMobile ? '12px' : 'clamp(18px,2.4vw,26px)';
-    const blurbClamp = isMobile ? 1 : 2;
+    const gridCols = s.measuredCols || gridColsEstimate;
     const gridFullRows = Math.floor(gridChars.length / gridCols);
     const gridCharsPadded = gridChars.slice(0, Math.max(gridCols, gridFullRows * gridCols));
     const sortDefs = [
       { key: 'trending', icon: '▲', label: 'Trending' },
-      { key: 'telegram', icon: React.createElement('svg', { width: 13, height: 13, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round' }, React.createElement('path', { d: 'M22 2 11 13' }), React.createElement('path', { d: 'M22 2 15 22 11 13 2 9 22 2z' })), label: 'In Telegram' },
+      { key: 'telegram', icon: '◆', label: 'In Telegram' },
       { key: 'popular', icon: '♥', label: 'Popular' },
       { key: 'latest', icon: '●', label: 'Latest' }
     ];
     const sortOptions = sortDefs.map(o => ({ ...o, active: s.sort === o.key, fg: s.sort === o.key ? '#facc15' : 'rgba(255,255,255,.75)', bg: s.sort === o.key ? 'rgba(250,204,21,.1)' : 'transparent', pick: () => this.setState({ sort: o.key, sortMenuOpen: false }) }));
     const curSort = sortDefs.find(o => o.key === s.sort);
-    const tagPool = [
-      'Sunshine', 'Grumpy', 'Shy', 'Confident', 'Flirty', 'Clingy', 'Cold', 'Warm', 'Sarcastic', 'Sweet', 'Bratty', 'Gentle', 'Fierce', 'Playful', 'Serious', 'Chaotic', 'Calm', 'Mysterious', 'Charming', 'Awkward', 'Bold', 'Quiet', 'Loud', 'Nerdy', 'Jock', 'Artsy', 'Rebel', 'Loyal', 'Jealous', 'Protective', 'Independent', 'Curious', 'Wise', 'Naive', 'Adventurous', 'Homebody', 'Introvert', 'Extrovert', 'Workaholic', 'Foodie',
-      'Tsundere', 'Yandere', 'Kuudere', 'Dandere', 'Himedere',
-      'Mafia', 'Vampire', 'Werewolf', 'Alien', 'Robot', 'Angel', 'Demon', 'Pirate', 'Ninja', 'Samurai', 'Knight', 'Wizard', 'Witch', 'Elf', 'Dwarf', 'Orc', 'Mermaid', 'Ghost', 'Zombie', 'Cyborg', 'Superhero', 'Villain', 'Detective', 'Doctor', 'Nurse', 'Teacher', 'Student', 'Boss', 'Secretary', 'Bodyguard', 'Chef', 'Idol', 'Popstar', 'Athlete', 'Soldier', 'Spy', 'Assassin', 'Thief', 'Prince', 'Princess', 'King', 'Queen', 'Monster', 'Dragon', 'Catgirl', 'Foxgirl', 'Wolfgirl', 'Bunny Girl', 'Maid', 'Butler', 'Roommate', 'Neighbor', 'Best Friend', 'Ex', 'Rival', 'Stranger', 'Landlord', 'Coworker', 'CEO', 'Intern',
-      'Streamer', 'Gamer', 'Artist', 'Musician', 'Writer', 'Poet', 'Scientist', 'Engineer', 'Pilot', 'Sailor', 'Astronaut', 'Bartender', 'Barista', 'Farmer', 'Fisherman', 'Hunter', 'Explorer', 'Archaeologist', 'Priest', 'Monk', 'Shaman', 'Alchemist', 'Necromancer', 'Paladin', 'Rogue', 'Bard', 'Druid', 'Warlock', 'Sorcerer', 'Trainer',
-      'Historical', 'Medieval', 'Victorian', 'Cyberpunk', 'Steampunk', 'Post-apocalyptic', 'Sci-fi', 'Horror', 'Comedy', 'Drama', 'Slice of Life', 'Isekai', 'Mystery', 'Thriller', 'Adventure', 'Western', 'Noir', 'Slow Burn', 'Enemies to Lovers', 'Friends to Lovers', 'Forbidden Love', 'Second Chance', 'Love Triangle', 'Arranged Marriage', 'Fake Dating',
-      'Tall', 'Short', 'Muscular', 'Slim', 'Curvy', 'Petite', 'Tattooed', 'Pierced', 'Glasses', 'Freckles', 'Redhead', 'Blonde', 'Brunette', 'Silver Hair', 'Blue Hair', 'Pink Hair', 'Scarred', 'One-eyed', 'Winged', 'Horned', 'Tailed', 'Multiple Personalities', 'Amnesia', 'Royalty', 'Outlaw',
-      'Hero', 'Anti-hero', 'Chosen One', 'Underdog', 'Genius', 'Clumsy', 'Bookworm', 'Fitness', 'Yoga', 'Dancer', 'Singer', 'Actor', 'Model', 'Influencer', 'Coach'
-    ];
-    const allCats = ['All', 'Anime', 'Movie', 'Celebrity', 'Original', 'Fantasy', 'Story', 'Game', ...tagPool];
-    const visibleCats = allCats.slice(0, 5);
-    const hiddenCats = allCats.slice(5);
-    const filterChips = visibleCats.map(f => {
+    const filterChips = ['All', 'Anime', 'Movie', 'Celebrity', 'Original', 'Fantasy'].map(f => {
       const on = s.filter === f;
       return { label: t.filters[f], fw: on ? '700' : '400', fg: on ? '#07060a' : 'rgba(255,255,255,.7)', bg: on ? '#facc15' : 'transparent', bd: on ? '#facc15' : 'rgba(255,255,255,.12)', pick: () => this.setState({ filter: f }) };
     });
-    const moreActive = hiddenCats.includes(s.filter);
-    const moreLabel = moreActive ? (t.filters[s.filter] || s.filter) : (t.moreLabel || 'More');
-    const moreQ = s.moreQuery.trim().toLowerCase();
-    const hiddenCatsFiltered = hiddenCats.filter(f => (t.filters[f] || f).toLowerCase().includes(moreQ));
-    const moreOptions = hiddenCatsFiltered.map(f => {
-      const on = s.filter === f;
-      return { label: t.filters[f] || f, active: on, fg: on ? '#facc15' : 'rgba(255,255,255,.8)', bg: on ? 'rgba(250,204,21,.08)' : 'transparent', pick: () => this.setState({ filter: f, moreMenuOpen: false, moreQuery: '' }) };
-    });
-    const noMoreResults = hiddenCatsFiltered.length === 0;
-    const moreFw = moreActive ? '700' : '400', moreFg = moreActive ? '#07060a' : 'rgba(255,255,255,.7)', moreBg = moreActive ? '#facc15' : 'transparent', moreBd = moreActive ? '#facc15' : 'rgba(255,255,255,.12)';
-    const filterQ = s.filterQuery.trim().toLowerCase();
-    const allCatsFiltered = allCats.filter(f => (t.filters[f] || f).toLowerCase().includes(filterQ));
-    const filterOptions = allCatsFiltered.map(f => {
-      const on = s.filter === f;
-      return { label: t.filters[f] || f, active: on, fg: on ? '#facc15' : 'rgba(255,255,255,.8)', bg: on ? 'rgba(250,204,21,.08)' : 'transparent', pick: () => this.setState({ filter: f, filterMenuOpen: false, filterQuery: '' }) };
-    });
-    const noFilterResults = allCatsFiltered.length === 0;
-    const filterLabel = t.filters[s.filter] || s.filter;
-    const filterIcon = s.filter === 'All' ? '☰' : '#';
     const seeds = [['annie', 'now'], ['arwen', '2h'], ['rengoku', '1d'], ['lana', '3d'], ['sophie', '5d']];
     const recentList = seeds.map(([id, time]) => {
       const c = chars.find(x => x.id === id);
@@ -1166,7 +1076,7 @@ class Component extends DCLogic {
     });
     const nav = (route, extra) => () => this.setState({ route, menuOpen: false, paywallOpen: false, ...(extra || {}) });
     return {
-      t, isMobile, isDesktop, isWide, onlineNowText, onlineLabelText,
+      t, isMobile, isDesktop, isWide,
       isOnboarding: s.route === 'onboarding', inApp: s.route !== 'onboarding',
       isExplore: s.route === 'explore', isChat: s.route === 'chat', isCreate: s.route === 'create', isProfile: s.route === 'profile',
       obStep0: s.obStep === 0, obStep1: s.obStep === 1, obDenied: s.obDenied,
@@ -1197,13 +1107,7 @@ class Component extends DCLogic {
       billingOptions, tiers,
       unsub: () => this.setState({ premium: false }),
       search: s.search, onSearch: (e) => this.setState({ search: e.target.value }),
-      filterQuery: s.filterQuery, gridChars: gridCharsPadded, gridRef: this.gridRef, gridTemplateCols, gridGapCss, blurbClamp,
-      heroPad, heroTitleMb, heroKickerMb, searchBoxPadX, searchInputPad, searchFontSize, filterRowPadBottom, searchBtnFontSize, searchBtnPad,
-      filterMenuOpen: s.filterMenuOpen, toggleFilterMenu: () => this.setState({ filterMenuOpen: !s.filterMenuOpen, filterQuery: '' }),
-      filterOptions, filterLabel, filterIcon, onFilterQuery: (e) => this.setState({ filterQuery: e.target.value }), noFilterResults,
-      filterFw: '400', filterFg: '#fff', filterBg: 'rgba(255,255,255,.05)', filterBd: 'rgba(255,255,255,.14)',
-      filterChips, moreMenuOpen: s.moreMenuOpen, toggleMoreMenu: () => this.setState({ moreMenuOpen: !s.moreMenuOpen, moreQuery: '' }),
-      moreOptions, moreLabel, moreActive, moreQuery: s.moreQuery, onMoreQuery: (e) => this.setState({ moreQuery: e.target.value }), noMoreResults, moreFw, moreFg, moreBg, moreBd,
+      filterChips, gridChars: gridCharsPadded, gridRef: this.gridRef,
       sortMenuOpen: s.sortMenuOpen, toggleSortMenu: () => this.setState({ sortMenuOpen: !s.sortMenuOpen }),
       sortOptions, sortIcon: curSort.icon, sortLabel: curSort.label,
       pageItems, pagePrev: () => this.setState({ page: Math.max(1, s.page - 1) }), pageNext: () => this.setState({ page: Math.min(totalPages, s.page + 1) }),
