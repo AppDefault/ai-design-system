@@ -1080,8 +1080,8 @@ class Component extends DCLogic {
     const gridGap = 22;
     const gridMinCol = Math.min(220, 0.46 * s.w);
     const gridColsEstimate = Math.max(1, Math.floor((gridAvail + gridGap) / (gridMinCol + gridGap)));
-    const gridCols = isMobile ? 2 : (s.measuredCols || gridColsEstimate);
-    const gridTemplateCols = isMobile ? 'repeat(2, 1fr)' : 'repeat(auto-fill,minmax(min(220px,46vw),1fr))';
+    const gridCols = s.w < 480 ? 2 : s.w < 768 ? 3 : s.w < 1200 ? 4 : (s.measuredCols || gridColsEstimate);
+    const gridTemplateCols = s.w < 480 ? 'repeat(2, 1fr)' : s.w < 768 ? 'repeat(3, 1fr)' : s.w < 1200 ? 'repeat(4, 1fr)' : 'repeat(auto-fill,minmax(min(220px,46vw),1fr))';
     const gridGapCss = isMobile ? '12px' : 'clamp(18px,2.4vw,26px)';
     const blurbClamp = isMobile ? 1 : 2;
     const gridFullRows = Math.floor(gridChars.length / gridCols);
