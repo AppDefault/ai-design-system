@@ -17,7 +17,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; }
-body { margin: 0; background: #07060a; }
+body { margin: 0; background: #07060a; overflow-x: hidden; }
+html { overflow-x: hidden; }
 ::-webkit-scrollbar { height: 8px; width: 8px; }
 ::-webkit-scrollbar-thumb { background: rgba(255,255,255,.12); border-radius: 4px; }
 a { color: #facc15; text-decoration: none; transition: color .15s ease; }
@@ -64,7 +65,7 @@ button:active, *[style*="cursor:pointer"]:active { filter: brightness(.94); }
         <sc-if value="{{ obStep1 }}" hint-placeholder-val="{{ false }}">
           <div style="width:100%; background:#0a0910; border:1px solid rgba(255,255,255,.08); border-radius:20px; padding:clamp(22px,5vw,32px); display:flex; flex-direction:column; gap:14px; text-align:left;">
             <div style="font-family:'Newsreader',serif; font-size:26px; font-weight:500;">{{ t.signTitle }}</div>
-            <input placeholder="you@example.com" style="width:100%; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); border-radius:11px; padding:14px 16px; font-size:15px; color:#fff; outline:none;">
+            <input placeholder="you@example.com" style="width:100%; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); border-radius:11px; padding:14px 16px; font-size:16px; color:#fff; outline:none;">
             <button onClick="{{ obLogin }}" style="cursor:pointer; border:none; font-size:15px; font-weight:700; color:#07060a; background:#facc15; padding:14px; border-radius:11px;" style-hover="background:#fde047;">{{ t.cont }}</button>
             <div style="display:flex; align-items:center; gap:12px; color:rgba(255,255,255,.35); font-size:13px;"><span style="flex:1; height:1px; background:rgba(255,255,255,.08);"></span>{{ t.or }}<span style="flex:1; height:1px; background:rgba(255,255,255,.08);"></span></div>
             <button onClick="{{ obLogin }}" style="cursor:pointer; background:transparent; font-size:15px; color:rgba(255,255,255,.8); border:1px solid rgba(255,255,255,.14); padding:13px; border-radius:11px;" style-hover="border-color:rgba(255,255,255,.3);">G · {{ t.google }}</button>
@@ -152,7 +153,7 @@ button:active, *[style*="cursor:pointer"]:active { filter: brightness(.94); }
             <span onClick="{{ toggleMoreMenu }}" style="cursor:pointer; white-space:nowrap; font-size:14px; font-weight:{{ moreFw }}; color:{{ moreFg }}; background:{{ moreBg }}; border:1px solid {{ moreBd }}; padding:8px 18px; border-radius:999px; display:inline-flex; align-items:center; gap:6px;" style-hover="transform:translateY(-3px); border-color:rgba(250,204,21,.6);">{{ moreLabel }} ▾</span>
             <sc-if value="{{ moreMenuOpen }}" hint-placeholder-val="{{ false }}">
               <div style="position:absolute; top:calc(100% + 6px); left:0; background:#0a0910; border:1px solid rgba(255,255,255,.12); border-radius:12px; padding:5px; display:flex; flex-direction:column; gap:2px; min-width:190px; max-height:260px; box-shadow:0 12px 32px rgba(0,0,0,.5); z-index:60;">
-                <input value="{{ moreQuery }}" onChange="{{ onMoreQuery }}" placeholder="{{ t.tagSearchPh }}" style="width:100%; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:8px; padding:8px 10px; font-size:13px; color:#fff; outline:none; margin-bottom:2px;">
+                <input value="{{ moreQuery }}" onChange="{{ onMoreQuery }}" placeholder="{{ t.tagSearchPh }}" style="width:100%; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:8px; padding:8px 10px; font-size:16px; color:#fff; outline:none; margin-bottom:2px;">
                 <div style="overflow:auto; max-height:210px; display:flex; flex-direction:column; gap:2px;">
                 <sc-for list="{{ moreOptions }}" as="mo2" hint-placeholder-count="8">
                   <span onClick="{{ mo2.pick }}" style="cursor:pointer; font-size:13px; padding:9px 12px; border-radius:8px; color:{{ mo2.fg }}; background:{{ mo2.bg }}; display:flex; align-items:center; gap:8px;" style-hover="background:rgba(255,255,255,.08);">{{ mo2.label }}<sc-if value="{{ mo2.active }}" hint-placeholder-val="{{ false }}"><span style="margin-left:auto;">✓</span></sc-if></span>
@@ -170,7 +171,7 @@ button:active, *[style*="cursor:pointer"]:active { filter: brightness(.94); }
             <span onClick="{{ toggleFilterMenu }}" style="cursor:pointer; white-space:nowrap; font-size:14px; font-weight:{{ filterFw }}; color:{{ filterFg }}; background:{{ filterBg }}; border:1px solid {{ filterBd }}; padding:8px 16px; border-radius:999px; display:inline-flex; align-items:center; gap:8px;" style-hover="border-color:rgba(250,204,21,.6);">{{ filterIcon }} {{ filterLabel }} ▾</span>
             <sc-if value="{{ filterMenuOpen }}" hint-placeholder-val="{{ false }}">
               <div style="position:absolute; top:calc(100% + 6px); left:0; background:#0a0910; border:1px solid rgba(255,255,255,.12); border-radius:12px; padding:5px; display:flex; flex-direction:column; gap:2px; min-width:210px; max-height:280px; box-shadow:0 12px 32px rgba(0,0,0,.5); z-index:60;">
-                <input value="{{ filterQuery }}" onChange="{{ onFilterQuery }}" placeholder="{{ t.tagSearchPh }}" style="width:100%; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:8px; padding:8px 10px; font-size:13px; color:#fff; outline:none; margin-bottom:2px;">
+                <input value="{{ filterQuery }}" onChange="{{ onFilterQuery }}" placeholder="{{ t.tagSearchPh }}" style="width:100%; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:8px; padding:8px 10px; font-size:16px; color:#fff; outline:none; margin-bottom:2px;">
                 <div style="overflow:auto; max-height:230px; display:flex; flex-direction:column; gap:2px;">
                 <sc-for list="{{ filterOptions }}" as="fo" hint-placeholder-count="8">
                   <span onClick="{{ fo.pick }}" style="cursor:pointer; font-size:13px; padding:9px 12px; border-radius:8px; color:{{ fo.fg }}; background:{{ fo.bg }}; display:flex; align-items:center; gap:8px;" style-hover="background:rgba(255,255,255,.08);">{{ fo.label }}<sc-if value="{{ fo.active }}" hint-placeholder-val="{{ false }}"><span style="margin-left:auto;">✓</span></sc-if></span>
@@ -399,7 +400,7 @@ button:active, *[style*="cursor:pointer"]:active { filter: brightness(.94); }
                 <span onClick="{{ toggleSuggest }}" style="cursor:pointer; display:flex; color:{{ suggestColor }};" style-hover="color:#facc15;">
                   <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a6.5 6.5 0 0 0-4 11.6c.6.5 1 1.3 1 2.1V17h6v-1.3c0-.8.4-1.6 1-2.1A6.5 6.5 0 0 0 12 2z"></path></svg>
                 </span>
-                <input value="{{ draft }}" onChange="{{ onDraft }}" onKeyDown="{{ onKey }}" placeholder="{{ msgPlaceholder }}" style="flex:1; min-width:0; background:transparent; border:none; outline:none; color:#fff; font-size:15px; padding:12px 0;">
+                <input value="{{ draft }}" onChange="{{ onDraft }}" onKeyDown="{{ onKey }}" placeholder="{{ msgPlaceholder }}" style="flex:1; min-width:0; background:transparent; border:none; outline:none; color:#fff; font-size:16px; padding:12px 0;">
                 <button onClick="{{ send }}" style="cursor:pointer; border:none; width:44px; height:44px; border-radius:11px; background:#facc15; color:#07060a; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;" style-hover="background:#fde047;">➤</button>
               </div>
               <sc-if value="{{ showFreeChip }}" hint-placeholder-val="{{ false }}">
@@ -448,16 +449,16 @@ button:active, *[style*="cursor:pointer"]:active { filter: brightness(.94); }
                     <div style="aspect-ratio:1/1; border-radius:14px; border:1.5px dashed rgba(255,255,255,.18); background:rgba(255,255,255,.03); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; color:rgba(255,255,255,.4); cursor:pointer;" style-hover="border-color:rgba(250,204,21,.5);"><span style="font-size:24px;">＋</span><span style="font-size:11px;">Avatar</span></div>
                   </div>
                   <div style="flex:1 1 260px; display:flex; flex-direction:column; gap:18px;">
-                    <div><label style="font-size:13px; font-weight:600; color:rgba(255,255,255,.7); display:block; margin-bottom:7px;">{{ t.nameLbl }}</label><input value="{{ cName }}" onChange="{{ onCName }}" placeholder="{{ t.namePh }}" style="width:100%; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); border-radius:11px; padding:13px 16px; font-size:15px; color:#fff; outline:none;"><div style="font-size:12px; color:rgba(255,255,255,.35); margin-top:6px;">{{ t.nameHint }}</div></div>
-                    <div><label style="font-size:13px; font-weight:600; color:rgba(255,255,255,.7); display:block; margin-bottom:7px;">{{ t.introLbl }}</label><input value="{{ cIntro }}" onChange="{{ onCIntro }}" placeholder="{{ t.introPh }}" style="width:100%; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); border-radius:11px; padding:13px 16px; font-size:15px; color:#fff; outline:none;"></div>
+                    <div><label style="font-size:13px; font-weight:600; color:rgba(255,255,255,.7); display:block; margin-bottom:7px;">{{ t.nameLbl }}</label><input value="{{ cName }}" onChange="{{ onCName }}" placeholder="{{ t.namePh }}" style="width:100%; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); border-radius:11px; padding:13px 16px; font-size:16px; color:#fff; outline:none;"><div style="font-size:12px; color:rgba(255,255,255,.35); margin-top:6px;">{{ t.nameHint }}</div></div>
+                    <div><label style="font-size:13px; font-weight:600; color:rgba(255,255,255,.7); display:block; margin-bottom:7px;">{{ t.introLbl }}</label><input value="{{ cIntro }}" onChange="{{ onCIntro }}" placeholder="{{ t.introPh }}" style="width:100%; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); border-radius:11px; padding:13px 16px; font-size:16px; color:#fff; outline:none;"></div>
                   </div>
                 </div>
               </div>
               <div>
                 <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;"><span style="width:26px; height:26px; border-radius:8px; background:rgba(250,204,21,.15); color:#facc15; font-weight:700; font-size:14px; display:flex; align-items:center; justify-content:center;">2</span><span style="font-family:'Newsreader',serif; font-size:20px;">{{ t.personality }}</span></div>
                 <div style="display:flex; flex-direction:column; gap:18px;">
-                  <div><label style="font-size:13px; font-weight:600; color:rgba(255,255,255,.7); display:block; margin-bottom:7px;">{{ t.greetLbl }}</label><textarea value="{{ cGreet }}" onChange="{{ onCGreet }}" placeholder="{{ t.greetPh }}" rows="2" style="width:100%; resize:vertical; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); border-radius:11px; padding:13px 16px; font-size:15px; color:#fff; outline:none;"></textarea></div>
-                  <div><label style="font-size:13px; font-weight:600; color:rgba(255,255,255,.7); display:block; margin-bottom:7px;">{{ t.persLbl }}</label><textarea value="{{ cPers }}" onChange="{{ onCPers }}" placeholder="{{ t.persPh }}" rows="4" style="width:100%; resize:vertical; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); border-radius:11px; padding:13px 16px; font-size:15px; color:#fff; outline:none;"></textarea></div>
+                  <div><label style="font-size:13px; font-weight:600; color:rgba(255,255,255,.7); display:block; margin-bottom:7px;">{{ t.greetLbl }}</label><textarea value="{{ cGreet }}" onChange="{{ onCGreet }}" placeholder="{{ t.greetPh }}" rows="2" style="width:100%; resize:vertical; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); border-radius:11px; padding:13px 16px; font-size:16px; color:#fff; outline:none;"></textarea></div>
+                  <div><label style="font-size:13px; font-weight:600; color:rgba(255,255,255,.7); display:block; margin-bottom:7px;">{{ t.persLbl }}</label><textarea value="{{ cPers }}" onChange="{{ onCPers }}" placeholder="{{ t.persPh }}" rows="4" style="width:100%; resize:vertical; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); border-radius:11px; padding:13px 16px; font-size:16px; color:#fff; outline:none;"></textarea></div>
                   <div>
                     <label style="font-size:13px; font-weight:600; color:rgba(255,255,255,.7); display:block; margin-bottom:9px;">{{ t.tagsLbl }}</label>
                     <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px;">
@@ -466,7 +467,7 @@ button:active, *[style*="cursor:pointer"]:active { filter: brightness(.94); }
                       </sc-for>
                     </div>
                     <div style="position:relative; max-width:320px;">
-                      <input value="{{ tagQuery }}" onChange="{{ onTagQuery }}" onFocus="{{ openTagMenu }}" placeholder="{{ t.tagSearchPh }}" style="width:100%; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); border-radius:11px; padding:11px 14px; font-size:14px; color:#fff; outline:none;">
+                      <input value="{{ tagQuery }}" onChange="{{ onTagQuery }}" onFocus="{{ openTagMenu }}" placeholder="{{ t.tagSearchPh }}" style="width:100%; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); border-radius:11px; padding:11px 14px; font-size:16px; color:#fff; outline:none;">
                       <sc-if value="{{ tagMenuOpen }}" hint-placeholder-val="{{ false }}">
                         <div style="position:absolute; top:calc(100% + 6px); left:0; right:0; background:#0a0910; border:1px solid rgba(255,255,255,.12); border-radius:12px; padding:5px; display:flex; flex-direction:column; gap:2px; max-height:220px; overflow:auto; box-shadow:0 12px 32px rgba(0,0,0,.5); z-index:60;">
                           <sc-for list="{{ tagOptions }}" as="to" hint-placeholder-count="4">
@@ -479,7 +480,7 @@ button:active, *[style*="cursor:pointer"]:active { filter: brightness(.94); }
                       </sc-if>
                     </div>
                   </div>
-                  <div><label style="font-size:13px; font-weight:600; color:rgba(255,255,255,.7); display:block; margin-bottom:7px;">{{ t.exampleLbl }}</label><textarea value="{{ cExample }}" onChange="{{ onCExample }}" placeholder="{{ t.examplePh }}" rows="3" style="width:100%; resize:vertical; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); border-radius:11px; padding:13px 16px; font-size:14px; font-family:'JetBrains Mono',monospace; color:#fff; outline:none;"></textarea><div style="font-size:12px; color:rgba(255,255,255,.35); margin-top:6px;">{{ t.exampleHint }}</div></div>
+                  <div><label style="font-size:13px; font-weight:600; color:rgba(255,255,255,.7); display:block; margin-bottom:7px;">{{ t.exampleLbl }}</label><textarea value="{{ cExample }}" onChange="{{ onCExample }}" placeholder="{{ t.examplePh }}" rows="3" style="width:100%; resize:vertical; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); border-radius:11px; padding:13px 16px; font-size:16px; font-family:'JetBrains Mono',monospace; color:#fff; outline:none;"></textarea><div style="font-size:12px; color:rgba(255,255,255,.35); margin-top:6px;">{{ t.exampleHint }}</div></div>
                 </div>
               </div>
               <div>
@@ -543,9 +544,9 @@ button:active, *[style*="cursor:pointer"]:active { filter: brightness(.94); }
           <div style="display:flex; flex-wrap:wrap;">
             <div style="flex:1 1 380px; min-width:0; padding:clamp(20px,3vw,34px) clamp(16px,3vw,40px); border-right:1px solid rgba(255,255,255,.06); display:flex; flex-direction:column; gap:20px;">
               <div style="font-family:'Newsreader',serif; font-size:20px;">{{ t.accountLbl }}</div>
-              <div><label style="font-size:13px; font-weight:600; color:rgba(255,255,255,.7); display:block; margin-bottom:7px;">{{ t.usernameLbl }}</label><input value="bortnikov" style="width:100%; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); border-radius:11px; padding:13px 16px; font-size:15px; color:#fff; outline:none;"></div>
-              <div><label style="font-size:13px; font-weight:600; color:rgba(255,255,255,.7); display:block; margin-bottom:7px;">Email</label><input value="max.bortnikov@gmail.com" style="width:100%; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); border-radius:11px; padding:13px 16px; font-size:15px; color:#fff; outline:none;"></div>
-              <div><label style="font-size:13px; font-weight:600; color:rgba(255,255,255,.7); display:block; margin-bottom:7px;">{{ t.highlightsLbl }} <span style="font-weight:400; color:rgba(255,255,255,.4);">{{ t.highlightsSub }}</span></label><textarea placeholder="{{ t.highlightsPh }}" rows="3" style="width:100%; resize:vertical; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); border-radius:11px; padding:13px 16px; font-size:15px; color:#fff; outline:none;"></textarea></div>
+              <div><label style="font-size:13px; font-weight:600; color:rgba(255,255,255,.7); display:block; margin-bottom:7px;">{{ t.usernameLbl }}</label><input value="bortnikov" style="width:100%; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); border-radius:11px; padding:13px 16px; font-size:16px; color:#fff; outline:none;"></div>
+              <div><label style="font-size:13px; font-weight:600; color:rgba(255,255,255,.7); display:block; margin-bottom:7px;">Email</label><input value="max.bortnikov@gmail.com" style="width:100%; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); border-radius:11px; padding:13px 16px; font-size:16px; color:#fff; outline:none;"></div>
+              <div><label style="font-size:13px; font-weight:600; color:rgba(255,255,255,.7); display:block; margin-bottom:7px;">{{ t.highlightsLbl }} <span style="font-weight:400; color:rgba(255,255,255,.4);">{{ t.highlightsSub }}</span></label><textarea placeholder="{{ t.highlightsPh }}" rows="3" style="width:100%; resize:vertical; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); border-radius:11px; padding:13px 16px; font-size:16px; color:#fff; outline:none;"></textarea></div>
               <div style="display:flex; gap:12px; flex-wrap:wrap;">
                 <button style="cursor:pointer; border:none; font-size:15px; font-weight:700; color:#07060a; background:#facc15; padding:12px 28px; border-radius:12px;" style-hover="background:#fde047;">{{ t.saveProfile }}</button>
                 <button onClick="{{ logout }}" style="cursor:pointer; background:transparent; font-size:15px; color:rgba(255,255,255,.7); border:1px solid rgba(255,255,255,.14); padding:12px 24px; border-radius:12px;">{{ t.logout }}</button>
@@ -1060,7 +1061,7 @@ class Component extends DCLogic {
     const heroKickerMb = isMobile ? '6px' : '10px';
     const searchBoxPadX = isMobile ? '14px' : '20px';
     const searchInputPad = isMobile ? '11px 0' : '18px 0';
-    const searchFontSize = isMobile ? '15px' : '17px';
+    const searchFontSize = isMobile ? '16px' : '17px';
     const filterRowPadBottom = isMobile ? '16px' : '28px';
     const searchBtnFontSize = isMobile ? '14px' : '16px';
     const searchBtnPad = isMobile ? '14px' : 'clamp(18px,2.5vw,30px)';

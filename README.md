@@ -47,6 +47,8 @@ How AIGirl writes.
 
 **Buttons.** Gold primary (dark ink, weight 700) is the single strongest CTA per view; secondary is a hairline outline; premium is the magenta gradient; ghost is bare text for low-priority actions (Report).
 
+**Mobile implementation note.** Any `<input>`/`<textarea>` must use `font-size: 16px` or larger — below that, iOS Safari auto-zooms on focus and visually shifts the page sideways when the keyboard opens. Keep `overflow-x: hidden` on `html`/`body` as a safeguard.
+
 ---
 
 ## Iconography
