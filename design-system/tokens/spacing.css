@@ -1,0 +1,39 @@
+/* AIGirl — Noir Editorial · Spacing, radius, shadow, motion
+   Generous, editorial spacing. Panels breathe (40px gutters); grids use 20px gaps. */
+:root {
+  /* Spacing scale */
+  --sp-1: 4px;
+  --sp-2: 7px;
+  --sp-3: 10px;
+  --sp-4: 14px;
+  --sp-5: 18px;
+  --sp-6: 20px;
+  --sp-7: 24px;
+  --sp-8: 28px;
+  --sp-9: 34px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+  --sp-16: 80px;
+
+  /* Radius — badges 6, controls 11–12, cards 12, panels 20, pills full */
+  --radius-xs: 6px;
+  --radius-sm: 8px;
+  --radius-md: 11px;
+  --radius-card: 12px;
+  --radius-lg: 16px;
+  --radius-panel: 20px;
+  --radius-phone: 34px;
+  --radius-pill: 999px;
+
+  /* Shadow — one deep, soft panel shadow; UI is otherwise flat/hairline */
+  --shadow-panel: 0 40px 120px rgba(0,0,0,.55);
+  --shadow-float: 0 12px 40px rgba(0,0,0,.45);
+
+  /* Motion — spring on interactive, quick fades otherwise */
+  --ease-spring: cubic-bezier(.34,1.56,.64,1); /* @kind other */
+  --dur-fast: .13s; /* @kind other */
+  --dur: .15s; /* @kind other */
+
+  /* Ambient premium glow used behind chat / hero */
+  --glow-magenta: radial-gradient(1200px 400px at 50% -10%,rgba(217,70,239,.05),transparent); /* @kind other */
+}

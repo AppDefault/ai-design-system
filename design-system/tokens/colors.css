@@ -1,0 +1,53 @@
+/* AIGirl — Noir Editorial · Color tokens
+   Dark-first palette. One gold accent (primary action), one magenta accent (premium/pro),
+   plus green/red semantics. Neutrals are white-alpha layers over near-black. */
+:root {
+  /* — Base surfaces (near-black, warm) — */
+  --bg: #07060a;                       /* app background */
+  --surface-panel: #0a0910;            /* raised panel / card shell */
+  --surface-1: rgba(255,255,255,.04);  /* subtle fill (inputs, chips) */
+  --surface-2: rgba(255,255,255,.05);  /* raised fill (bubbles) */
+  --surface-3: rgba(255,255,255,.06);  /* hover fill */
+
+  /* — Borders (white alpha, hairline) — */
+  --border-faint: rgba(255,255,255,.06);
+  --border-1: rgba(255,255,255,.08);
+  --border-2: rgba(255,255,255,.10);
+  --border-3: rgba(255,255,255,.12);
+  --border-strong: rgba(255,255,255,.14);
+
+  /* — Text on dark — */
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255,255,255,.55);
+  --text-tertiary: rgba(255,255,255,.42);
+  --text-muted: rgba(255,255,255,.35);
+  --text-faint: rgba(255,255,255,.055);   /* watermark initials */
+
+  /* — Gold (primary action / brand highlight) — */
+  --gold: #facc15;
+  --gold-hover: #fde047;
+  --gold-ink: #07060a;                  /* text on gold */
+  --gold-soft: rgba(250,204,21,.14);    /* user bubble / tint fill */
+  --gold-soft-border: rgba(250,204,21,.30);
+  --gold-tint-text: #fef3c7;            /* text inside gold-soft */
+
+  /* — Magenta (premium / PRO) — */
+  --magenta: #d946ef;
+  --magenta-light: #f0abfc;
+  --magenta-border: rgba(217,70,239,.45);
+  --magenta-soft: rgba(217,70,239,.08);
+  --magenta-badge: rgba(217,70,239,.90);
+  --premium-cta: linear-gradient(135deg,#d946ef,#a021d1); /* @kind color */
+
+  /* — Semantic — */
+  --success: #4ade80;
+  --danger: #f87171;
+
+  /* — Character placeholder (no image): warm-violet gradient + diagonal hatch — */
+  --placeholder-fill: linear-gradient(160deg,#1b1626,#0d0b12);
+  --placeholder-hatch: repeating-linear-gradient(135deg,rgba(255,255,255,.03) 0 2px,transparent 2px 10px); /* @kind color */
+  --avatar-fill: linear-gradient(160deg,#241c32,#120e18);
+
+  /* — Overlay chip on imagery — */
+  --overlay-scrim: rgba(0,0,0,.45);
+}

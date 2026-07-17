@@ -1,0 +1,32 @@
+/* AIGirl — Noir Editorial · Type tokens
+   Newsreader (serif) = display & names · Manrope (sans) = body & UI · JetBrains Mono = kickers/meta.
+   The serif/mono pairing over a warm black is the core of the "noir editorial" feel. */
+:root {
+  --font-display: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Manrope', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Display / serif ramp (weights 400/500/600; headings favour 500) */
+  --display-hero: 500 50px/1.02 var(--font-display);
+  --display-xl: 500 36px/1.05 var(--font-display);
+  --display-lg: 600 24px/1.1 var(--font-display);
+  --display-md: 600 22px/1.15 var(--font-display);
+  --display-sm: 500 18px/1.2 var(--font-display);
+
+  /* Body / sans ramp */
+  --body-lg: 400 16px/1.55 var(--font-sans);
+  --body: 400 15px/1.55 var(--font-sans);
+  --body-sm: 400 14px/1.5 var(--font-sans);
+  --body-xs: 400 12.5px/1.45 var(--font-sans);
+  --ui: 500 14px/1 var(--font-sans);
+  --ui-strong: 700 15px/1 var(--font-sans);
+
+  /* Mono kickers & meta — always uppercase + tracked */
+  --kicker: 600 12px/1 var(--font-mono);
+  --kicker-tracking: .24em;
+  --meta: 500 11px/1 var(--font-mono);
+  --meta-tracking: .08em;
+
+  --tracking-tight: -.02em;   /* large serif headings */
+  --tracking-snug: -.01em;    /* names / mid serif */
+}

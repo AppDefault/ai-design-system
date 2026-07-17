@@ -1,0 +1,16 @@
+<!-- @dsCard group="Brand" viewport="700x160" name="Interaction recipe" subtitle="Spring hover/press · brightness lift · role accents" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
+<style>body{margin:0;background:var(--bg);padding:26px 30px;font-family:var(--font-sans)}
+.row{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+button,.pill,.card{transition:transform .13s cubic-bezier(.34,1.56,.64,1),filter .13s ease,border-color .13s ease}
+button:hover,.pill:hover,.card:hover{filter:brightness(1.22)}button:active{transform:scale(.94)}
+.pill:hover{transform:translateY(-1px);border-color:var(--gold)}
+.card:hover{transform:translateY(-4px);border-color:var(--gold)}
+.recipe{font:var(--meta);letter-spacing:.04em;color:var(--text-muted);margin-top:18px;line-height:1.7}</style></head>
+<body><div class="row">
+<button style="cursor:pointer;border:none;font-weight:700;color:var(--gold-ink);background:var(--gold);padding:12px 24px;border-radius:var(--radius-md);font-family:var(--font-sans)">Primary button</button>
+<span class="pill" style="cursor:pointer;font-size:14px;color:var(--text-secondary);border:1px solid var(--border-3);padding:8px 18px;border-radius:var(--radius-pill)">Filter chip</span>
+<div class="card" style="cursor:pointer;font-size:14px;color:var(--text-secondary);border:1px solid var(--border-2);border-radius:var(--radius-card);padding:12px 18px">Selectable card</div>
+</div>
+<div class="recipe">transform .13s cubic-bezier(.34,1.56,.64,1) · hover → brightness(1.22) + role accent · active → scale(.94)</div>
+</body></html>
