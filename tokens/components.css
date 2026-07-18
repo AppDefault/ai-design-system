@@ -36,6 +36,23 @@
   --button-premium-text: var(--premium-ink);
   --button-disabled-opacity: .45;
 
+  /* Desktop navigation action cluster */
+  --nav-action-height: 38px;
+  --nav-action-gap: 8px;
+  --nav-action-padding: 0 13px;
+  --nav-action-radius: var(--radius-pill);
+  --nav-action-bg: var(--surface-1);
+  --nav-action-border: var(--border-strong);
+  --nav-action-text: var(--text-secondary);
+  --nav-action-hover-bg: var(--gold-soft);
+  --nav-action-hover-border: var(--gold-soft-border);
+  --nav-action-hover-text: var(--text-primary);
+  --nav-premium-bg: var(--magenta-soft);
+  --nav-premium-border: var(--magenta-border);
+  --nav-premium-text: var(--magenta);
+  --nav-avatar-bg: var(--avatar-fill);
+  --nav-avatar-border: var(--border-3);
+
   /* Chips, tags and badges */
   --chip-radius: var(--radius-pill);
   --chip-bg: transparent;
@@ -53,6 +70,7 @@
   --badge-pro-text: var(--premium-ink);
   --badge-stat-bg: var(--overlay-scrim);
   --badge-stat-text: var(--overlay-text);
+  --badge-stat-ring: inset 0 0 0 1px transparent;
   --badge-premium-bg: var(--magenta-soft);
   --badge-premium-border: var(--magenta-border);
   --badge-premium-text: var(--magenta);
@@ -66,6 +84,14 @@
   --menu-option-text: var(--text-high);
   --menu-option-hover-bg: var(--gold-soft);
   --menu-option-hover-text: var(--gold);
+
+  /* Store / external destination card */
+  --store-link-bg: transparent;
+  --store-link-border: var(--border-strong);
+  --store-link-text: var(--text-primary);
+  --store-link-hover-bg: var(--gold-soft);
+  --store-link-hover-border: var(--gold);
+  --store-link-hover-text: var(--gold-hover);
 
   /* Character discovery */
   --character-card-media-bg: var(--placeholder-hatch), var(--placeholder-fill);
@@ -82,4 +108,12 @@
   --message-ai-text: var(--text-secondary);
   --message-user-bg: var(--gold-soft);
   --message-user-text: var(--gold-tint-text);
+}
+
+[data-theme="light"] {
+  /* Counts sit on pale placeholder art in the reference prototype. Keep the
+     badge paper-like in light mode instead of reusing the dark media scrim. */
+  --badge-stat-bg: rgba(255,253,248,.82);
+  --badge-stat-text: rgba(36,26,20,.78);
+  --badge-stat-ring: inset 0 0 0 1px rgba(67,47,31,.12);
 }

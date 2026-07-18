@@ -20,7 +20,8 @@ export function Badge({ variant = 'pro', children, style = {}, ...rest }) {
     stat: {
       fontFamily: 'var(--font-mono)', fontSize: 'var(--font-size-sm)',
       color: 'var(--badge-stat-text)', background: 'var(--badge-stat-bg)',
-      backdropFilter: 'blur(4px)', padding: 'var(--badge-padding)', borderRadius: 'var(--badge-radius)',
+      backdropFilter: 'blur(4px)', boxShadow: 'var(--badge-stat-ring)',
+      padding: 'var(--badge-padding)', borderRadius: 'var(--badge-radius)',
     },
     premium: {
       fontFamily: 'var(--font-sans)', fontSize: 'var(--font-size-md)', fontWeight: 'var(--font-weight-bold)',

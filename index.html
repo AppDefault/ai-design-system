@@ -28,6 +28,18 @@ a:hover, a:focus-visible { color:var(--link-hover); }
 .journal-card:hover .journal-link { color:var(--gold) !important; }
 .site-footer a { color:var(--text-primary); }
 .site-footer a:hover, .site-footer a:focus-visible { color:var(--gold); }
+.desktop-nav-actions { display:flex; align-items:center; gap:var(--nav-action-gap); }
+.nav-control { position:relative; top:0; height:var(--nav-action-height); min-height:var(--nav-action-height); padding:var(--nav-action-padding); display:inline-flex; align-items:center; justify-content:center; gap:7px; white-space:nowrap; border:1px solid var(--nav-action-border); border-radius:var(--nav-action-radius); background:var(--nav-action-bg); color:var(--nav-action-text); font-family:var(--font-sans); font-size:var(--font-size-sm); font-weight:var(--font-weight-semibold); line-height:var(--line-height-ui); transition:var(--interactive-transition), top var(--dur-fast) var(--ease-spring) !important; }
+.nav-control:hover, .nav-control:focus-visible { top:-1px; color:var(--nav-action-hover-text); background:var(--nav-action-hover-bg); border-color:var(--nav-action-hover-border); filter:none !important; }
+.nav-control:active { top:0; transform:scale(var(--press-scale)); }
+.nav-control-premium { color:var(--nav-premium-text); background:var(--nav-premium-bg); border-color:var(--nav-premium-border); }
+.nav-control-premium:hover, .nav-control-premium:focus-visible { color:var(--nav-premium-text); background:var(--nav-premium-bg); border-color:var(--nav-premium-text); }
+.nav-avatar { position:relative; top:0; width:var(--nav-action-height); height:var(--nav-action-height); flex:0 0 var(--nav-action-height); display:flex; align-items:center; justify-content:center; border:1px solid var(--nav-avatar-border); border-radius:var(--radius-pill); background:var(--nav-avatar-bg); color:var(--text-secondary); font-family:var(--font-display); font-size:var(--font-size-input); transition:var(--interactive-transition), top var(--dur-fast) var(--ease-spring) !important; }
+.nav-avatar:hover, .nav-avatar:focus-visible { top:-1px; color:var(--text-primary); border-color:var(--nav-action-hover-border); filter:none !important; }
+.nav-avatar:active { top:0; transform:scale(var(--press-scale)); }
+.app-store-link { position:relative; top:0; background:var(--store-link-bg); border-color:var(--store-link-border) !important; color:var(--store-link-text); transition:var(--interactive-transition), top var(--dur-fast) var(--ease-spring); }
+.app-store-link:hover, .app-store-link:focus-visible { top:-2px; color:var(--store-link-hover-text); background:var(--store-link-hover-bg); border-color:var(--store-link-hover-border) !important; filter:none; }
+.app-store-link:active { top:0; transform:scale(var(--press-scale)); }
 .combo-option:hover { color:var(--menu-option-hover-text) !important; background:var(--menu-option-hover-bg) !important; box-shadow:inset 0 0 0 1px var(--gold-soft-border); filter:none !important; }
 .pagination-link:not(.pagination-link-active):hover { color:var(--gold) !important; filter:none !important; }
 .pagination-arrow:hover { color:var(--gold) !important; border-color:var(--gold) !important; filter:none !important; }
@@ -102,10 +114,10 @@ button:active, *[style*="cursor:pointer"]:active { filter:var(--interactive-pres
             <span onClick="{{ goCreate }}" style="cursor:pointer; color:{{ colCreate }};" style-hover="color:var(--text-primary); transform:translateY(-1px);">{{ t.create }}</span>
           </div>
         </div>
-        <div style="display:flex; align-items:center; gap:10px;">
-          <button onClick="{{ toggleTheme }}" aria-label="{{ themeLabel }}" title="{{ themeLabel }}" style="cursor:pointer; height:32px; padding:0 12px; border-radius:var(--radius-pill); border:1px solid var(--border-strong); background:var(--surface-1); color:var(--text-high); font-size:var(--font-size-sm); display:inline-flex; align-items:center; gap:7px;"><span style="font-size:var(--font-size-xl); line-height:1;">{{ themeIcon }}</span>{{ themeShort }}</button>
+        <div class="desktop-nav-actions">
+          <button class="nav-control" onClick="{{ toggleTheme }}" aria-label="{{ themeLabel }}" title="{{ themeLabel }}" style="cursor:pointer;"><span style="font-size:var(--font-size-xl); line-height:1;">{{ themeIcon }}</span>{{ themeShort }}</button>
           <div style="position:relative;">
-            <span onClick="{{ toggleLangMenu }}" style="cursor:pointer; font-family:var(--font-mono); font-size:var(--font-size-xs); letter-spacing:.05em; padding:5px 11px; border-radius:var(--radius-pill); border:1px solid var(--border-strong); color:var(--text-secondary); display:inline-flex; align-items:center; gap:5px;" style-hover="border-color:var(--gold); color:var(--text-primary); background:var(--gold-soft); transform:translateY(-1px);">{{ langCode }} ▾</span>
+            <span class="nav-control" onClick="{{ toggleLangMenu }}" style="cursor:pointer;">{{ langCode }} ▾</span>
             <sc-if value="{{ langMenuOpen }}" hint-placeholder-val="{{ false }}">
               <div style="position:absolute; top:calc(100% + 6px); right:0; background:var(--surface-panel); border:1px solid var(--border-3); border-radius:var(--radius-card); padding:4px; display:flex; flex-direction:column; gap:2px; min-width:80px; box-shadow:var(--shadow-float); z-index:80;">
                 <sc-for list="{{ langOptions }}" as="lo" hint-placeholder-count="7">
@@ -114,8 +126,8 @@ button:active, *[style*="cursor:pointer"]:active { filter:var(--interactive-pres
               </div>
             </sc-if>
           </div>
-          <span onClick="{{ openPaywall }}" style="cursor:pointer; font-size:var(--font-size-md); font-weight:var(--font-weight-bold); color:var(--magenta); border:1px solid var(--magenta-border); padding:8px 16px; border-radius:var(--radius-pill); background:var(--magenta-soft);" style-hover="background:var(--magenta-soft);">{{ premiumLabel }}</span>
-          <div onClick="{{ goProfile }}" style="cursor:pointer; width:38px; height:38px; border-radius:var(--radius-pill); background:var(--avatar-fill); border:1px solid var(--border-3); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:var(--font-size-input); color:var(--text-secondary);">M</div>
+          <span class="nav-control nav-control-premium" onClick="{{ openPaywall }}" style="cursor:pointer;">{{ premiumLabel }}</span>
+          <div class="nav-avatar" onClick="{{ goProfile }}" style="cursor:pointer;">M</div>
         </div>
       </div>
     </sc-if>
@@ -220,7 +232,7 @@ button:active, *[style*="cursor:pointer"]:active { filter:var(--interactive-pres
                 <sc-if value="{{ c.pro }}" hint-placeholder-val="{{ false }}">
                   <span style="position:absolute; top:12px; left:12px; font-family:var(--font-mono); font-size:var(--font-size-xs); font-weight:var(--font-weight-semibold); letter-spacing:.08em; color:var(--premium-ink); background:var(--magenta-badge); padding:4px 9px; border-radius:var(--radius-xs);">PRO</span>
                 </sc-if>
-                <span style="position:absolute; top:12px; right:12px; font-family:var(--font-mono); font-size:var(--font-size-sm); color:var(--text-high); background:var(--overlay-scrim); padding:4px 9px; border-radius:var(--radius-xs);">{{ c.views }}</span>
+                <span style="position:absolute; top:12px; right:12px; font-family:var(--font-mono); font-size:var(--font-size-sm); color:var(--badge-stat-text); background:var(--badge-stat-bg); box-shadow:var(--badge-stat-ring); backdrop-filter:blur(4px); padding:var(--badge-padding); border-radius:var(--badge-radius);">{{ c.views }}</span>
               </div>
               <div>
                 <div style="display:flex; align-items:baseline; justify-content:space-between; gap:10px;">
@@ -293,8 +305,8 @@ button:active, *[style*="cursor:pointer"]:active { filter:var(--interactive-pres
           </div>
           <div>
             <div style="font-family:var(--font-mono); font-size:var(--font-size-xs); letter-spacing:.18em; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px;">{{ t.getAppLbl }}</div>
-            <a href="#" style="display:inline-flex; align-items:center; gap:10px; border:1px solid var(--border-strong); border-radius:10px; padding:9px 16px; color:var(--text-primary);" style-hover="border-color:var(--text-muted);">
-              <span style="display:flex; color:var(--text-primary);"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M4 3.3v17.4a1 1 0 0 0 1.53.85l14.2-8.7a1 1 0 0 0 0-1.7L5.53 2.45A1 1 0 0 0 4 3.3z" fill="currentColor"></path></svg></span>
+            <a class="app-store-link" href="#" style="display:inline-flex; align-items:center; gap:10px; border:1px solid var(--store-link-border); border-radius:10px; padding:9px 16px; color:var(--store-link-text);">
+              <span style="display:flex; color:currentColor;"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M4 3.3v17.4a1 1 0 0 0 1.53.85l14.2-8.7a1 1 0 0 0 0-1.7L5.53 2.45A1 1 0 0 0 4 3.3z" fill="currentColor"></path></svg></span>
               <span style="display:flex; flex-direction:column; line-height:1.3;">
                 <span style="font-size:var(--font-size-2xs); color:var(--text-tertiary);">{{ t.getItOn }}</span>
                 <span style="font-size:var(--font-size-xl); font-weight:var(--font-weight-semibold);">Google Play</span>

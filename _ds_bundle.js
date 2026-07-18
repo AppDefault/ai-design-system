@@ -47,6 +47,7 @@ function Badge({
       color: 'var(--badge-stat-text)',
       background: 'var(--badge-stat-bg)',
       backdropFilter: 'blur(4px)',
+      boxShadow: 'var(--badge-stat-ring)',
       padding: 'var(--badge-padding)',
       borderRadius: 'var(--badge-radius)'
     },

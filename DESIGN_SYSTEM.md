@@ -151,6 +151,7 @@ These are canonical compositions even where no exported React primitive exists y
 
 - `AppShell`: full viewport, theme canvas, one vertical attention flow.
 - `TopNav`: wordmark + Explore/My Chats/Create + theme/language/premium/profile actions.
+- `DesktopNavActions`: theme, language and Premium use the same 38px pill geometry; the profile avatar is a 38px circle. Neutral utilities share one treatment, while Premium changes only color—not height, radius or alignment.
 - `MobileTopNav`: wordmark + theme + compact premium + menu trigger.
 - `MobileDrawer`: full-screen overlay with large serif destinations; theme and language remain available.
 - `LanguageMenu`: floating `ComboMenu`; active language is gold, inactive options use semantic text.
@@ -244,4 +245,3 @@ Before returning generated UI, verify:
 - Character cards use relative top lift and no filter/transform on the whole card.
 - Link, menu, pagination, hover, press and focus states match this specification.
 - The result remains usable at mobile and desktop widths.
-
