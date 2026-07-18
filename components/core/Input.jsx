@@ -10,9 +10,9 @@ export function Input({ icon = null, style = {}, wrapperStyle = {}, ...rest }) {
     <div
       style={{
         display: 'flex', alignItems: 'center', gap: 12, width: '100%',
-        background: 'var(--surface-1)',
-        border: `1px solid ${focus ? 'var(--gold-soft-border)' : 'var(--border-2)'}`,
-        borderRadius: 'var(--radius-card)', padding: '13px 16px',
+        background: 'var(--field-background)',
+        border: `1px solid ${focus ? 'var(--field-border-focus)' : 'var(--field-border)'}`,
+        borderRadius: 'var(--field-radius)', padding: 'var(--field-padding)',
         transition: 'border-color var(--dur) ease',
         ...wrapperStyle,
       }}
@@ -23,7 +23,7 @@ export function Input({ icon = null, style = {}, wrapperStyle = {}, ...rest }) {
         onBlur={(e) => { setFocus(false); rest.onBlur && rest.onBlur(e); }}
         style={{
           flex: 1, minWidth: 0, background: 'transparent', border: 'none', outline: 'none',
-          fontFamily: 'var(--font-sans)', fontSize: 15, color: 'var(--text-primary)',
+          fontFamily: 'var(--font-sans)', fontSize: 'var(--field-font-size)', color: 'var(--field-text)',
           ...style,
         }}
         {...rest}

@@ -13,11 +13,11 @@ export function Textarea({ rows = 3, style = {}, ...rest }) {
       onBlur={(e) => { setFocus(false); rest.onBlur && rest.onBlur(e); }}
       style={{
         width: '100%', resize: 'vertical',
-        background: 'var(--surface-1)',
-        border: `1px solid ${focus ? 'var(--gold-soft-border)' : 'var(--border-2)'}`,
-        borderRadius: 'var(--radius-card)', padding: '13px 16px',
-        fontFamily: 'var(--font-sans)', fontSize: 15, lineHeight: 1.5,
-        color: 'var(--text-primary)', outline: 'none',
+        background: 'var(--field-background)',
+        border: `1px solid ${focus ? 'var(--field-border-focus)' : 'var(--field-border)'}`,
+        borderRadius: 'var(--field-radius)', padding: 'var(--field-padding)',
+        fontFamily: 'var(--font-sans)', fontSize: 'var(--field-font-size)', lineHeight: 'var(--field-line-height)',
+        color: 'var(--field-text)', outline: 'none',
         transition: 'border-color var(--dur) ease',
         ...style,
       }}

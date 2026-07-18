@@ -17,28 +17,28 @@ export function Button({
   ...rest
 }) {
   const sizes = {
-    sm: { padding: '9px 16px', fontSize: 13, radius: 'var(--radius-md)' },
-    md: { padding: '12px 24px', fontSize: 15, radius: 'var(--radius-md)' },
-    lg: { padding: '14px 28px', fontSize: 15, radius: 'var(--radius-card)' },
+    sm: { padding: 'var(--control-padding-sm)', fontSize: 'var(--button-font-size-sm)', radius: 'var(--button-radius-sm)' },
+    md: { padding: 'var(--control-padding-md)', fontSize: 'var(--button-font-size-md)', radius: 'var(--button-radius-md)' },
+    lg: { padding: 'var(--control-padding-lg)', fontSize: 'var(--button-font-size-lg)', radius: 'var(--button-radius-lg)' },
   };
   const s = sizes[size] || sizes.md;
 
   const variants = {
     primary: {
-      background: 'var(--gold)', color: 'var(--gold-ink)',
-      border: '1px solid transparent', fontWeight: 700,
+      background: 'var(--button-primary-bg)', color: 'var(--button-primary-text)',
+      border: '1px solid transparent', fontWeight: 'var(--font-weight-bold)',
     },
     secondary: {
-      background: 'transparent', color: 'var(--text-high)',
-      border: '1px solid var(--border-strong)', fontWeight: 500,
+      background: 'var(--button-secondary-bg)', color: 'var(--button-secondary-text)',
+      border: '1px solid var(--button-secondary-border)', fontWeight: 'var(--font-weight-medium)',
     },
     premium: {
-      background: 'var(--premium-cta)', color: 'var(--premium-ink)',
-      border: '1px solid transparent', fontWeight: 700,
+      background: 'var(--button-premium-bg)', color: 'var(--button-premium-text)',
+      border: '1px solid transparent', fontWeight: 'var(--font-weight-bold)',
     },
     ghost: {
-      background: 'transparent', color: 'var(--text-secondary)',
-      border: '1px solid transparent', fontWeight: 600,
+      background: 'transparent', color: 'var(--button-ghost-text)',
+      border: '1px solid transparent', fontWeight: 'var(--font-weight-semibold)',
     },
   };
   const v = variants[variant] || variants.primary;
@@ -52,13 +52,13 @@ export function Button({
         fontFamily: 'var(--font-sans)', lineHeight: 1,
         padding: s.padding, fontSize: s.fontSize, borderRadius: s.radius,
         width: full ? '100%' : 'auto',
-        opacity: disabled ? 0.45 : 1,
-        transition: 'transform var(--dur-fast) var(--ease-spring), filter var(--dur-fast) ease',
+        opacity: disabled ? 'var(--button-disabled-opacity)' : 1,
+        transition: 'var(--interactive-transition)',
         ...v, ...style,
       }}
-      onMouseEnter={(e) => { if (!disabled) e.currentTarget.style.filter = 'brightness(1.22)'; }}
+      onMouseEnter={(e) => { if (!disabled) e.currentTarget.style.filter = 'var(--interactive-hover-filter)'; }}
       onMouseLeave={(e) => { e.currentTarget.style.filter = 'none'; }}
-      onMouseDown={(e) => { if (!disabled) e.currentTarget.style.transform = 'scale(.96)'; }}
+      onMouseDown={(e) => { if (!disabled) e.currentTarget.style.transform = 'scale(var(--press-scale))'; }}
       onMouseUp={(e) => { e.currentTarget.style.transform = 'none'; }}
       {...rest}
     >

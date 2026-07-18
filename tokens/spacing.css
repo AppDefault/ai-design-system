@@ -2,6 +2,7 @@
    Generous, editorial spacing. Panels breathe (40px gutters); grids use 20px gaps. */
 :root {
   /* Spacing scale */
+  --sp-0: 0;
   --sp-1: 4px;
   --sp-2: 7px;
   --sp-3: 10px;
@@ -14,6 +15,35 @@
   --sp-10: 40px;
   --sp-12: 48px;
   --sp-16: 80px;
+
+  /* Layout roles. Override these on an app shell to rescale a product surface. */
+  --layout-max: 1400px;
+  --layout-reading-max: 820px;
+  --layout-form-max: 680px;
+  --layout-sidebar: 260px;
+  --layout-gutter: clamp(16px,3vw,40px);
+  --layout-section-block: clamp(28px,4vw,44px);
+  --layout-grid-gap: clamp(18px,2.4vw,26px);
+  --layout-grid-gap-compact: 12px;
+  --layout-card-min: 220px;
+
+  /* Control and component geometry. */
+  --control-height-sm: 32px;
+  --control-height-md: 40px;
+  --control-min-target: 44px;
+  --control-padding-sm: 9px 16px;
+  --control-padding-md: 12px 24px;
+  --control-padding-lg: 14px 28px;
+  --field-padding: 13px 16px;
+  --chip-padding: 8px 18px;
+  --tag-padding: 3px 10px;
+  --badge-padding: 4px 9px;
+  --menu-padding: 5px;
+  --menu-option-padding: 9px 12px;
+  --card-media-ratio: 4 / 5;
+  --card-content-gap: 11px;
+  --message-radius-ai: 4px 16px 16px 16px;
+  --message-radius-user: 16px 4px 16px 16px;
 
   /* Radius — badges 6, controls 11–12, cards 12, panels 20, pills full */
   --radius-xs: 6px;
@@ -33,6 +63,16 @@
   --ease-spring: cubic-bezier(.34,1.56,.64,1); /* @kind other */
   --dur-fast: .13s; /* @kind other */
   --dur: .15s; /* @kind other */
+  --hover-lift: -4px;
+  --hover-brightness: 1.22;
+  --press-brightness: .94;
+  --press-scale: .96;
+  --focus-ring-width: 2px;
+
+  /* Layer order. Avoid one-off z-index values in components. */
+  --z-dropdown: 60;
+  --z-overlay: 70;
+  --z-modal: 80;
 
   /* Ambient premium glow used behind chat / hero */
   --glow-magenta: radial-gradient(1200px 400px at 50% -10%,rgba(217,70,239,.05),transparent); /* @kind other */

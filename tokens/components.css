@@ -1,0 +1,85 @@
+/* AIGirl — component role tokens
+   This is the public customization layer. Product themes normally override
+   these roles, not component source and not primitive palette values. */
+:root {
+  /* Shared interactive contract */
+  --interactive-transition: transform var(--dur-fast) var(--ease-spring), filter var(--dur-fast) ease, opacity var(--dur-fast) ease, background-color var(--dur-fast) ease, border-color var(--dur-fast) ease, color var(--dur-fast) ease;
+  --interactive-hover-filter: brightness(var(--hover-brightness));
+  --interactive-press-filter: brightness(var(--press-brightness));
+  --focus-ring: 0 0 0 var(--focus-ring-width) var(--gold-soft-border);
+
+  /* Fields */
+  --field-background: var(--surface-1);
+  --field-border: var(--border-2);
+  --field-border-focus: var(--gold-soft-border);
+  --field-text: var(--text-primary);
+  --field-placeholder: var(--text-muted);
+  --field-radius: var(--radius-md);
+  --field-font-size: var(--font-size-input);
+  --field-line-height: var(--line-height-copy);
+
+  /* Buttons */
+  --button-radius-sm: var(--radius-md);
+  --button-radius-md: var(--radius-md);
+  --button-radius-lg: var(--radius-card);
+  --button-font-size-sm: var(--font-size-md);
+  --button-font-size-md: var(--font-size-xl);
+  --button-font-size-lg: var(--font-size-xl);
+  --button-primary-bg: var(--gold);
+  --button-primary-bg-hover: var(--gold-hover);
+  --button-primary-text: var(--gold-ink);
+  --button-secondary-bg: transparent;
+  --button-secondary-border: var(--border-strong);
+  --button-secondary-text: var(--text-high);
+  --button-ghost-text: var(--text-secondary);
+  --button-premium-bg: var(--premium-cta);
+  --button-premium-text: var(--premium-ink);
+  --button-disabled-opacity: .45;
+
+  /* Chips, tags and badges */
+  --chip-radius: var(--radius-pill);
+  --chip-bg: transparent;
+  --chip-border: var(--border-3);
+  --chip-text: var(--text-secondary);
+  --chip-active-bg: var(--gold);
+  --chip-active-border: var(--gold);
+  --chip-active-text: var(--gold-ink);
+  --chip-hover-border: var(--gold-soft-border);
+  --tag-radius: var(--radius-pill);
+  --tag-border: var(--border-strong);
+  --tag-text: var(--text-secondary);
+  --badge-radius: var(--radius-xs);
+  --badge-pro-bg: var(--magenta-badge);
+  --badge-pro-text: var(--premium-ink);
+  --badge-stat-bg: var(--overlay-scrim);
+  --badge-stat-text: var(--overlay-text);
+  --badge-premium-bg: var(--magenta-soft);
+  --badge-premium-border: var(--magenta-border);
+  --badge-premium-text: var(--magenta);
+
+  /* Menus and floating surfaces */
+  --menu-background: var(--surface-panel);
+  --menu-border: var(--border-3);
+  --menu-radius: var(--radius-card);
+  --menu-shadow: var(--shadow-float);
+  --menu-option-radius: var(--radius-sm);
+  --menu-option-text: var(--text-high);
+  --menu-option-hover-bg: var(--gold-soft);
+  --menu-option-hover-text: var(--gold);
+
+  /* Character discovery */
+  --character-card-media-bg: var(--placeholder-hatch), var(--placeholder-fill);
+  --character-card-media-border: var(--border-1);
+  --character-card-radius: var(--radius-card);
+  --character-card-title: var(--text-primary);
+  --character-card-category: var(--gold);
+  --character-card-copy: var(--text-tertiary);
+  --character-card-initial: var(--text-faint);
+
+  /* Conversation */
+  --message-ai-bg: var(--surface-2);
+  --message-ai-border: var(--border-faint);
+  --message-ai-text: var(--text-secondary);
+  --message-user-bg: var(--gold-soft);
+  --message-user-text: var(--gold-tint-text);
+}

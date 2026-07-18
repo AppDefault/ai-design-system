@@ -33,30 +33,30 @@ function Badge({
   const variants = {
     pro: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 11,
-      fontWeight: 600,
+      fontSize: 'var(--font-size-xs)',
+      fontWeight: 'var(--font-weight-semibold)',
       letterSpacing: '.08em',
-      color: 'var(--premium-ink)',
-      background: 'var(--magenta-badge)',
-      padding: '4px 9px',
-      borderRadius: 'var(--radius-xs)'
+      color: 'var(--badge-pro-text)',
+      background: 'var(--badge-pro-bg)',
+      padding: 'var(--badge-padding)',
+      borderRadius: 'var(--badge-radius)'
     },
     stat: {
       fontFamily: 'var(--font-mono)',
-      fontSize: 12,
-      color: 'var(--overlay-text)',
-      background: 'var(--overlay-scrim)',
+      fontSize: 'var(--font-size-sm)',
+      color: 'var(--badge-stat-text)',
+      background: 'var(--badge-stat-bg)',
       backdropFilter: 'blur(4px)',
-      padding: '4px 9px',
-      borderRadius: 'var(--radius-xs)'
+      padding: 'var(--badge-padding)',
+      borderRadius: 'var(--badge-radius)'
     },
     premium: {
       fontFamily: 'var(--font-sans)',
-      fontSize: 13,
-      fontWeight: 700,
-      color: 'var(--magenta)',
-      background: 'var(--magenta-soft)',
-      border: '1px solid var(--magenta-border)',
+      fontSize: 'var(--font-size-md)',
+      fontWeight: 'var(--font-weight-bold)',
+      color: 'var(--badge-premium-text)',
+      background: 'var(--badge-premium-bg)',
+      border: '1px solid var(--badge-premium-border)',
       padding: '8px 16px',
       borderRadius: 'var(--radius-pill)'
     }
@@ -93,46 +93,46 @@ function Button({
 }) {
   const sizes = {
     sm: {
-      padding: '9px 16px',
-      fontSize: 13,
-      radius: 'var(--radius-md)'
+      padding: 'var(--control-padding-sm)',
+      fontSize: 'var(--button-font-size-sm)',
+      radius: 'var(--button-radius-sm)'
     },
     md: {
-      padding: '12px 24px',
-      fontSize: 15,
-      radius: 'var(--radius-md)'
+      padding: 'var(--control-padding-md)',
+      fontSize: 'var(--button-font-size-md)',
+      radius: 'var(--button-radius-md)'
     },
     lg: {
-      padding: '14px 28px',
-      fontSize: 15,
-      radius: 'var(--radius-card)'
+      padding: 'var(--control-padding-lg)',
+      fontSize: 'var(--button-font-size-lg)',
+      radius: 'var(--button-radius-lg)'
     }
   };
   const s = sizes[size] || sizes.md;
   const variants = {
     primary: {
-      background: 'var(--gold)',
-      color: 'var(--gold-ink)',
+      background: 'var(--button-primary-bg)',
+      color: 'var(--button-primary-text)',
       border: '1px solid transparent',
-      fontWeight: 700
+      fontWeight: 'var(--font-weight-bold)'
     },
     secondary: {
-      background: 'transparent',
-      color: 'var(--text-high)',
-      border: '1px solid var(--border-strong)',
-      fontWeight: 500
+      background: 'var(--button-secondary-bg)',
+      color: 'var(--button-secondary-text)',
+      border: '1px solid var(--button-secondary-border)',
+      fontWeight: 'var(--font-weight-medium)'
     },
     premium: {
-      background: 'var(--premium-cta)',
-      color: 'var(--premium-ink)',
+      background: 'var(--button-premium-bg)',
+      color: 'var(--button-premium-text)',
       border: '1px solid transparent',
-      fontWeight: 700
+      fontWeight: 'var(--font-weight-bold)'
     },
     ghost: {
       background: 'transparent',
-      color: 'var(--text-secondary)',
+      color: 'var(--button-ghost-text)',
       border: '1px solid transparent',
-      fontWeight: 600
+      fontWeight: 'var(--font-weight-semibold)'
     }
   };
   const v = variants[variant] || variants.primary;
@@ -150,19 +150,19 @@ function Button({
       fontSize: s.fontSize,
       borderRadius: s.radius,
       width: full ? '100%' : 'auto',
-      opacity: disabled ? 0.45 : 1,
-      transition: 'transform var(--dur-fast) var(--ease-spring), filter var(--dur-fast) ease',
+      opacity: disabled ? 'var(--button-disabled-opacity)' : 1,
+      transition: 'var(--interactive-transition)',
       ...v,
       ...style
     },
     onMouseEnter: e => {
-      if (!disabled) e.currentTarget.style.filter = 'brightness(1.22)';
+      if (!disabled) e.currentTarget.style.filter = 'var(--interactive-hover-filter)';
     },
     onMouseLeave: e => {
       e.currentTarget.style.filter = 'none';
     },
     onMouseDown: e => {
-      if (!disabled) e.currentTarget.style.transform = 'scale(.96)';
+      if (!disabled) e.currentTarget.style.transform = 'scale(var(--press-scale))';
     },
     onMouseUp: e => {
       e.currentTarget.style.transform = 'none';
@@ -191,35 +191,35 @@ function Chip({
       alignItems: 'center',
       gap: 6,
       fontFamily: 'var(--font-sans)',
-      fontSize: 14,
-      lineHeight: 1,
-      padding: '8px 18px',
-      borderRadius: 'var(--radius-pill)',
+      fontSize: 'var(--font-size-lg)',
+      lineHeight: 'var(--line-height-ui)',
+      padding: 'var(--chip-padding)',
+      borderRadius: 'var(--chip-radius)',
       cursor: 'pointer',
       whiteSpace: 'nowrap',
       transition: 'transform var(--dur-fast) var(--ease-spring), border-color var(--dur-fast) ease, color var(--dur-fast) ease',
       ...(active ? {
-        background: 'var(--gold)',
-        color: 'var(--gold-ink)',
-        fontWeight: 700,
-        border: '1px solid transparent'
+        background: 'var(--chip-active-bg)',
+        color: 'var(--chip-active-text)',
+        fontWeight: 'var(--font-weight-bold)',
+        border: '1px solid var(--chip-active-border)'
       } : {
-        background: 'transparent',
-        color: 'var(--text-secondary)',
-        fontWeight: 500,
-        border: '1px solid var(--border-3)'
+        background: 'var(--chip-bg)',
+        color: 'var(--chip-text)',
+        fontWeight: 'var(--font-weight-medium)',
+        border: '1px solid var(--chip-border)'
       }),
       ...style
     },
     onMouseEnter: e => {
       if (!active) {
-        e.currentTarget.style.borderColor = 'rgba(250,204,21,.6)';
+        e.currentTarget.style.borderColor = 'var(--chip-hover-border)';
         e.currentTarget.style.transform = 'translateY(-1px)';
       }
     },
     onMouseLeave: e => {
       if (!active) {
-        e.currentTarget.style.borderColor = 'var(--border-3)';
+        e.currentTarget.style.borderColor = 'var(--chip-border)';
         e.currentTarget.style.transform = 'none';
       }
     }
@@ -248,10 +248,10 @@ function Input({
       alignItems: 'center',
       gap: 12,
       width: '100%',
-      background: 'var(--surface-1)',
-      border: `1px solid ${focus ? 'var(--gold-soft-border)' : 'var(--border-2)'}`,
-      borderRadius: 'var(--radius-card)',
-      padding: '13px 16px',
+      background: 'var(--field-background)',
+      border: `1px solid ${focus ? 'var(--field-border-focus)' : 'var(--field-border)'}`,
+      borderRadius: 'var(--field-radius)',
+      padding: 'var(--field-padding)',
       transition: 'border-color var(--dur) ease',
       ...wrapperStyle
     }
@@ -277,8 +277,8 @@ function Input({
       border: 'none',
       outline: 'none',
       fontFamily: 'var(--font-sans)',
-      fontSize: 15,
-      color: 'var(--text-primary)',
+      fontSize: 'var(--field-font-size)',
+      color: 'var(--field-text)',
       ...style
     }
   }, rest)));
@@ -303,12 +303,12 @@ function Tag({
       display: 'inline-flex',
       alignItems: 'center',
       fontFamily: 'var(--font-sans)',
-      fontSize: 12,
+      fontSize: 'var(--font-size-sm)',
       lineHeight: 1.2,
-      color: 'var(--text-secondary)',
-      border: '1px solid var(--border-strong)',
-      padding: '3px 10px',
-      borderRadius: 'var(--radius-pill)',
+      color: 'var(--tag-text)',
+      border: '1px solid var(--tag-border)',
+      padding: 'var(--tag-padding)',
+      borderRadius: 'var(--tag-radius)',
       whiteSpace: 'nowrap',
       ...style
     }
@@ -343,14 +343,14 @@ function Textarea({
     style: {
       width: '100%',
       resize: 'vertical',
-      background: 'var(--surface-1)',
-      border: `1px solid ${focus ? 'var(--gold-soft-border)' : 'var(--border-2)'}`,
-      borderRadius: 'var(--radius-card)',
-      padding: '13px 16px',
+      background: 'var(--field-background)',
+      border: `1px solid ${focus ? 'var(--field-border-focus)' : 'var(--field-border)'}`,
+      borderRadius: 'var(--field-radius)',
+      padding: 'var(--field-padding)',
       fontFamily: 'var(--font-sans)',
-      fontSize: 15,
-      lineHeight: 1.5,
-      color: 'var(--text-primary)',
+      fontSize: 'var(--field-font-size)',
+      lineHeight: 'var(--field-line-height)',
+      color: 'var(--field-text)',
       outline: 'none',
       transition: 'border-color var(--dur) ease',
       ...style
@@ -376,7 +376,7 @@ function Avatar({
   style = {},
   ...rest
 }) {
-  const radius = shape === 'circle' ? '999px' : size >= 64 ? 'var(--radius-lg)' : size >= 40 ? 'var(--radius-md)' : 'var(--radius-sm)';
+  const radius = shape === 'circle' ? 'var(--radius-pill)' : size >= 64 ? 'var(--radius-lg)' : size >= 40 ? 'var(--radius-md)' : 'var(--radius-sm)';
   return /*#__PURE__*/React.createElement("div", _extends({
     style: {
       width: size,
@@ -394,7 +394,7 @@ function Avatar({
   }, rest), !src && /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--font-display)',
-      fontWeight: 600,
+      fontWeight: 'var(--font-weight-semibold)',
       fontSize: Math.round(size * 0.44),
       color: 'var(--text-secondary)'
     }
@@ -433,13 +433,13 @@ function CharacterCard({
       filter: 'none',
       display: 'flex',
       flexDirection: 'column',
-      gap: 11,
+      gap: 'var(--card-content-gap)',
       cursor: 'pointer',
       transition: 'top var(--dur-fast) var(--ease-spring)',
       ...style
     },
     onMouseEnter: e => {
-      e.currentTarget.style.top = '-4px';
+      e.currentTarget.style.top = 'var(--hover-lift)';
     },
     onMouseLeave: e => {
       e.currentTarget.style.top = '0';
@@ -447,11 +447,11 @@ function CharacterCard({
   }, rest), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'relative',
-      aspectRatio: '4/5',
-      borderRadius: 'var(--radius-card)',
+      aspectRatio: 'var(--card-media-ratio)',
+      borderRadius: 'var(--character-card-radius)',
       overflow: 'hidden',
-      border: '1px solid var(--border-1)',
-      background: src ? `center/cover no-repeat url(${src})` : 'var(--placeholder-hatch), var(--placeholder-fill)',
+      border: '1px solid var(--character-card-media-border)',
+      background: src ? `center/cover no-repeat url(${src})` : 'var(--character-card-media-bg)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center'
@@ -460,8 +460,8 @@ function CharacterCard({
     style: {
       fontFamily: 'var(--font-display)',
       fontSize: 84,
-      fontWeight: 600,
-      color: 'var(--text-faint)'
+      fontWeight: 'var(--font-weight-semibold)',
+      color: 'var(--character-card-initial)'
     }
   }, letter), pro && /*#__PURE__*/React.createElement(__ds_scope.Badge, {
     variant: "pro",
@@ -486,10 +486,8 @@ function CharacterCard({
     }
   }, /*#__PURE__*/React.createElement("h3", {
     style: {
-      fontFamily: 'var(--font-display)',
-      fontWeight: 500,
-      fontSize: 18,
-      color: 'var(--text-primary)',
+      font: 'var(--type-card-title)',
+      color: 'var(--character-card-title)',
       margin: 0,
       letterSpacing: 'var(--tracking-snug)',
       whiteSpace: 'nowrap',
@@ -498,18 +496,17 @@ function CharacterCard({
     }
   }, name), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontFamily: 'var(--font-mono)',
-      fontSize: 11,
+      font: 'var(--type-meta)',
       letterSpacing: '.1em',
       textTransform: 'uppercase',
-      color: 'var(--gold)',
+      color: 'var(--character-card-category)',
       whiteSpace: 'nowrap'
     }
   }, category)), blurb && /*#__PURE__*/React.createElement("p", {
     style: {
       font: 'var(--body-xs)',
       fontWeight: 'var(--text-supporting-weight)',
-      color: 'var(--text-secondary)',
+      color: 'var(--character-card-copy)',
       margin: '6px 0 10px',
       display: '-webkit-box',
       WebkitLineClamp: 2,

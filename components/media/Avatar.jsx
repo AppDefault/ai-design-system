@@ -6,7 +6,7 @@ import React from 'react';
  * Square rounded-rect by default; set shape="circle" for user/persona avatars.
  */
 export function Avatar({ initial = 'A', src = null, size = 40, shape = 'rounded', style = {}, ...rest }) {
-  const radius = shape === 'circle' ? '999px'
+  const radius = shape === 'circle' ? 'var(--radius-pill)'
     : size >= 64 ? 'var(--radius-lg)'
     : size >= 40 ? 'var(--radius-md)' : 'var(--radius-sm)';
   return (
@@ -22,7 +22,7 @@ export function Avatar({ initial = 'A', src = null, size = 40, shape = 'rounded'
     >
       {!src && (
         <span style={{
-          fontFamily: 'var(--font-display)', fontWeight: 600,
+          fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-semibold)',
           fontSize: Math.round(size * 0.44), color: 'var(--text-secondary)',
         }}>{initial}</span>
       )}

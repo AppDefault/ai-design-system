@@ -1,11 +1,14 @@
 # AIGirl — Noir Editorial Design System
 
+> **Canonical implementation guide:** [`DESIGN_SYSTEM.md`](./DESIGN_SYSTEM.md). It is the normative, AI-readable component map and token contract. `index.html` remains the visual and behavioral reference.
+
 A dual-theme editorial design system for **AIGirl**, an 18+ AI companion / character-chat product (chat & roleplay with created and featured characters). The default **"Noir Editorial"** direction keeps its warm near-black canvas; the companion light theme translates the same hierarchy to warm paper surfaces, dark ink, deeper gold and restrained magenta.
 
 > **Product context.** AIGirl (aigirl.one, operated by SIGNLAB STUDIO CORP) lets users browse a catalogue of AI characters, chat/roleplay with them, create their own, manage personas, and upgrade to Premium tiers for unlimited messages, deeper memory, and image-generation coins. This design system is a *redesign* of that product — it keeps the product's structure and copy patterns but replaces the stock-dark UI with the Noir Editorial look. **All character imagery in this system is a neutral placeholder motif, never explicit content.**
 
 ## Sources
 Built from the material attached to this project:
+- **Local source of truth:** `index.html` defines the canonical product flow and visual hierarchy. `tokens/` expresses its reusable values; `DESIGN_SYSTEM.md` explains how to apply them.
 - **GitHub:** [`AppDefault/ai-design-system`](https://github.com/AppDefault/ai-design-system) — contains the "Noir Editorial" redesign prototype (`uploads/Aigirl Redesign - Noir Editorial.html`, `extracted/template.html`), a `design-system/tokens.json` + `Design System.dc.html` reference, and screenshots of both the live product and the redesign. Explore this repo for the full prototype and the exact source values behind these tokens.
 - Product screenshots of the live app (Explore, Chat, Create, Profile/Pay) and of the redesigned Explore grid.
 
@@ -98,8 +101,9 @@ Reusable React primitives (in `_ds_bundle.js`, namespace resolved by the compile
 ---
 
 ## Root index / manifest
-- `styles.css` — **the only file consumers link.** `@import`s the token + font files below.
-- `tokens/` — `fonts.css`, `colors.css`, `typography.css`, `spacing.css` (CSS custom properties).
+- `styles.css` — **the only file consumers link.** It imports every token layer in dependency order.
+- `tokens/` — `fonts.css`, `colors.css`, `typography.css`, `spacing.css`, `components.css`. The last file is the public component-customization layer.
+- `DESIGN_SYSTEM.md` — normative source precedence, component decision map, anatomy, states, responsive rules and AI checklist.
 - `components/core/`, `components/media/` — React primitives (`.jsx` + `.d.ts` + `.prompt.md` + a card `.html`).
 - `ui_kits/aigirl-web/` — the interactive web UI kit + its `README.md`.
 - `guidelines/` — foundation specimen cards.

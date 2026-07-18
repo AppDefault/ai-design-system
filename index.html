@@ -22,67 +22,68 @@ body { margin: 0; background: var(--bg); color: var(--text-primary); overflow-x:
 html { overflow-x: hidden; }
 ::-webkit-scrollbar { height: 8px; width: 8px; }
 ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 4px; }
-a { color:var(--gold); text-decoration:none; transition:color .15s ease; }
+a { color:var(--gold); text-decoration:none; transition:color var(--dur) ease; }
 a:hover, a:focus-visible { color:var(--link-hover); }
-.journal-link { transition:color .15s ease; }
+.journal-link { transition:color var(--dur) ease; }
 .journal-card:hover .journal-link { color:var(--gold) !important; }
 .site-footer a { color:var(--text-primary); }
 .site-footer a:hover, .site-footer a:focus-visible { color:var(--gold); }
-.combo-option:hover { color:var(--gold) !important; background:var(--gold-soft) !important; box-shadow:inset 0 0 0 1px var(--gold-soft-border); filter:none !important; }
+.combo-option:hover { color:var(--menu-option-hover-text) !important; background:var(--menu-option-hover-bg) !important; box-shadow:inset 0 0 0 1px var(--gold-soft-border); filter:none !important; }
 .pagination-link:not(.pagination-link-active):hover { color:var(--gold) !important; filter:none !important; }
 .pagination-arrow:hover { color:var(--gold) !important; border-color:var(--gold) !important; filter:none !important; }
-.character-card:hover { top:-4px !important; filter:none !important; }
+.character-card:hover { top:var(--hover-lift) !important; filter:none !important; }
 input, textarea, button { font-family: var(--font-sans); }
-input::placeholder, textarea::placeholder { color: var(--text-muted); }
+input::placeholder, textarea::placeholder { color: var(--field-placeholder); }
+input:focus-visible, textarea:focus-visible, button:focus-visible, *[style*="cursor:pointer"]:focus-visible { outline:none; box-shadow:var(--focus-ring); }
 @keyframes blink { 0%, 80%, 100% { opacity: .25; } 40% { opacity: 1; } }
 @keyframes pulse-dot { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .45; transform: scale(.8); } }
-button, *[style*="cursor:pointer"] { transition: transform .13s cubic-bezier(.34,1.56,.64,1), filter .13s ease, opacity .13s ease, background-color .13s ease, border-color .13s ease, color .13s ease, padding-left .13s ease; }
-button:hover, *[style*="cursor:pointer"]:hover { filter: brightness(1.22); }
-button:active, *[style*="cursor:pointer"]:active { filter: brightness(.94); }
+button, *[style*="cursor:pointer"] { transition:var(--interactive-transition), padding-left var(--dur-fast) ease; }
+button:hover, *[style*="cursor:pointer"]:hover { filter:var(--interactive-hover-filter); }
+button:active, *[style*="cursor:pointer"]:active { filter:var(--interactive-press-filter); }
 </style>
 </helmet>
 
-<div data-theme="{{ theme }}" style="height:100dvh; display:flex; flex-direction:column; background:var(--bg); font-family:'Manrope',sans-serif; font-weight:500; color:var(--text-primary); overflow:hidden;">
+<div data-theme="{{ theme }}" style="height:100dvh; display:flex; flex-direction:column; background:var(--bg); font-family:var(--font-sans); font-weight:var(--font-weight-regular); color:var(--text-primary); overflow:hidden;">
 
   <!-- ============ ONBOARDING ============ -->
   <sc-if value="{{ isOnboarding }}" hint-placeholder-val="{{ false }}">
     <div data-screen-label="Onboarding" style="flex:1; min-height:0; overflow:auto; position:relative; display:flex; padding:24px; background:radial-gradient(900px 500px at 50% -10%, var(--magenta-glow), transparent);">
       <div style="position:absolute; top:20px; right:20px; display:flex; align-items:center; gap:8px;">
-        <button onClick="{{ toggleTheme }}" aria-label="{{ themeLabel }}" title="{{ themeLabel }}" style="cursor:pointer; min-width:38px; height:32px; padding:0 10px; border-radius:999px; border:1px solid var(--border-strong); background:var(--surface-1); color:var(--text-high); font-size:15px; display:inline-flex; align-items:center; justify-content:center;">{{ themeIcon }}</button>
+        <button onClick="{{ toggleTheme }}" aria-label="{{ themeLabel }}" title="{{ themeLabel }}" style="cursor:pointer; min-width:38px; height:32px; padding:0 10px; border-radius:var(--radius-pill); border:1px solid var(--border-strong); background:var(--surface-1); color:var(--text-high); font-size:var(--font-size-xl); display:inline-flex; align-items:center; justify-content:center;">{{ themeIcon }}</button>
         <div style="position:relative;">
-        <span onClick="{{ toggleLangMenu }}" style="cursor:pointer; font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.05em; padding:6px 13px; border-radius:999px; border:1px solid var(--border-strong); color:var(--text-secondary); display:inline-flex; align-items:center; gap:6px;" style-hover="border-color:var(--gold); color:var(--text-primary); background:var(--gold-soft); transform:translateY(-1px);">{{ langCode }} ▾</span>
+        <span onClick="{{ toggleLangMenu }}" style="cursor:pointer; font-family:var(--font-mono); font-size:var(--font-size-sm); letter-spacing:.05em; padding:6px 13px; border-radius:var(--radius-pill); border:1px solid var(--border-strong); color:var(--text-secondary); display:inline-flex; align-items:center; gap:6px;" style-hover="border-color:var(--gold); color:var(--text-primary); background:var(--gold-soft); transform:translateY(-1px);">{{ langCode }} ▾</span>
         <sc-if value="{{ langMenuOpen }}" hint-placeholder-val="{{ false }}">
-          <div style="position:absolute; top:calc(100% + 6px); right:0; background:var(--surface-panel); border:1px solid var(--border-3); border-radius:12px; padding:4px; display:flex; flex-direction:column; gap:2px; min-width:84px; box-shadow:var(--shadow-float); z-index:80;">
+          <div style="position:absolute; top:calc(100% + 6px); right:0; background:var(--surface-panel); border:1px solid var(--border-3); border-radius:var(--radius-card); padding:4px; display:flex; flex-direction:column; gap:2px; min-width:84px; box-shadow:var(--shadow-float); z-index:80;">
             <sc-for list="{{ langOptions }}" as="lo" hint-placeholder-count="7">
-              <span onClick="{{ lo.pick }}" style="cursor:pointer; font-family:'JetBrains Mono',monospace; font-size:12px; padding:8px 12px; border-radius:8px; color:{{ lo.fg }}; background:{{ lo.bg }};" style-hover="background:var(--surface-3);">{{ lo.label }}</span>
+              <span onClick="{{ lo.pick }}" style="cursor:pointer; font-family:var(--font-mono); font-size:var(--font-size-sm); padding:8px 12px; border-radius:var(--radius-sm); color:{{ lo.fg }}; background:{{ lo.bg }};" style-hover="background:var(--surface-3);">{{ lo.label }}</span>
             </sc-for>
           </div>
         </sc-if>
         </div>
       </div>
       <div style="width:100%; max-width:480px; margin:auto; display:flex; flex-direction:column; align-items:center; text-align:center; gap:18px;">
-        <div style="font-family:'Newsreader',serif; font-size:40px; font-weight:600; letter-spacing:-.01em;">AI<span style="color:var(--gold);">Girl</span></div>
+        <div style="font-family:var(--font-display); font-size:40px; font-weight:var(--font-weight-semibold); letter-spacing:-.01em;">AI<span style="color:var(--gold);">Girl</span></div>
         <sc-if value="{{ obStep0 }}" hint-placeholder-val="{{ false }}">
-          <div style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--gold);">{{ t.obKicker }}</div>
-          <h1 style="font-family:'Newsreader',serif; font-weight:500; font-size:clamp(32px,7vw,50px); line-height:1.05; margin:0; letter-spacing:-.02em;">{{ t.obTitle }}</h1>
-          <p style="font-size:16px; line-height:1.55; color:var(--text-secondary); margin:0; max-width:400px;">{{ t.obSub }}</p>
+          <div style="font-family:var(--font-mono); font-size:var(--font-size-sm); letter-spacing:.12em; text-transform:uppercase; color:var(--gold);">{{ t.obKicker }}</div>
+          <h1 style="font-family:var(--font-display); font-weight:var(--font-weight-medium); font-size:clamp(32px,7vw,50px); line-height:1.05; margin:0; letter-spacing:-.02em;">{{ t.obTitle }}</h1>
+          <p style="font-size:var(--font-size-input); line-height:var(--line-height-reading); color:var(--text-secondary); margin:0; max-width:400px;">{{ t.obSub }}</p>
           <div style="display:flex; flex-direction:column; gap:12px; width:100%; max-width:340px; margin-top:10px;">
-            <button onClick="{{ ob18 }}" style="cursor:pointer; border:none; font-size:16px; font-weight:700; color:var(--gold-ink); background:var(--gold); padding:15px; border-radius:12px;" style-hover="background:var(--gold-hover);">{{ t.obEnter }}</button>
-            <button onClick="{{ obDeny }}" style="cursor:pointer; background:transparent; font-size:15px; color:var(--text-secondary); border:1px solid var(--border-strong); padding:14px; border-radius:12px;" style-hover="color:var(--text-primary);">{{ t.obLeave }}</button>
+            <button onClick="{{ ob18 }}" style="cursor:pointer; border:none; font-size:var(--font-size-input); font-weight:var(--font-weight-bold); color:var(--gold-ink); background:var(--gold); padding:15px; border-radius:var(--radius-card);" style-hover="background:var(--gold-hover);">{{ t.obEnter }}</button>
+            <button onClick="{{ obDeny }}" style="cursor:pointer; background:transparent; font-size:var(--font-size-xl); color:var(--text-secondary); border:1px solid var(--border-strong); padding:14px; border-radius:var(--radius-card);" style-hover="color:var(--text-primary);">{{ t.obLeave }}</button>
           </div>
           <sc-if value="{{ obDenied }}" hint-placeholder-val="{{ false }}">
-            <div style="font-size:14px; color:var(--danger);">{{ t.obDeniedTxt }}</div>
+            <div style="font-size:var(--font-size-lg); color:var(--danger);">{{ t.obDeniedTxt }}</div>
           </sc-if>
         </sc-if>
         <sc-if value="{{ obStep1 }}" hint-placeholder-val="{{ false }}">
           <div style="width:100%; background:var(--surface-panel); border:1px solid var(--border-1); border-radius:20px; padding:clamp(22px,5vw,32px); display:flex; flex-direction:column; gap:14px; text-align:left;">
-            <div style="font-family:'Newsreader',serif; font-size:26px; font-weight:500;">{{ t.signTitle }}</div>
-            <input placeholder="you@example.com" style="width:100%; background:var(--surface-1); border:1px solid var(--border-2); border-radius:11px; padding:14px 16px; font-size:16px; color:var(--text-primary); outline:none;">
-            <button onClick="{{ obLogin }}" style="cursor:pointer; border:none; font-size:15px; font-weight:700; color:var(--gold-ink); background:var(--gold); padding:14px; border-radius:11px;" style-hover="background:var(--gold-hover);">{{ t.cont }}</button>
-            <div style="display:flex; align-items:center; gap:12px; color:var(--text-muted); font-size:13px;"><span style="flex:1; height:1px; background:var(--surface-3);"></span>{{ t.or }}<span style="flex:1; height:1px; background:var(--surface-3);"></span></div>
-            <button onClick="{{ obLogin }}" style="cursor:pointer; background:transparent; font-size:15px; color:var(--text-high); border:1px solid var(--border-strong); padding:13px; border-radius:11px;" style-hover="border-color:var(--text-muted);">G · {{ t.google }}</button>
-            <button onClick="{{ obLogin }}" style="cursor:pointer; background:transparent; font-size:15px; color:var(--text-high); border:1px solid var(--border-strong); padding:13px; border-radius:11px;" style-hover="border-color:var(--text-muted);"> · {{ t.apple }}</button>
-            <div style="font-size:12px; line-height:1.5; color:var(--text-muted);">{{ t.terms }}</div>
+            <div style="font-family:var(--font-display); font-size:26px; font-weight:var(--font-weight-medium);">{{ t.signTitle }}</div>
+            <input placeholder="you@example.com" style="width:100%; background:var(--surface-1); border:1px solid var(--border-2); border-radius:var(--radius-md); padding:14px 16px; font-size:var(--font-size-input); color:var(--text-primary); outline:none;">
+            <button onClick="{{ obLogin }}" style="cursor:pointer; border:none; font-size:var(--font-size-xl); font-weight:var(--font-weight-bold); color:var(--gold-ink); background:var(--gold); padding:14px; border-radius:var(--radius-md);" style-hover="background:var(--gold-hover);">{{ t.cont }}</button>
+            <div style="display:flex; align-items:center; gap:12px; color:var(--text-muted); font-size:var(--font-size-md);"><span style="flex:1; height:1px; background:var(--surface-3);"></span>{{ t.or }}<span style="flex:1; height:1px; background:var(--surface-3);"></span></div>
+            <button onClick="{{ obLogin }}" style="cursor:pointer; background:transparent; font-size:var(--font-size-xl); color:var(--text-high); border:1px solid var(--border-strong); padding:13px; border-radius:var(--radius-md);" style-hover="border-color:var(--text-muted);">G · {{ t.google }}</button>
+            <button onClick="{{ obLogin }}" style="cursor:pointer; background:transparent; font-size:var(--font-size-xl); color:var(--text-high); border:1px solid var(--border-strong); padding:13px; border-radius:var(--radius-md);" style-hover="border-color:var(--text-muted);"> · {{ t.apple }}</button>
+            <div style="font-size:var(--font-size-sm); line-height:var(--line-height-copy); color:var(--text-muted);">{{ t.terms }}</div>
           </div>
         </sc-if>
       </div>
@@ -94,37 +95,37 @@ button:active, *[style*="cursor:pointer"]:active { filter: brightness(.94); }
     <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
       <div style="display:flex; align-items:center; justify-content:space-between; padding:16px clamp(20px,3vw,40px); border-bottom:1px solid var(--border-faint); flex-shrink:0;">
         <div style="display:flex; align-items:center; gap:clamp(20px,3vw,40px);">
-          <div onClick="{{ goExplore }}" style="cursor:pointer; font-family:'Newsreader',serif; font-size:26px; font-weight:600; letter-spacing:-.01em;">AI<span style="color:var(--gold);">Girl</span></div>
-          <div style="display:flex; gap:clamp(16px,2vw,28px); font-size:14px; font-weight:500;">
+          <div onClick="{{ goExplore }}" style="cursor:pointer; font-family:var(--font-display); font-size:26px; font-weight:var(--font-weight-semibold); letter-spacing:-.01em;">AI<span style="color:var(--gold);">Girl</span></div>
+          <div style="display:flex; gap:clamp(16px,2vw,28px); font-size:var(--font-size-lg); font-weight:var(--font-weight-medium);">
             <span onClick="{{ goExplore }}" style="cursor:pointer; color:{{ colExplore }};" style-hover="color:var(--text-primary); transform:translateY(-1px);">{{ t.explore }}</span>
             <span onClick="{{ goChats }}" style="cursor:pointer; color:{{ colChats }};" style-hover="color:var(--text-primary); transform:translateY(-1px);">{{ t.chats }}</span>
             <span onClick="{{ goCreate }}" style="cursor:pointer; color:{{ colCreate }};" style-hover="color:var(--text-primary); transform:translateY(-1px);">{{ t.create }}</span>
           </div>
         </div>
         <div style="display:flex; align-items:center; gap:10px;">
-          <button onClick="{{ toggleTheme }}" aria-label="{{ themeLabel }}" title="{{ themeLabel }}" style="cursor:pointer; height:32px; padding:0 12px; border-radius:999px; border:1px solid var(--border-strong); background:var(--surface-1); color:var(--text-high); font-size:12px; display:inline-flex; align-items:center; gap:7px;"><span style="font-size:15px; line-height:1;">{{ themeIcon }}</span>{{ themeShort }}</button>
+          <button onClick="{{ toggleTheme }}" aria-label="{{ themeLabel }}" title="{{ themeLabel }}" style="cursor:pointer; height:32px; padding:0 12px; border-radius:var(--radius-pill); border:1px solid var(--border-strong); background:var(--surface-1); color:var(--text-high); font-size:var(--font-size-sm); display:inline-flex; align-items:center; gap:7px;"><span style="font-size:var(--font-size-xl); line-height:1;">{{ themeIcon }}</span>{{ themeShort }}</button>
           <div style="position:relative;">
-            <span onClick="{{ toggleLangMenu }}" style="cursor:pointer; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.05em; padding:5px 11px; border-radius:999px; border:1px solid var(--border-strong); color:var(--text-secondary); display:inline-flex; align-items:center; gap:5px;" style-hover="border-color:var(--gold); color:var(--text-primary); background:var(--gold-soft); transform:translateY(-1px);">{{ langCode }} ▾</span>
+            <span onClick="{{ toggleLangMenu }}" style="cursor:pointer; font-family:var(--font-mono); font-size:var(--font-size-xs); letter-spacing:.05em; padding:5px 11px; border-radius:var(--radius-pill); border:1px solid var(--border-strong); color:var(--text-secondary); display:inline-flex; align-items:center; gap:5px;" style-hover="border-color:var(--gold); color:var(--text-primary); background:var(--gold-soft); transform:translateY(-1px);">{{ langCode }} ▾</span>
             <sc-if value="{{ langMenuOpen }}" hint-placeholder-val="{{ false }}">
-              <div style="position:absolute; top:calc(100% + 6px); right:0; background:var(--surface-panel); border:1px solid var(--border-3); border-radius:12px; padding:4px; display:flex; flex-direction:column; gap:2px; min-width:80px; box-shadow:var(--shadow-float); z-index:80;">
+              <div style="position:absolute; top:calc(100% + 6px); right:0; background:var(--surface-panel); border:1px solid var(--border-3); border-radius:var(--radius-card); padding:4px; display:flex; flex-direction:column; gap:2px; min-width:80px; box-shadow:var(--shadow-float); z-index:80;">
                 <sc-for list="{{ langOptions }}" as="lo" hint-placeholder-count="7">
-                  <span onClick="{{ lo.pick }}" style="cursor:pointer; font-family:'JetBrains Mono',monospace; font-size:12px; padding:7px 11px; border-radius:8px; color:{{ lo.fg }}; background:{{ lo.bg }};" style-hover="background:var(--surface-3);">{{ lo.label }}</span>
+                  <span onClick="{{ lo.pick }}" style="cursor:pointer; font-family:var(--font-mono); font-size:var(--font-size-sm); padding:7px 11px; border-radius:var(--radius-sm); color:{{ lo.fg }}; background:{{ lo.bg }};" style-hover="background:var(--surface-3);">{{ lo.label }}</span>
                 </sc-for>
               </div>
             </sc-if>
           </div>
-          <span onClick="{{ openPaywall }}" style="cursor:pointer; font-size:13px; font-weight:700; color:var(--magenta); border:1px solid var(--magenta-border); padding:8px 16px; border-radius:999px; background:var(--magenta-soft);" style-hover="background:var(--magenta-soft);">{{ premiumLabel }}</span>
-          <div onClick="{{ goProfile }}" style="cursor:pointer; width:38px; height:38px; border-radius:999px; background:var(--avatar-fill); border:1px solid var(--border-3); display:flex; align-items:center; justify-content:center; font-family:'Newsreader',serif; font-size:16px; color:var(--text-secondary);">M</div>
+          <span onClick="{{ openPaywall }}" style="cursor:pointer; font-size:var(--font-size-md); font-weight:var(--font-weight-bold); color:var(--magenta); border:1px solid var(--magenta-border); padding:8px 16px; border-radius:var(--radius-pill); background:var(--magenta-soft);" style-hover="background:var(--magenta-soft);">{{ premiumLabel }}</span>
+          <div onClick="{{ goProfile }}" style="cursor:pointer; width:38px; height:38px; border-radius:var(--radius-pill); background:var(--avatar-fill); border:1px solid var(--border-3); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:var(--font-size-input); color:var(--text-secondary);">M</div>
         </div>
       </div>
     </sc-if>
     <sc-if value="{{ showMobileTopNav }}" hint-placeholder-val="{{ false }}">
       <div style="display:flex; align-items:center; justify-content:space-between; padding:14px 16px; border-bottom:1px solid var(--border-faint); flex-shrink:0;">
-        <div onClick="{{ goExplore }}" style="cursor:pointer; font-family:'Newsreader',serif; font-size:22px; font-weight:600;">AI<span style="color:var(--gold);">Girl</span></div>
+        <div onClick="{{ goExplore }}" style="cursor:pointer; font-family:var(--font-display); font-size:var(--font-size-title-md); font-weight:var(--font-weight-semibold);">AI<span style="color:var(--gold);">Girl</span></div>
         <div style="display:flex; align-items:center; gap:8px;">
-          <button onClick="{{ toggleTheme }}" aria-label="{{ themeLabel }}" title="{{ themeLabel }}" style="cursor:pointer; width:38px; height:38px; padding:0; border-radius:999px; border:1px solid var(--border-strong); background:var(--surface-1); color:var(--text-high); font-size:16px; display:flex; align-items:center; justify-content:center;">{{ themeIcon }}</button>
-          <span onClick="{{ openPaywall }}" style="cursor:pointer; font-size:11px; font-weight:700; color:var(--magenta); border:1px solid var(--magenta-border); padding:6px 12px; border-radius:999px;">{{ premiumShort }}</span>
-          <span onClick="{{ toggleMenu }}" style="cursor:pointer; font-size:22px; color:var(--text-high); padding:4px 8px; min-width:44px; min-height:44px; display:flex; align-items:center; justify-content:center;">☰</span>
+          <button onClick="{{ toggleTheme }}" aria-label="{{ themeLabel }}" title="{{ themeLabel }}" style="cursor:pointer; width:38px; height:38px; padding:0; border-radius:var(--radius-pill); border:1px solid var(--border-strong); background:var(--surface-1); color:var(--text-high); font-size:var(--font-size-input); display:flex; align-items:center; justify-content:center;">{{ themeIcon }}</button>
+          <span onClick="{{ openPaywall }}" style="cursor:pointer; font-size:var(--font-size-xs); font-weight:var(--font-weight-bold); color:var(--magenta); border:1px solid var(--magenta-border); padding:6px 12px; border-radius:var(--radius-pill);">{{ premiumShort }}</span>
+          <span onClick="{{ toggleMenu }}" style="cursor:pointer; font-size:var(--font-size-title-md); color:var(--text-high); padding:4px 8px; min-width:44px; min-height:44px; display:flex; align-items:center; justify-content:center;">☰</span>
         </div>
       </div>
     </sc-if>
@@ -137,43 +138,43 @@ button:active, *[style*="cursor:pointer"]:active { filter: brightness(.94); }
     <!-- EXPLORE -->
     <sc-if value="{{ isExplore }}" hint-placeholder-val="{{ true }}">
       <div data-screen-label="Explore" style="flex:1; min-height:0; overflow:auto;">
-        <div style="padding:{{ heroPad }}; max-width:1400px; margin:0 auto;">
+        <div style="padding:{{ heroPad }}; max-width:var(--layout-max); margin:0 auto;">
           <div style="margin-bottom:{{ heroTitleMb }};">
-            <div style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); margin-bottom:{{ heroKickerMb }};">{{ t.kicker }}</div>
-            <h1 style="font-family:'Newsreader',serif; font-weight:500; font-size:clamp(26px,3.4vw,36px); line-height:1.12; margin:0; letter-spacing:-.015em; color:var(--text-primary); text-wrap:balance;">{{ t.heroT1 }} {{ t.heroT2 }}</h1>
+            <div style="font-family:var(--font-mono); font-size:var(--font-size-sm); letter-spacing:.12em; text-transform:uppercase; color:var(--gold); margin-bottom:{{ heroKickerMb }};">{{ t.kicker }}</div>
+            <h1 style="font-family:var(--font-display); font-weight:var(--font-weight-medium); font-size:clamp(26px,3.4vw,36px); line-height:1.12; margin:0; letter-spacing:-.015em; color:var(--text-primary); text-wrap:balance;">{{ t.heroT1 }} {{ t.heroT2 }}</h1>
           </div>
           <div style="display:flex; gap:12px; margin-bottom:{{ heroTitleMb }}; max-width:820px;">
             <div style="flex:1; min-width:0; display:flex; align-items:center; gap:14px; background:var(--surface-2); border:1px solid var(--border-strong); border-radius:14px; padding:0 {{ searchBoxPadX }};">
               <span style="color:var(--text-tertiary); display:flex; flex-shrink:0;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg></span>
               <input value="{{ search }}" onChange="{{ onSearch }}" placeholder="{{ t.searchPh }}" style="flex:1; min-width:0; background:transparent; border:none; outline:none; color:var(--text-primary); font-size:{{ searchFontSize }}; padding:{{ searchInputPad }};">
             </div>
-            <button style="cursor:pointer; border:none; background:var(--gold); color:var(--gold-ink); font-weight:700; font-size:{{ searchBtnFontSize }}; padding:0 {{ searchBtnPad }}; border-radius:14px; flex-shrink:1; white-space:nowrap;" style-hover="background:var(--gold-hover);">{{ t.searchBtn }}</button>
+            <button style="cursor:pointer; border:none; background:var(--gold); color:var(--gold-ink); font-weight:var(--font-weight-bold); font-size:{{ searchBtnFontSize }}; padding:0 {{ searchBtnPad }}; border-radius:14px; flex-shrink:1; white-space:nowrap;" style-hover="background:var(--gold-hover);">{{ t.searchBtn }}</button>
           </div>
           <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
           <div style="display:flex; gap:clamp(18px,3vw,28px); flex-wrap:wrap;">
-            <div><span style="font-family:'Newsreader',serif; font-size:17px;">12,400+</span> <span style="font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:var(--text-meta-weight); letter-spacing:.06em; text-transform:uppercase; color:var(--text-tertiary);">{{ t.statChars }}</span></div>
-            <div><span style="font-family:'Newsreader',serif; font-size:17px;">48M</span> <span style="font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:var(--text-meta-weight); letter-spacing:.06em; text-transform:uppercase; color:var(--text-tertiary);">{{ t.statChats }}</span></div>
-            <div style="display:flex; align-items:center; gap:6px;"><span style="width:7px; height:7px; border-radius:99px; background:var(--success); animation:pulse-dot 1.6s ease-in-out infinite; flex-shrink:0;"></span><span style="font-family:'Newsreader',serif; font-size:17px; color:var(--gold);">Live</span> <span style="font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:var(--text-meta-weight); letter-spacing:.06em; text-transform:uppercase; color:var(--text-tertiary);">{{ onlineNowText }}</span></div>
+            <div><span style="font-family:var(--font-display); font-size:17px;">12,400+</span> <span style="font-family:var(--font-mono); font-size:var(--font-size-xs); font-weight:var(--text-meta-weight); letter-spacing:.06em; text-transform:uppercase; color:var(--text-tertiary);">{{ t.statChars }}</span></div>
+            <div><span style="font-family:var(--font-display); font-size:17px;">48M</span> <span style="font-family:var(--font-mono); font-size:var(--font-size-xs); font-weight:var(--text-meta-weight); letter-spacing:.06em; text-transform:uppercase; color:var(--text-tertiary);">{{ t.statChats }}</span></div>
+            <div style="display:flex; align-items:center; gap:6px;"><span style="width:7px; height:7px; border-radius:var(--radius-pill); background:var(--success); animation:pulse-dot 1.6s ease-in-out infinite; flex-shrink:0;"></span><span style="font-family:var(--font-display); font-size:17px; color:var(--gold);">Live</span> <span style="font-family:var(--font-mono); font-size:var(--font-size-xs); font-weight:var(--text-meta-weight); letter-spacing:.06em; text-transform:uppercase; color:var(--text-tertiary);">{{ onlineNowText }}</span></div>
           </div>
           </sc-if>
         </div>
-        <div style="display:flex; align-items:center; gap:10px; padding:0 clamp(16px,3vw,40px) {{ filterRowPadBottom }}; max-width:1400px; margin:0 auto; flex-wrap:wrap;">
+        <div style="display:flex; align-items:center; gap:10px; padding:0 var(--layout-gutter) {{ filterRowPadBottom }}; max-width:var(--layout-max); margin:0 auto; flex-wrap:wrap;">
           <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; min-width:0;">
           <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
           <sc-for list="{{ filterChips }}" as="f" hint-placeholder-count="5">
-            <span onClick="{{ f.pick }}" style="cursor:pointer; white-space:nowrap; font-size:14px; font-weight:{{ f.fw }}; color:{{ f.fg }}; background:{{ f.bg }}; border:1px solid {{ f.bd }}; padding:8px 18px; border-radius:999px; flex-shrink:0;" style-hover="transform:translateY(-3px); border-color:var(--gold);">{{ f.label }}</span>
+            <span onClick="{{ f.pick }}" style="cursor:pointer; white-space:nowrap; font-size:var(--font-size-lg); font-weight:{{ f.fw }}; color:{{ f.fg }}; background:{{ f.bg }}; border:1px solid {{ f.bd }}; padding:8px 18px; border-radius:var(--radius-pill); flex-shrink:0;" style-hover="transform:translateY(-3px); border-color:var(--gold);">{{ f.label }}</span>
           </sc-for>
           <div style="position:relative; flex-shrink:0;">
-            <span onClick="{{ toggleMoreMenu }}" style="cursor:pointer; white-space:nowrap; font-size:14px; font-weight:{{ moreFw }}; color:{{ moreFg }}; background:{{ moreBg }}; border:1px solid {{ moreBd }}; padding:8px 18px; border-radius:999px; display:inline-flex; align-items:center; gap:6px;" style-hover="transform:translateY(-3px); border-color:var(--gold);">{{ moreLabel }} ▾</span>
+            <span onClick="{{ toggleMoreMenu }}" style="cursor:pointer; white-space:nowrap; font-size:var(--font-size-lg); font-weight:{{ moreFw }}; color:{{ moreFg }}; background:{{ moreBg }}; border:1px solid {{ moreBd }}; padding:8px 18px; border-radius:var(--radius-pill); display:inline-flex; align-items:center; gap:6px;" style-hover="transform:translateY(-3px); border-color:var(--gold);">{{ moreLabel }} ▾</span>
             <sc-if value="{{ moreMenuOpen }}" hint-placeholder-val="{{ false }}">
-              <div style="position:absolute; top:calc(100% + 6px); left:0; background:var(--surface-panel); border:1px solid var(--border-3); border-radius:12px; padding:5px; display:flex; flex-direction:column; gap:2px; min-width:190px; max-height:260px; box-shadow:var(--shadow-float); z-index:60;">
-                <input value="{{ moreQuery }}" onChange="{{ onMoreQuery }}" placeholder="{{ t.tagSearchPh }}" style="width:100%; background:var(--surface-2); border:1px solid var(--border-2); border-radius:8px; padding:8px 10px; font-size:16px; color:var(--text-primary); outline:none; margin-bottom:2px;">
+              <div style="position:absolute; top:calc(100% + 6px); left:0; background:var(--surface-panel); border:1px solid var(--border-3); border-radius:var(--radius-card); padding:5px; display:flex; flex-direction:column; gap:2px; min-width:190px; max-height:260px; box-shadow:var(--shadow-float); z-index:60;">
+                <input value="{{ moreQuery }}" onChange="{{ onMoreQuery }}" placeholder="{{ t.tagSearchPh }}" style="width:100%; background:var(--surface-2); border:1px solid var(--border-2); border-radius:var(--radius-sm); padding:8px 10px; font-size:var(--font-size-input); color:var(--text-primary); outline:none; margin-bottom:2px;">
                 <div style="overflow:auto; max-height:210px; display:flex; flex-direction:column; gap:2px;">
                 <sc-for list="{{ moreOptions }}" as="mo2" hint-placeholder-count="8">
-                  <span class="combo-option" onClick="{{ mo2.pick }}" style="cursor:pointer; font-size:13px; padding:9px 12px; border-radius:8px; color:{{ mo2.fg }}; background:{{ mo2.bg }}; display:flex; align-items:center; gap:8px;">{{ mo2.label }}<sc-if value="{{ mo2.active }}" hint-placeholder-val="{{ false }}"><span style="margin-left:auto;">✓</span></sc-if></span>
+                  <span class="combo-option" onClick="{{ mo2.pick }}" style="cursor:pointer; font-size:var(--font-size-md); padding:9px 12px; border-radius:var(--radius-sm); color:{{ mo2.fg }}; background:{{ mo2.bg }}; display:flex; align-items:center; gap:8px;">{{ mo2.label }}<sc-if value="{{ mo2.active }}" hint-placeholder-val="{{ false }}"><span style="margin-left:auto;">✓</span></sc-if></span>
                 </sc-for>
                 <sc-if value="{{ noMoreResults }}" hint-placeholder-val="{{ false }}">
-                  <span style="font-size:13px; padding:9px 12px; color:var(--text-muted);">{{ t.noTagsFound }}</span>
+                  <span style="font-size:var(--font-size-md); padding:9px 12px; color:var(--text-muted);">{{ t.noTagsFound }}</span>
                 </sc-if>
                 </div>
               </div>
@@ -182,16 +183,16 @@ button:active, *[style*="cursor:pointer"]:active { filter: brightness(.94); }
           </sc-if>
           <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
           <div style="position:relative; flex-shrink:0;">
-            <span onClick="{{ toggleFilterMenu }}" style="cursor:pointer; white-space:nowrap; font-size:14px; font-weight:{{ filterFw }}; color:{{ filterFg }}; background:{{ filterBg }}; border:1px solid {{ filterBd }}; padding:8px 16px; border-radius:999px; display:inline-flex; align-items:center; gap:8px;" style-hover="border-color:var(--gold);">{{ filterIcon }} {{ filterLabel }} ▾</span>
+            <span onClick="{{ toggleFilterMenu }}" style="cursor:pointer; white-space:nowrap; font-size:var(--font-size-lg); font-weight:{{ filterFw }}; color:{{ filterFg }}; background:{{ filterBg }}; border:1px solid {{ filterBd }}; padding:8px 16px; border-radius:var(--radius-pill); display:inline-flex; align-items:center; gap:8px;" style-hover="border-color:var(--gold);">{{ filterIcon }} {{ filterLabel }} ▾</span>
             <sc-if value="{{ filterMenuOpen }}" hint-placeholder-val="{{ false }}">
-              <div style="position:absolute; top:calc(100% + 6px); left:0; background:var(--surface-panel); border:1px solid var(--border-3); border-radius:12px; padding:5px; display:flex; flex-direction:column; gap:2px; min-width:210px; max-height:280px; box-shadow:var(--shadow-float); z-index:60;">
-                <input value="{{ filterQuery }}" onChange="{{ onFilterQuery }}" placeholder="{{ t.tagSearchPh }}" style="width:100%; background:var(--surface-2); border:1px solid var(--border-2); border-radius:8px; padding:8px 10px; font-size:16px; color:var(--text-primary); outline:none; margin-bottom:2px;">
+              <div style="position:absolute; top:calc(100% + 6px); left:0; background:var(--surface-panel); border:1px solid var(--border-3); border-radius:var(--radius-card); padding:5px; display:flex; flex-direction:column; gap:2px; min-width:210px; max-height:280px; box-shadow:var(--shadow-float); z-index:60;">
+                <input value="{{ filterQuery }}" onChange="{{ onFilterQuery }}" placeholder="{{ t.tagSearchPh }}" style="width:100%; background:var(--surface-2); border:1px solid var(--border-2); border-radius:var(--radius-sm); padding:8px 10px; font-size:var(--font-size-input); color:var(--text-primary); outline:none; margin-bottom:2px;">
                 <div style="overflow:auto; max-height:230px; display:flex; flex-direction:column; gap:2px;">
                 <sc-for list="{{ filterOptions }}" as="fo" hint-placeholder-count="8">
-                  <span onClick="{{ fo.pick }}" style="cursor:pointer; font-size:13px; padding:9px 12px; border-radius:8px; color:{{ fo.fg }}; background:{{ fo.bg }}; display:flex; align-items:center; gap:8px;" style-hover="background:var(--surface-3);">{{ fo.label }}<sc-if value="{{ fo.active }}" hint-placeholder-val="{{ false }}"><span style="margin-left:auto;">✓</span></sc-if></span>
+                  <span onClick="{{ fo.pick }}" style="cursor:pointer; font-size:var(--font-size-md); padding:9px 12px; border-radius:var(--radius-sm); color:{{ fo.fg }}; background:{{ fo.bg }}; display:flex; align-items:center; gap:8px;" style-hover="background:var(--surface-3);">{{ fo.label }}<sc-if value="{{ fo.active }}" hint-placeholder-val="{{ false }}"><span style="margin-left:auto;">✓</span></sc-if></span>
                 </sc-for>
                 <sc-if value="{{ noFilterResults }}" hint-placeholder-val="{{ false }}">
-                  <span style="font-size:13px; padding:9px 12px; color:var(--text-muted);">{{ t.noTagsFound }}</span>
+                  <span style="font-size:var(--font-size-md); padding:9px 12px; color:var(--text-muted);">{{ t.noTagsFound }}</span>
                 </sc-if>
                 </div>
               </div>
@@ -200,37 +201,37 @@ button:active, *[style*="cursor:pointer"]:active { filter: brightness(.94); }
           </sc-if>
           </div>
           <div style="position:relative; margin-left:auto; flex-shrink:0; padding-left:10px;">
-            <span onClick="{{ toggleSortMenu }}" style="cursor:pointer; font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--text-secondary); white-space:nowrap; display:inline-flex; align-items:center; gap:6px; border:1px solid var(--border-strong); padding:8px 14px; border-radius:999px;" style-hover="border-color:var(--gold); color:var(--text-primary); background:var(--gold-soft); transform:translateY(-1px);">{{ sortIcon }} {{ sortLabel }} ▾</span>
+            <span onClick="{{ toggleSortMenu }}" style="cursor:pointer; font-family:var(--font-mono); font-size:var(--font-size-md); color:var(--text-secondary); white-space:nowrap; display:inline-flex; align-items:center; gap:6px; border:1px solid var(--border-strong); padding:8px 14px; border-radius:var(--radius-pill);" style-hover="border-color:var(--gold); color:var(--text-primary); background:var(--gold-soft); transform:translateY(-1px);">{{ sortIcon }} {{ sortLabel }} ▾</span>
             <sc-if value="{{ sortMenuOpen }}" hint-placeholder-val="{{ false }}">
-              <div style="position:absolute; top:calc(100% + 6px); right:0; background:var(--surface-panel); border:1px solid var(--border-3); border-radius:12px; padding:5px; display:flex; flex-direction:column; gap:2px; min-width:170px; box-shadow:var(--shadow-float); z-index:9999;">
+              <div style="position:absolute; top:calc(100% + 6px); right:0; background:var(--surface-panel); border:1px solid var(--border-3); border-radius:var(--radius-card); padding:5px; display:flex; flex-direction:column; gap:2px; min-width:170px; box-shadow:var(--shadow-float); z-index:9999;">
                 <sc-for list="{{ sortOptions }}" as="so" hint-placeholder-count="4">
-                  <span class="combo-option" onClick="{{ so.pick }}" style="cursor:pointer; font-family:'JetBrains Mono',monospace; font-size:13px; padding:9px 12px; border-radius:8px; color:{{ so.fg }}; background:{{ so.bg }}; display:flex; align-items:center; gap:9px;">{{ so.icon }} {{ so.label }}<sc-if value="{{ so.active }}" hint-placeholder-val="{{ false }}"><span style="margin-left:auto;">✓</span></sc-if></span>
+                  <span class="combo-option" onClick="{{ so.pick }}" style="cursor:pointer; font-family:var(--font-mono); font-size:var(--font-size-md); padding:9px 12px; border-radius:var(--radius-sm); color:{{ so.fg }}; background:{{ so.bg }}; display:flex; align-items:center; gap:9px;">{{ so.icon }} {{ so.label }}<sc-if value="{{ so.active }}" hint-placeholder-val="{{ false }}"><span style="margin-left:auto;">✓</span></sc-if></span>
                 </sc-for>
               </div>
             </sc-if>
           </div>
         </div>
-        <div ref="{{ gridRef }}" style="display:grid; grid-template-columns:{{ gridTemplateCols }}; gap:{{ gridGapCss }}; padding:0 clamp(16px,3vw,40px) 48px; max-width:1400px; margin:0 auto;">
+        <div ref="{{ gridRef }}" style="display:grid; grid-template-columns:{{ gridTemplateCols }}; gap:{{ gridGapCss }}; padding:0 var(--layout-gutter) var(--sp-12); max-width:var(--layout-max); margin:0 auto;">
           <sc-for list="{{ gridChars }}" as="c" hint-placeholder-count="10">
-            <div class="character-card" onClick="{{ c.open }}" style="cursor:pointer; visibility:{{ c.vis }}; position:relative; top:0; filter:none; display:flex; flex-direction:column; gap:11px; min-width:0; transition:top .18s;">
+            <div class="character-card" onClick="{{ c.open }}" style="cursor:pointer; visibility:{{ c.vis }}; position:relative; top:0; filter:none; display:flex; flex-direction:column; gap:var(--card-content-gap); min-width:0; transition:top var(--dur-fast) var(--ease-spring);">
               <sc-if value="{{ c.notFiller }}" hint-placeholder-val="{{ true }}">
-              <div style="position:relative; aspect-ratio:4/5; border-radius:12px; overflow:hidden; border:1px solid var(--border-1); background:var(--placeholder-hatch),var(--placeholder-fill); display:flex; align-items:center; justify-content:center;">
-                <span style="font-family:'Newsreader',serif; font-size:84px; color:var(--text-faint); font-weight:600;">{{ c.initial }}</span>
+              <div style="position:relative; aspect-ratio:var(--card-media-ratio); border-radius:var(--character-card-radius); overflow:hidden; border:1px solid var(--character-card-media-border); background:var(--character-card-media-bg); display:flex; align-items:center; justify-content:center;">
+                <span style="font-family:var(--font-display); font-size:84px; color:var(--character-card-initial); font-weight:var(--font-weight-semibold);">{{ c.initial }}</span>
                 <sc-if value="{{ c.pro }}" hint-placeholder-val="{{ false }}">
-                  <span style="position:absolute; top:12px; left:12px; font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:600; letter-spacing:.08em; color:var(--premium-ink); background:var(--magenta-badge); padding:4px 9px; border-radius:6px;">PRO</span>
+                  <span style="position:absolute; top:12px; left:12px; font-family:var(--font-mono); font-size:var(--font-size-xs); font-weight:var(--font-weight-semibold); letter-spacing:.08em; color:var(--premium-ink); background:var(--magenta-badge); padding:4px 9px; border-radius:var(--radius-xs);">PRO</span>
                 </sc-if>
-                <span style="position:absolute; top:12px; right:12px; font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--text-high); background:var(--overlay-scrim); padding:4px 9px; border-radius:6px;">{{ c.views }}</span>
+                <span style="position:absolute; top:12px; right:12px; font-family:var(--font-mono); font-size:var(--font-size-sm); color:var(--text-high); background:var(--overlay-scrim); padding:4px 9px; border-radius:var(--radius-xs);">{{ c.views }}</span>
               </div>
               <div>
                 <div style="display:flex; align-items:baseline; justify-content:space-between; gap:10px;">
-                  <h3 style="font-family:'Newsreader',serif; font-weight:500; font-size:18px; margin:0; letter-spacing:-.01em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ c.name }}</h3>
-                  <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); white-space:nowrap;">{{ c.cat }}</span>
+                  <h3 style="font:var(--type-card-title); color:var(--character-card-title); margin:0; letter-spacing:var(--tracking-snug); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ c.name }}</h3>
+                  <span style="font:var(--type-meta); letter-spacing:.1em; text-transform:uppercase; color:var(--character-card-category); white-space:nowrap;">{{ c.cat }}</span>
                 </div>
-                <p style="font-size:12.5px; font-weight:var(--text-supporting-weight); line-height:1.45; color:var(--text-tertiary); margin:6px 0 10px; display:-webkit-box; -webkit-line-clamp:{{ blurbClamp }}; -webkit-box-orient:vertical; overflow:hidden;">{{ c.blurb }}</p>
+                <p style="font:var(--type-caption); font-weight:var(--text-supporting-weight); color:var(--character-card-copy); margin:6px 0 10px; display:-webkit-box; -webkit-line-clamp:{{ blurbClamp }}; -webkit-box-orient:vertical; overflow:hidden;">{{ c.blurb }}</p>
                 <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
                 <div style="display:flex; gap:7px; flex-wrap:wrap;">
                   <sc-for list="{{ c.tags }}" as="tag" hint-placeholder-count="2">
-                    <span style="font-size:12px; color:var(--text-secondary); border:1px solid var(--border-strong); padding:3px 10px; border-radius:999px;">{{ tag }}</span>
+                    <span style="font-size:var(--font-size-sm); color:var(--text-secondary); border:1px solid var(--border-strong); padding:3px 10px; border-radius:var(--radius-pill);">{{ tag }}</span>
                   </sc-for>
                 </div>
                 </sc-if>
@@ -241,32 +242,32 @@ button:active, *[style*="cursor:pointer"]:active { filter: brightness(.94); }
         </div>
 
         <!-- Pagination -->
-        <div style="display:flex; align-items:center; justify-content:center; gap:8px; padding:0 clamp(16px,3vw,40px) 44px; max-width:1400px; margin:0 auto; flex-wrap:wrap;">
-          <span class="pagination-arrow" onClick="{{ pagePrev }}" style="cursor:pointer; font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--text-tertiary); padding:8px 12px; border:1px solid var(--border-3); border-radius:8px;">‹</span>
+        <div style="display:flex; align-items:center; justify-content:center; gap:8px; padding:0 var(--layout-gutter) 44px; max-width:var(--layout-max); margin:0 auto; flex-wrap:wrap;">
+          <span class="pagination-arrow" onClick="{{ pagePrev }}" style="cursor:pointer; font-family:var(--font-mono); font-size:var(--font-size-md); color:var(--text-tertiary); padding:8px 12px; border:1px solid var(--border-3); border-radius:var(--radius-sm);">‹</span>
           <sc-for list="{{ pageItems }}" as="p" hint-placeholder-count="5">
-            <span class="{{ p.cls }}" onClick="{{ p.pick }}" style="cursor:pointer; font-family:'JetBrains Mono',monospace; font-size:13px; min-width:36px; text-align:center; padding:8px 10px; border-radius:8px; color:{{ p.fg }}; background:{{ p.bg }}; font-weight:{{ p.fw }};">{{ p.label }}</span>
+            <span class="{{ p.cls }}" onClick="{{ p.pick }}" style="cursor:pointer; font-family:var(--font-mono); font-size:var(--font-size-md); min-width:36px; text-align:center; padding:8px 10px; border-radius:var(--radius-sm); color:{{ p.fg }}; background:{{ p.bg }}; font-weight:{{ p.fw }};">{{ p.label }}</span>
           </sc-for>
-          <span class="pagination-arrow" onClick="{{ pageNext }}" style="cursor:pointer; font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--text-tertiary); padding:8px 12px; border:1px solid var(--border-3); border-radius:8px;">›</span>
-          <span style="font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--text-muted); margin-left:6px;">{{ t.ofPages }}</span>
+          <span class="pagination-arrow" onClick="{{ pageNext }}" style="cursor:pointer; font-family:var(--font-mono); font-size:var(--font-size-md); color:var(--text-tertiary); padding:8px 12px; border:1px solid var(--border-3); border-radius:var(--radius-sm);">›</span>
+          <span style="font-family:var(--font-mono); font-size:var(--font-size-sm); color:var(--text-muted); margin-left:6px;">{{ t.ofPages }}</span>
         </div>
 
         <!-- Journal / Blog teaser -->
-        <div style="border-top:1px solid var(--border-faint); padding:clamp(28px,4vw,44px) clamp(16px,3vw,40px) clamp(28px,4vw,44px); max-width:1400px; margin:0 auto;">
-          <div style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:var(--text-tertiary); margin-bottom:20px;">{{ t.journalLbl }}</div>
+        <div style="border-top:1px solid var(--border-faint); padding:var(--layout-section-block) var(--layout-gutter); max-width:var(--layout-max); margin:0 auto;">
+          <div style="font-family:var(--font-mono); font-size:var(--font-size-sm); letter-spacing:.2em; text-transform:uppercase; color:var(--text-tertiary); margin-bottom:20px;">{{ t.journalLbl }}</div>
           <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr)); gap:28px 32px;">
             <sc-for list="{{ blogPosts }}" as="b" hint-placeholder-count="3">
               <div class="journal-card" style="display:flex; flex-direction:column; gap:8px; cursor:pointer;">
-                <h4 class="journal-link" style="font-family:'Newsreader',serif; font-weight:500; font-size:19px; margin:0; color:var(--text-primary); letter-spacing:-.01em;">{{ b.title }}</h4>
-                <p style="font-size:13.5px; line-height:1.55; color:var(--text-tertiary); margin:0;">{{ b.excerpt }}</p>
+                <h4 class="journal-link" style="font-family:var(--font-display); font-weight:var(--font-weight-medium); font-size:19px; margin:0; color:var(--text-primary); letter-spacing:-.01em;">{{ b.title }}</h4>
+                <p style="font-size:13.5px; line-height:var(--line-height-reading); color:var(--text-tertiary); margin:0;">{{ b.excerpt }}</p>
               </div>
             </sc-for>
           </div>
         </div>
 
         <!-- Footer -->
-        <div class="site-footer" style="border-top:1px solid var(--border-faint); padding:clamp(28px,4vw,44px) clamp(16px,3vw,40px) 40px; max-width:1400px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:32px;">
+        <div class="site-footer" style="border-top:1px solid var(--border-faint); padding:var(--layout-section-block) var(--layout-gutter) var(--sp-10); max-width:var(--layout-max); margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:32px;">
           <div>
-            <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px;">{{ t.contactLbl }}</div>
+            <div style="font-family:var(--font-mono); font-size:var(--font-size-xs); letter-spacing:.18em; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px;">{{ t.contactLbl }}</div>
             <div style="font-size:13.5px; line-height:1.9; color:var(--text-secondary);">
               <div>{{ t.legalName }}</div>
               <div>{{ t.legalAddr }}</div>
@@ -274,7 +275,7 @@ button:active, *[style*="cursor:pointer"]:active { filter: brightness(.94); }
             </div>
           </div>
           <div>
-            <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px;">{{ t.infoLbl }}</div>
+            <div style="font-family:var(--font-mono); font-size:var(--font-size-xs); letter-spacing:.18em; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px;">{{ t.infoLbl }}</div>
             <div style="display:flex; flex-direction:column; gap:9px; font-size:13.5px;">
               <a href="#">{{ t.termsLink }}</a>
               <a href="#">{{ t.privacyLink }}</a>
@@ -283,7 +284,7 @@ button:active, *[style*="cursor:pointer"]:active { filter: brightness(.94); }
             </div>
           </div>
           <div>
-            <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px;">{{ t.joinLbl }}</div>
+            <div style="font-family:var(--font-mono); font-size:var(--font-size-xs); letter-spacing:.18em; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px;">{{ t.joinLbl }}</div>
             <div style="display:flex; flex-direction:column; gap:9px; font-size:13.5px;">
               <a href="#">Discord</a>
               <a href="#">Telegram</a>
@@ -291,17 +292,17 @@ button:active, *[style*="cursor:pointer"]:active { filter: brightness(.94); }
             </div>
           </div>
           <div>
-            <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px;">{{ t.getAppLbl }}</div>
+            <div style="font-family:var(--font-mono); font-size:var(--font-size-xs); letter-spacing:.18em; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px;">{{ t.getAppLbl }}</div>
             <a href="#" style="display:inline-flex; align-items:center; gap:10px; border:1px solid var(--border-strong); border-radius:10px; padding:9px 16px; color:var(--text-primary);" style-hover="border-color:var(--text-muted);">
               <span style="display:flex; color:var(--text-primary);"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M4 3.3v17.4a1 1 0 0 0 1.53.85l14.2-8.7a1 1 0 0 0 0-1.7L5.53 2.45A1 1 0 0 0 4 3.3z" fill="currentColor"></path></svg></span>
               <span style="display:flex; flex-direction:column; line-height:1.3;">
-                <span style="font-size:10px; color:var(--text-tertiary);">{{ t.getItOn }}</span>
-                <span style="font-size:15px; font-weight:600;">Google Play</span>
+                <span style="font-size:var(--font-size-2xs); color:var(--text-tertiary);">{{ t.getItOn }}</span>
+                <span style="font-size:var(--font-size-xl); font-weight:var(--font-weight-semibold);">Google Play</span>
               </span>
             </a>
           </div>
         </div>
-        <div style="text-align:center; padding:0 20px 32px; font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text-muted);">{{ t.copyright }}</div>
+        <div style="text-align:center; padding:0 20px 32px; font-family:var(--font-mono); font-size:var(--font-size-xs); color:var(--text-muted);">{{ t.copyright }}</div>
       </div>
     </sc-if>
 
@@ -310,17 +311,17 @@ button:active, *[style*="cursor:pointer"]:active { filter: brightness(.94); }
       <div data-screen-label="Chat" style="flex:1; min-height:0; display:flex;">
         <sc-if value="{{ showRail }}" hint-placeholder-val="{{ false }}">
           <div style="width:{{ railW }}; flex-shrink:0; border-right:1px solid var(--border-faint); display:flex; flex-direction:column; min-height:0;">
-            <div style="padding:16px 18px;"><button onClick="{{ goExplore }}" style="cursor:pointer; border:none; width:100%; display:flex; align-items:center; justify-content:center; gap:8px; font-size:14px; font-weight:600; color:var(--gold-ink); background:var(--gold); padding:11px; border-radius:11px;" style-hover="background:var(--gold-hover);">{{ t.newChat }}</button></div>
-            <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--text-muted); padding:4px 22px 10px;">{{ t.recentLbl }}</div>
+            <div style="padding:16px 18px;"><button onClick="{{ goExplore }}" style="cursor:pointer; border:none; width:100%; display:flex; align-items:center; justify-content:center; gap:8px; font-size:var(--font-size-lg); font-weight:var(--font-weight-semibold); color:var(--gold-ink); background:var(--gold); padding:11px; border-radius:var(--radius-md);" style-hover="background:var(--gold-hover);">{{ t.newChat }}</button></div>
+            <div style="font-family:var(--font-mono); font-size:var(--font-size-xs); letter-spacing:.14em; text-transform:uppercase; color:var(--text-muted); padding:4px 22px 10px;">{{ t.recentLbl }}</div>
             <div style="flex:1; overflow:auto; display:flex; flex-direction:column; gap:2px; padding:0 12px 12px;">
               <sc-for list="{{ recentList }}" as="r" hint-placeholder-count="5">
-                <div onClick="{{ r.open }}" style="cursor:pointer; display:flex; align-items:center; gap:11px; padding:11px; border-radius:11px; background:{{ r.bg }};" style-hover="background:var(--surface-2);">
-                  <div style="width:38px; height:38px; flex-shrink:0; border-radius:10px; background:var(--avatar-fill); display:flex; align-items:center; justify-content:center; font-family:'Newsreader',serif; font-size:17px; color:var(--text-secondary);">{{ r.initial }}</div>
+                <div onClick="{{ r.open }}" style="cursor:pointer; display:flex; align-items:center; gap:11px; padding:11px; border-radius:var(--radius-md); background:{{ r.bg }};" style-hover="background:var(--surface-2);">
+                  <div style="width:38px; height:38px; flex-shrink:0; border-radius:10px; background:var(--avatar-fill); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:17px; color:var(--text-secondary);">{{ r.initial }}</div>
                   <div style="min-width:0; flex:1;">
-                    <div style="font-size:14px; font-weight:600;">{{ r.name }}</div>
-                    <div style="font-size:12px; color:var(--text-tertiary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ r.snippet }}</div>
+                    <div style="font-size:var(--font-size-lg); font-weight:var(--font-weight-semibold);">{{ r.name }}</div>
+                    <div style="font-size:var(--font-size-sm); color:var(--text-tertiary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ r.snippet }}</div>
                   </div>
-                  <span style="font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--text-muted);">{{ r.time }}</span>
+                  <span style="font-family:var(--font-mono); font-size:var(--font-size-2xs); color:var(--text-muted);">{{ r.time }}</span>
                 </div>
               </sc-for>
             </div>
@@ -329,29 +330,29 @@ button:active, *[style*="cursor:pointer"]:active { filter: brightness(.94); }
         <sc-if value="{{ showConvo }}" hint-placeholder-val="{{ false }}">
           <div style="flex:1; display:flex; flex-direction:column; min-width:0; min-height:0;">
             <div style="display:flex; align-items:center; gap:12px; padding:12px clamp(14px,2vw,24px); border-bottom:1px solid var(--border-faint); flex-shrink:0;">
-              <span onClick="{{ back }}" style="cursor:pointer; color:var(--text-tertiary); font-size:22px; padding:6px 10px;" style-hover="color:var(--text-primary);">‹</span>
-              <div style="width:40px; height:40px; border-radius:11px; background:var(--avatar-fill); display:flex; align-items:center; justify-content:center; font-family:'Newsreader',serif; font-size:18px; color:var(--text-secondary);">{{ activeChar.initial }}</div>
-              <div style="min-width:0;"><div style="font-family:'Newsreader',serif; font-size:20px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ activeChar.name }}</div><div style="font-size:12px; color:var(--success); display:flex; align-items:center; gap:5px;"><span style="width:6px; height:6px; border-radius:99px; background:var(--success); animation:pulse-dot 1.6s ease-in-out infinite; flex-shrink:0;"></span>{{ onlineLabelText }}</div></div>
+              <span onClick="{{ back }}" style="cursor:pointer; color:var(--text-tertiary); font-size:var(--font-size-title-md); padding:6px 10px;" style-hover="color:var(--text-primary);">‹</span>
+              <div style="width:40px; height:40px; border-radius:var(--radius-md); background:var(--avatar-fill); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:var(--font-size-title-sm); color:var(--text-secondary);">{{ activeChar.initial }}</div>
+              <div style="min-width:0;"><div style="font-family:var(--font-display); font-size:20px; font-weight:var(--font-weight-semibold); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ activeChar.name }}</div><div style="font-size:var(--font-size-sm); color:var(--success); display:flex; align-items:center; gap:5px;"><span style="width:6px; height:6px; border-radius:var(--radius-pill); background:var(--success); animation:pulse-dot 1.6s ease-in-out infinite; flex-shrink:0;"></span>{{ onlineLabelText }}</div></div>
               <div style="margin-left:auto; display:flex; align-items:center; gap:10px;">
                 <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ false }}">
                   <div style="position:relative;">
-                    <span onClick="{{ toggleModelMenu }}" style="cursor:pointer; display:flex; align-items:center; gap:7px; font-size:13px; color:var(--text-secondary); border:1px solid var(--border-strong); padding:8px 14px; border-radius:999px;" style-hover="border-color:var(--gold); color:var(--text-primary); background:var(--gold-soft); transform:translateY(-1px);">✦ {{ modelLabel }} ▾</span>
+                    <span onClick="{{ toggleModelMenu }}" style="cursor:pointer; display:flex; align-items:center; gap:7px; font-size:var(--font-size-md); color:var(--text-secondary); border:1px solid var(--border-strong); padding:8px 14px; border-radius:var(--radius-pill);" style-hover="border-color:var(--gold); color:var(--text-primary); background:var(--gold-soft); transform:translateY(-1px);">✦ {{ modelLabel }} ▾</span>
                     <sc-if value="{{ modelMenuOpen }}" hint-placeholder-val="{{ false }}">
-                      <div style="position:absolute; top:calc(100% + 6px); right:0; background:var(--surface-panel); border:1px solid var(--border-3); border-radius:12px; padding:5px; display:flex; flex-direction:column; gap:2px; min-width:200px; box-shadow:var(--shadow-float); z-index:9999;">
+                      <div style="position:absolute; top:calc(100% + 6px); right:0; background:var(--surface-panel); border:1px solid var(--border-3); border-radius:var(--radius-card); padding:5px; display:flex; flex-direction:column; gap:2px; min-width:200px; box-shadow:var(--shadow-float); z-index:9999;">
                         <sc-for list="{{ modelOptions }}" as="mo" hint-placeholder-count="3">
-                          <span onClick="{{ mo.pick }}" style="cursor:pointer; font-size:13px; padding:9px 12px; border-radius:8px; color:{{ mo.fg }}; background:{{ mo.bg }}; display:flex; flex-direction:column; gap:2px;" style-hover="background:var(--surface-3);">{{ mo.label }}<span style="font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text-tertiary);">{{ mo.hint }}</span></span>
+                          <span onClick="{{ mo.pick }}" style="cursor:pointer; font-size:var(--font-size-md); padding:9px 12px; border-radius:var(--radius-sm); color:{{ mo.fg }}; background:{{ mo.bg }}; display:flex; flex-direction:column; gap:2px;" style-hover="background:var(--surface-3);">{{ mo.label }}<span style="font-family:var(--font-mono); font-size:var(--font-size-xs); color:var(--text-tertiary);">{{ mo.hint }}</span></span>
                         </sc-for>
                       </div>
                     </sc-if>
                   </div>
                   <div style="position:relative;">
-                    <span onClick="{{ togglePersonaMenu }}" style="cursor:pointer; display:flex; align-items:center; gap:7px; font-size:13px; color:var(--text-secondary); border:1px solid var(--border-strong); padding:8px 14px; border-radius:999px;" style-hover="border-color:var(--gold); color:var(--text-primary); background:var(--gold-soft); transform:translateY(-1px);">🎭 {{ personaLabel }} ▾</span>
+                    <span onClick="{{ togglePersonaMenu }}" style="cursor:pointer; display:flex; align-items:center; gap:7px; font-size:var(--font-size-md); color:var(--text-secondary); border:1px solid var(--border-strong); padding:8px 14px; border-radius:var(--radius-pill);" style-hover="border-color:var(--gold); color:var(--text-primary); background:var(--gold-soft); transform:translateY(-1px);">🎭 {{ personaLabel }} ▾</span>
                     <sc-if value="{{ personaMenuOpen }}" hint-placeholder-val="{{ false }}">
-                      <div style="position:absolute; top:calc(100% + 6px); right:0; background:var(--surface-panel); border:1px solid var(--border-3); border-radius:12px; padding:5px; display:flex; flex-direction:column; gap:2px; min-width:180px; box-shadow:var(--shadow-float); z-index:9999;">
+                      <div style="position:absolute; top:calc(100% + 6px); right:0; background:var(--surface-panel); border:1px solid var(--border-3); border-radius:var(--radius-card); padding:5px; display:flex; flex-direction:column; gap:2px; min-width:180px; box-shadow:var(--shadow-float); z-index:9999;">
                         <sc-for list="{{ personaOptions }}" as="po" hint-placeholder-count="2">
-                          <span onClick="{{ po.pick }}" style="cursor:pointer; font-size:13px; padding:9px 12px; border-radius:8px; color:{{ po.fg }}; background:{{ po.bg }};" style-hover="background:var(--surface-3);">{{ po.label }}</span>
+                          <span onClick="{{ po.pick }}" style="cursor:pointer; font-size:var(--font-size-md); padding:9px 12px; border-radius:var(--radius-sm); color:{{ po.fg }}; background:{{ po.bg }};" style-hover="background:var(--surface-3);">{{ po.label }}</span>
                         </sc-for>
-                        <span onClick="{{ newPersona }}" style="cursor:pointer; font-size:13px; padding:9px 12px; border-radius:8px; color:var(--gold); border-top:1px solid var(--border-1); margin-top:3px;">+ {{ t.newPersona }}</span>
+                        <span onClick="{{ newPersona }}" style="cursor:pointer; font-size:var(--font-size-md); padding:9px 12px; border-radius:var(--radius-sm); color:var(--gold); border-top:1px solid var(--border-1); margin-top:3px;">+ {{ t.newPersona }}</span>
                       </div>
                     </sc-if>
                   </div>
@@ -360,17 +361,17 @@ button:active, *[style*="cursor:pointer"]:active { filter: brightness(.94); }
               </div>
             </div>
             <div ref="{{ msgRef }}" style="flex:1; overflow:auto; padding:clamp(16px,3vw,26px) clamp(14px,3vw,28px); display:flex; flex-direction:column; gap:18px; background:radial-gradient(1200px 400px at 50% -10%,var(--magenta-glow),transparent);">
-              <div style="align-self:center; text-align:center; font-size:12px; color:var(--text-muted); background:var(--surface-1); padding:6px 14px; border-radius:999px;">{{ t.disclaimer }}</div>
+              <div style="align-self:center; text-align:center; font-size:var(--font-size-sm); color:var(--text-muted); background:var(--surface-1); padding:6px 14px; border-radius:var(--radius-pill);">{{ t.disclaimer }}</div>
               <sc-for list="{{ msgs }}" as="m" hint-placeholder-count="3">
                 <sc-if value="{{ m.isAi }}" hint-placeholder-val="{{ true }}">
                   <div style="display:flex; gap:12px; align-items:flex-start; max-width:min(74%,640px);">
-                    <div style="width:34px; height:34px; flex-shrink:0; border-radius:9px; background:var(--avatar-fill); display:flex; align-items:center; justify-content:center; font-family:'Newsreader',serif; font-size:15px; color:var(--text-secondary);">{{ activeChar.initial }}</div>
+                    <div style="width:34px; height:34px; flex-shrink:0; border-radius:9px; background:var(--avatar-fill); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:var(--font-size-xl); color:var(--text-secondary);">{{ activeChar.initial }}</div>
                     <div style="display:flex; flex-direction:column; gap:6px; align-items:flex-start;">
-                      <div style="background:var(--surface-2); border:1px solid var(--border-faint); border-radius:4px 16px 16px 16px; padding:14px 18px;">
-                        <sc-if value="{{ m.hasAction }}" hint-placeholder-val="{{ false }}"><div style="font-style:italic; font-size:14px; color:var(--text-tertiary); margin-bottom:6px;">{{ m.action }}</div></sc-if>
-                        <div style="font-size:15px; line-height:1.55; color:var(--text-high);">{{ m.text }}</div>
+                      <div style="background:var(--message-ai-bg); border:1px solid var(--message-ai-border); border-radius:var(--message-radius-ai); padding:14px 18px;">
+                        <sc-if value="{{ m.hasAction }}" hint-placeholder-val="{{ false }}"><div style="font-style:italic; font-size:var(--font-size-lg); color:var(--text-tertiary); margin-bottom:6px;">{{ m.action }}</div></sc-if>
+                        <div style="font-size:var(--font-size-xl); line-height:var(--line-height-reading); color:var(--text-high);">{{ m.text }}</div>
                       </div>
-                      <span onClick="{{ m.toggleVoice }}" style="cursor:pointer; display:flex; align-items:center; gap:6px; font-family:'JetBrains Mono',monospace; font-size:11px; color:{{ m.voiceColor }}; padding-left:4px;" style-hover="color:var(--gold);">
+                      <span onClick="{{ m.toggleVoice }}" style="cursor:pointer; display:flex; align-items:center; gap:6px; font-family:var(--font-mono); font-size:var(--font-size-xs); color:{{ m.voiceColor }}; padding-left:4px;" style-hover="color:var(--gold);">
                         <sc-if value="{{ m.voicePlaying }}" hint-placeholder-val="{{ false }}">
                           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V6l7 6-7 6z" fill="currentColor" stroke="none"></path></svg>
                         </sc-if>
@@ -384,17 +385,17 @@ button:active, *[style*="cursor:pointer"]:active { filter: brightness(.94); }
                 </sc-if>
                 <sc-if value="{{ m.isUser }}" hint-placeholder-val="{{ false }}">
                   <div style="display:flex; justify-content:flex-end;">
-                    <div style="max-width:min(70%,560px); background:var(--gold-soft); border:1px solid var(--gold-soft-border); border-radius:16px 4px 16px 16px; padding:13px 18px; font-size:15px; line-height:1.5; color:var(--gold-tint-text);">{{ m.text }}</div>
+                    <div style="max-width:min(70%,560px); background:var(--message-user-bg); border:1px solid var(--gold-soft-border); border-radius:var(--message-radius-user); padding:13px 18px; font:var(--type-body); color:var(--message-user-text);">{{ m.text }}</div>
                   </div>
                 </sc-if>
               </sc-for>
               <sc-if value="{{ typing }}" hint-placeholder-val="{{ false }}">
                 <div style="display:flex; gap:12px; align-items:flex-start;">
-                  <div style="width:34px; height:34px; flex-shrink:0; border-radius:9px; background:var(--avatar-fill); display:flex; align-items:center; justify-content:center; font-family:'Newsreader',serif; font-size:15px; color:var(--text-secondary);">{{ activeChar.initial }}</div>
-                  <div style="background:var(--surface-2); border:1px solid var(--border-faint); border-radius:4px 16px 16px 16px; padding:16px 18px; display:flex; gap:5px; align-items:center;">
-                    <span style="width:7px; height:7px; border-radius:99px; background:var(--text-secondary); animation:blink 1.2s infinite;"></span>
-                    <span style="width:7px; height:7px; border-radius:99px; background:var(--text-secondary); animation:blink 1.2s infinite; animation-delay:.2s;"></span>
-                    <span style="width:7px; height:7px; border-radius:99px; background:var(--text-secondary); animation:blink 1.2s infinite; animation-delay:.4s;"></span>
+                  <div style="width:34px; height:34px; flex-shrink:0; border-radius:9px; background:var(--avatar-fill); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:var(--font-size-xl); color:var(--text-secondary);">{{ activeChar.initial }}</div>
+                  <div style="background:var(--message-ai-bg); border:1px solid var(--message-ai-border); border-radius:var(--message-radius-ai); padding:16px 18px; display:flex; gap:5px; align-items:center;">
+                    <span style="width:7px; height:7px; border-radius:var(--radius-pill); background:var(--text-secondary); animation:blink 1.2s infinite;"></span>
+                    <span style="width:7px; height:7px; border-radius:var(--radius-pill); background:var(--text-secondary); animation:blink 1.2s infinite; animation-delay:.2s;"></span>
+                    <span style="width:7px; height:7px; border-radius:var(--radius-pill); background:var(--text-secondary); animation:blink 1.2s infinite; animation-delay:.4s;"></span>
                   </div>
                 </div>
               </sc-if>
@@ -403,7 +404,7 @@ button:active, *[style*="cursor:pointer"]:active { filter: brightness(.94); }
               <sc-if value="{{ suggestOpen }}" hint-placeholder-val="{{ false }}">
                 <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px;">
                   <sc-for list="{{ suggestions }}" as="sg" hint-placeholder-count="3">
-                    <span onClick="{{ sg.pick }}" style="cursor:pointer; font-size:13px; color:var(--text-secondary); border:1px solid var(--border-strong); padding:8px 14px; border-radius:999px; background:var(--surface-1);" style-hover="border-color:var(--gold); color:var(--gold);">{{ sg.text }}</span>
+                    <span onClick="{{ sg.pick }}" style="cursor:pointer; font-size:var(--font-size-md); color:var(--text-secondary); border:1px solid var(--border-strong); padding:8px 14px; border-radius:var(--radius-pill); background:var(--surface-1);" style-hover="border-color:var(--gold); color:var(--gold);">{{ sg.text }}</span>
                   </sc-for>
                 </div>
               </sc-if>
@@ -414,32 +415,32 @@ button:active, *[style*="cursor:pointer"]:active { filter: brightness(.94); }
                 <span onClick="{{ toggleSuggest }}" style="cursor:pointer; display:flex; color:{{ suggestColor }};" style-hover="color:var(--gold);">
                   <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a6.5 6.5 0 0 0-4 11.6c.6.5 1 1.3 1 2.1V17h6v-1.3c0-.8.4-1.6 1-2.1A6.5 6.5 0 0 0 12 2z"></path></svg>
                 </span>
-                <input value="{{ draft }}" onChange="{{ onDraft }}" onKeyDown="{{ onKey }}" placeholder="{{ msgPlaceholder }}" style="flex:1; min-width:0; background:transparent; border:none; outline:none; color:var(--text-primary); font-size:16px; padding:12px 0;">
-                <button onClick="{{ send }}" style="cursor:pointer; border:none; width:44px; height:44px; border-radius:11px; background:var(--gold); color:var(--gold-ink); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;" style-hover="background:var(--gold-hover);">➤</button>
+                <input value="{{ draft }}" onChange="{{ onDraft }}" onKeyDown="{{ onKey }}" placeholder="{{ msgPlaceholder }}" style="flex:1; min-width:0; background:transparent; border:none; outline:none; color:var(--text-primary); font-size:var(--font-size-input); padding:12px 0;">
+                <button onClick="{{ send }}" style="cursor:pointer; border:none; width:44px; height:44px; border-radius:var(--radius-md); background:var(--gold); color:var(--gold-ink); display:flex; align-items:center; justify-content:center; font-size:var(--font-size-input); flex-shrink:0;" style-hover="background:var(--gold-hover);">➤</button>
               </div>
               <sc-if value="{{ showFreeChip }}" hint-placeholder-val="{{ false }}">
-                <div onClick="{{ openPaywall }}" style="cursor:pointer; margin-top:8px; text-align:center; font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text-tertiary);" style-hover="color:var(--gold);">{{ freeLeftText }}</div>
+                <div onClick="{{ openPaywall }}" style="cursor:pointer; margin-top:8px; text-align:center; font-family:var(--font-mono); font-size:var(--font-size-xs); color:var(--text-tertiary);" style-hover="color:var(--gold);">{{ freeLeftText }}</div>
               </sc-if>
             </div>
           </div>
         </sc-if>
         <sc-if value="{{ isWide }}" hint-placeholder-val="{{ false }}">
           <div style="width:300px; flex-shrink:0; border-left:1px solid var(--border-faint); padding:26px 22px; display:flex; flex-direction:column; gap:18px; overflow:auto;">
-            <div style="aspect-ratio:1/1; border-radius:16px; background:var(--placeholder-hatch),var(--placeholder-fill); display:flex; align-items:center; justify-content:center; border:1px solid var(--border-1);"><span style="font-family:'Newsreader',serif; font-size:96px; color:var(--text-faint);">{{ activeChar.initial }}</span></div>
+            <div style="aspect-ratio:1/1; border-radius:16px; background:var(--placeholder-hatch),var(--placeholder-fill); display:flex; align-items:center; justify-content:center; border:1px solid var(--border-1);"><span style="font-family:var(--font-display); font-size:96px; color:var(--text-faint);">{{ activeChar.initial }}</span></div>
             <div>
-              <div style="font-family:'Newsreader',serif; font-size:24px; font-weight:600;">{{ activeChar.name }}</div>
-              <div style="font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--text-tertiary);">{{ activeChar.handle }} · {{ activeChar.views }} chats</div>
+              <div style="font-family:var(--font-display); font-size:24px; font-weight:var(--font-weight-semibold);">{{ activeChar.name }}</div>
+              <div style="font-family:var(--font-mono); font-size:var(--font-size-sm); color:var(--text-tertiary);">{{ activeChar.handle }} · {{ activeChar.views }} chats</div>
             </div>
             <div style="display:flex; gap:7px; flex-wrap:wrap;">
               <sc-for list="{{ activeChar.tags }}" as="tag" hint-placeholder-count="2">
-                <span style="font-size:12px; color:var(--text-secondary); border:1px solid var(--border-strong); padding:3px 10px; border-radius:999px;">{{ tag }}</span>
+                <span style="font-size:var(--font-size-sm); color:var(--text-secondary); border:1px solid var(--border-strong); padding:3px 10px; border-radius:var(--radius-pill);">{{ tag }}</span>
               </sc-for>
             </div>
-            <p style="font-size:14px; line-height:1.55; color:var(--text-secondary); margin:0;">{{ activeChar.blurb }}</p>
+            <p style="font-size:var(--font-size-lg); line-height:var(--line-height-reading); color:var(--text-secondary); margin:0;">{{ activeChar.blurb }}</p>
             <div style="margin-top:auto; display:flex; flex-direction:column; gap:9px;">
-              <button onClick="{{ goCreate }}" style="cursor:pointer; border:none; display:flex; align-items:center; justify-content:center; gap:8px; font-size:14px; font-weight:600; color:var(--gold-ink); background:var(--gold); padding:11px; border-radius:11px;" style-hover="background:var(--gold-hover);">{{ t.editChar }}</button>
-              <button onClick="{{ restart }}" style="cursor:pointer; background:transparent; display:flex; align-items:center; justify-content:center; gap:8px; font-size:14px; color:var(--text-secondary); border:1px solid var(--border-strong); padding:11px; border-radius:11px;" style-hover="border-color:var(--text-muted);">{{ t.restartLbl }}</button>
-              <div style="display:flex; align-items:center; justify-content:center; gap:8px; font-size:13px; color:var(--text-tertiary); padding:6px; cursor:pointer;">{{ t.reportLbl }}</div>
+              <button onClick="{{ goCreate }}" style="cursor:pointer; border:none; display:flex; align-items:center; justify-content:center; gap:8px; font-size:var(--font-size-lg); font-weight:var(--font-weight-semibold); color:var(--gold-ink); background:var(--gold); padding:11px; border-radius:var(--radius-md);" style-hover="background:var(--gold-hover);">{{ t.editChar }}</button>
+              <button onClick="{{ restart }}" style="cursor:pointer; background:transparent; display:flex; align-items:center; justify-content:center; gap:8px; font-size:var(--font-size-lg); color:var(--text-secondary); border:1px solid var(--border-strong); padding:11px; border-radius:var(--radius-md);" style-hover="border-color:var(--text-muted);">{{ t.restartLbl }}</button>
+              <div style="display:flex; align-items:center; justify-content:center; gap:8px; font-size:var(--font-size-md); color:var(--text-tertiary); padding:6px; cursor:pointer;">{{ t.reportLbl }}</div>
             </div>
           </div>
         </sc-if>
@@ -449,70 +450,70 @@ button:active, *[style*="cursor:pointer"]:active { filter: brightness(.94); }
     <!-- CREATE -->
     <sc-if value="{{ isCreate }}" hint-placeholder-val="{{ false }}">
       <div data-screen-label="Create" style="flex:1; min-height:0; overflow:auto;">
-        <div style="max-width:1400px; margin:0 auto;">
+        <div style="max-width:var(--layout-max); margin:0 auto;">
           <div style="padding:clamp(20px,3vw,30px) clamp(16px,3vw,40px); border-bottom:1px solid var(--border-faint); display:flex; align-items:flex-end; justify-content:space-between; gap:16px; flex-wrap:wrap;">
-            <div><div style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); margin-bottom:8px;">{{ t.studio }}</div><h2 style="font-family:'Newsreader',serif; font-weight:500; font-size:clamp(26px,3.5vw,36px); margin:0; letter-spacing:-.01em;">{{ t.createTitle }}</h2></div>
-            <span style="font-size:13px; color:var(--gold); cursor:pointer;">{{ t.guideLink }} →</span>
+            <div><div style="font-family:var(--font-mono); font-size:var(--font-size-sm); letter-spacing:.14em; text-transform:uppercase; color:var(--gold); margin-bottom:8px;">{{ t.studio }}</div><h2 style="font-family:var(--font-display); font-weight:var(--font-weight-medium); font-size:clamp(26px,3.5vw,36px); margin:0; letter-spacing:-.01em;">{{ t.createTitle }}</h2></div>
+            <span style="font-size:var(--font-size-md); color:var(--gold); cursor:pointer;">{{ t.guideLink }} →</span>
           </div>
           <div style="display:flex; flex-wrap:wrap;">
             <div style="flex:1 1 460px; min-width:0; padding:clamp(20px,3vw,34px) clamp(16px,3vw,40px); display:flex; flex-direction:column; gap:34px; border-right:1px solid var(--border-faint);">
               <div>
-                <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;"><span style="width:26px; height:26px; border-radius:8px; background:var(--gold); color:var(--gold-ink); font-weight:700; font-size:14px; display:flex; align-items:center; justify-content:center;">1</span><span style="font-family:'Newsreader',serif; font-size:20px;">{{ t.basics }}</span></div>
+                <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;"><span style="width:26px; height:26px; border-radius:var(--radius-sm); background:var(--gold); color:var(--gold-ink); font-weight:var(--font-weight-bold); font-size:var(--font-size-lg); display:flex; align-items:center; justify-content:center;">1</span><span style="font-family:var(--font-display); font-size:20px;">{{ t.basics }}</span></div>
                 <div style="display:flex; gap:24px; flex-wrap:wrap;">
                   <div style="width:130px; flex-shrink:0;">
-                    <div style="aspect-ratio:1/1; border-radius:14px; border:1.5px dashed var(--border-strong); background:var(--surface-1); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; color:var(--text-tertiary); cursor:pointer;" style-hover="border-color:var(--gold);"><span style="font-size:24px;">＋</span><span style="font-size:11px;">Avatar</span></div>
+                    <div style="aspect-ratio:1/1; border-radius:14px; border:1.5px dashed var(--border-strong); background:var(--surface-1); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; color:var(--text-tertiary); cursor:pointer;" style-hover="border-color:var(--gold);"><span style="font-size:24px;">＋</span><span style="font-size:var(--font-size-xs);">Avatar</span></div>
                   </div>
                   <div style="flex:1 1 260px; display:flex; flex-direction:column; gap:18px;">
-                    <div><label style="font-size:13px; font-weight:600; color:var(--text-secondary); display:block; margin-bottom:7px;">{{ t.nameLbl }}</label><input value="{{ cName }}" onChange="{{ onCName }}" placeholder="{{ t.namePh }}" style="width:100%; background:var(--surface-1); border:1px solid var(--border-2); border-radius:11px; padding:13px 16px; font-size:16px; color:var(--text-primary); outline:none;"><div style="font-size:12px; color:var(--text-muted); margin-top:6px;">{{ t.nameHint }}</div></div>
-                    <div><label style="font-size:13px; font-weight:600; color:var(--text-secondary); display:block; margin-bottom:7px;">{{ t.introLbl }}</label><input value="{{ cIntro }}" onChange="{{ onCIntro }}" placeholder="{{ t.introPh }}" style="width:100%; background:var(--surface-1); border:1px solid var(--border-2); border-radius:11px; padding:13px 16px; font-size:16px; color:var(--text-primary); outline:none;"></div>
+                    <div><label style="font-size:var(--font-size-md); font-weight:var(--font-weight-semibold); color:var(--text-secondary); display:block; margin-bottom:var(--sp-2);">{{ t.nameLbl }}</label><input value="{{ cName }}" onChange="{{ onCName }}" placeholder="{{ t.namePh }}" style="width:100%; background:var(--field-background); border:1px solid var(--field-border); border-radius:var(--field-radius); padding:var(--field-padding); font-size:var(--field-font-size); color:var(--field-text); outline:none;"><div style="font-size:var(--font-size-sm); color:var(--text-muted); margin-top:6px;">{{ t.nameHint }}</div></div>
+                    <div><label style="font-size:var(--font-size-md); font-weight:var(--font-weight-semibold); color:var(--text-secondary); display:block; margin-bottom:var(--sp-2);">{{ t.introLbl }}</label><input value="{{ cIntro }}" onChange="{{ onCIntro }}" placeholder="{{ t.introPh }}" style="width:100%; background:var(--field-background); border:1px solid var(--field-border); border-radius:var(--field-radius); padding:var(--field-padding); font-size:var(--field-font-size); color:var(--field-text); outline:none;"></div>
                   </div>
                 </div>
               </div>
               <div>
-                <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;"><span style="width:26px; height:26px; border-radius:8px; background:var(--gold-soft); color:var(--gold); font-weight:700; font-size:14px; display:flex; align-items:center; justify-content:center;">2</span><span style="font-family:'Newsreader',serif; font-size:20px;">{{ t.personality }}</span></div>
+                <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;"><span style="width:26px; height:26px; border-radius:var(--radius-sm); background:var(--gold-soft); color:var(--gold); font-weight:var(--font-weight-bold); font-size:var(--font-size-lg); display:flex; align-items:center; justify-content:center;">2</span><span style="font-family:var(--font-display); font-size:20px;">{{ t.personality }}</span></div>
                 <div style="display:flex; flex-direction:column; gap:18px;">
-                  <div><label style="font-size:13px; font-weight:600; color:var(--text-secondary); display:block; margin-bottom:7px;">{{ t.greetLbl }}</label><textarea value="{{ cGreet }}" onChange="{{ onCGreet }}" placeholder="{{ t.greetPh }}" rows="2" style="width:100%; resize:vertical; background:var(--surface-1); border:1px solid var(--border-2); border-radius:11px; padding:13px 16px; font-size:16px; color:var(--text-primary); outline:none;"></textarea></div>
-                  <div><label style="font-size:13px; font-weight:600; color:var(--text-secondary); display:block; margin-bottom:7px;">{{ t.persLbl }}</label><textarea value="{{ cPers }}" onChange="{{ onCPers }}" placeholder="{{ t.persPh }}" rows="4" style="width:100%; resize:vertical; background:var(--surface-1); border:1px solid var(--border-2); border-radius:11px; padding:13px 16px; font-size:16px; color:var(--text-primary); outline:none;"></textarea></div>
+                  <div><label style="font-size:var(--font-size-md); font-weight:var(--font-weight-semibold); color:var(--text-secondary); display:block; margin-bottom:var(--sp-2);">{{ t.greetLbl }}</label><textarea value="{{ cGreet }}" onChange="{{ onCGreet }}" placeholder="{{ t.greetPh }}" rows="2" style="width:100%; resize:vertical; background:var(--field-background); border:1px solid var(--field-border); border-radius:var(--field-radius); padding:var(--field-padding); font-size:var(--field-font-size); color:var(--field-text); outline:none;"></textarea></div>
+                  <div><label style="font-size:var(--font-size-md); font-weight:var(--font-weight-semibold); color:var(--text-secondary); display:block; margin-bottom:var(--sp-2);">{{ t.persLbl }}</label><textarea value="{{ cPers }}" onChange="{{ onCPers }}" placeholder="{{ t.persPh }}" rows="4" style="width:100%; resize:vertical; background:var(--field-background); border:1px solid var(--field-border); border-radius:var(--field-radius); padding:var(--field-padding); font-size:var(--field-font-size); color:var(--field-text); outline:none;"></textarea></div>
                   <div>
-                    <label style="font-size:13px; font-weight:600; color:var(--text-secondary); display:block; margin-bottom:9px;">{{ t.tagsLbl }}</label>
+                    <label style="font-size:var(--font-size-md); font-weight:var(--font-weight-semibold); color:var(--text-secondary); display:block; margin-bottom:9px;">{{ t.tagsLbl }}</label>
                     <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px;">
                       <sc-for list="{{ selectedTagChips }}" as="g" hint-placeholder-count="3">
-                        <span style="display:flex; align-items:center; gap:7px; font-size:13px; color:var(--gold-ink); background:var(--gold); padding:6px 8px 6px 14px; border-radius:999px;">{{ g.label }}<span onClick="{{ g.remove }}" style="cursor:pointer; opacity:.7;" style-hover="opacity:1;">✕</span></span>
+                        <span style="display:flex; align-items:center; gap:7px; font-size:var(--font-size-md); color:var(--gold-ink); background:var(--gold); padding:6px 8px 6px 14px; border-radius:var(--radius-pill);">{{ g.label }}<span onClick="{{ g.remove }}" style="cursor:pointer; opacity:.7;" style-hover="opacity:1;">✕</span></span>
                       </sc-for>
                     </div>
                     <div style="position:relative; max-width:320px;">
-                      <input value="{{ tagQuery }}" onChange="{{ onTagQuery }}" onFocus="{{ openTagMenu }}" placeholder="{{ t.tagSearchPh }}" style="width:100%; background:var(--surface-1); border:1px solid var(--border-2); border-radius:11px; padding:11px 14px; font-size:16px; color:var(--text-primary); outline:none;">
+                      <input value="{{ tagQuery }}" onChange="{{ onTagQuery }}" onFocus="{{ openTagMenu }}" placeholder="{{ t.tagSearchPh }}" style="width:100%; background:var(--surface-1); border:1px solid var(--border-2); border-radius:var(--radius-md); padding:11px 14px; font-size:var(--font-size-input); color:var(--text-primary); outline:none;">
                       <sc-if value="{{ tagMenuOpen }}" hint-placeholder-val="{{ false }}">
-                        <div style="position:absolute; top:calc(100% + 6px); left:0; right:0; background:var(--surface-panel); border:1px solid var(--border-3); border-radius:12px; padding:5px; display:flex; flex-direction:column; gap:2px; max-height:220px; overflow:auto; box-shadow:var(--shadow-float); z-index:60;">
+                        <div style="position:absolute; top:calc(100% + 6px); left:0; right:0; background:var(--surface-panel); border:1px solid var(--border-3); border-radius:var(--radius-card); padding:5px; display:flex; flex-direction:column; gap:2px; max-height:220px; overflow:auto; box-shadow:var(--shadow-float); z-index:60;">
                           <sc-for list="{{ tagOptions }}" as="to" hint-placeholder-count="4">
-                            <span onClick="{{ to.pick }}" style="cursor:pointer; font-size:13px; padding:9px 12px; border-radius:8px; color:var(--text-high);" style-hover="background:var(--surface-3);">{{ to.label }}</span>
+                            <span onClick="{{ to.pick }}" style="cursor:pointer; font-size:var(--font-size-md); padding:9px 12px; border-radius:var(--radius-sm); color:var(--text-high);" style-hover="background:var(--surface-3);">{{ to.label }}</span>
                           </sc-for>
                           <sc-if value="{{ noTagResults }}" hint-placeholder-val="{{ false }}">
-                            <span style="font-size:13px; padding:9px 12px; color:var(--text-muted);">{{ t.noTagsFound }}</span>
+                            <span style="font-size:var(--font-size-md); padding:9px 12px; color:var(--text-muted);">{{ t.noTagsFound }}</span>
                           </sc-if>
                         </div>
                       </sc-if>
                     </div>
                   </div>
-                  <div><label style="font-size:13px; font-weight:600; color:var(--text-secondary); display:block; margin-bottom:7px;">{{ t.exampleLbl }}</label><textarea value="{{ cExample }}" onChange="{{ onCExample }}" placeholder="{{ t.examplePh }}" rows="3" style="width:100%; resize:vertical; background:var(--surface-1); border:1px solid var(--border-2); border-radius:11px; padding:13px 16px; font-size:16px; font-family:'JetBrains Mono',monospace; color:var(--text-primary); outline:none;"></textarea><div style="font-size:12px; color:var(--text-muted); margin-top:6px;">{{ t.exampleHint }}</div></div>
+                  <div><label style="font-size:var(--font-size-md); font-weight:var(--font-weight-semibold); color:var(--text-secondary); display:block; margin-bottom:var(--sp-2);">{{ t.exampleLbl }}</label><textarea value="{{ cExample }}" onChange="{{ onCExample }}" placeholder="{{ t.examplePh }}" rows="3" style="width:100%; resize:vertical; background:var(--field-background); border:1px solid var(--field-border); border-radius:var(--field-radius); padding:var(--field-padding); font-size:var(--field-font-size); font-family:var(--font-mono); color:var(--field-text); outline:none;"></textarea><div style="font-size:var(--font-size-sm); color:var(--text-muted); margin-top:6px;">{{ t.exampleHint }}</div></div>
                 </div>
               </div>
               <div>
-                <div style="display:flex; align-items:center; gap:10px; margin-bottom:18px;"><span style="width:26px; height:26px; border-radius:8px; background:var(--gold-soft); color:var(--gold); font-weight:700; font-size:14px; display:flex; align-items:center; justify-content:center;">3</span><span style="font-family:'Newsreader',serif; font-size:20px;">{{ t.visibilityLbl }}</span></div>
+                <div style="display:flex; align-items:center; gap:10px; margin-bottom:18px;"><span style="width:26px; height:26px; border-radius:var(--radius-sm); background:var(--gold-soft); color:var(--gold); font-weight:var(--font-weight-bold); font-size:var(--font-size-lg); display:flex; align-items:center; justify-content:center;">3</span><span style="font-family:var(--font-display); font-size:20px;">{{ t.visibilityLbl }}</span></div>
                 <div style="display:flex; gap:12px; flex-wrap:wrap;">
-                  <div onClick="{{ pickPublic }}" style="cursor:pointer; flex:1 1 180px; border:{{ pubBd }}; background:{{ pubBg }}; border-radius:12px; padding:15px;" style-hover="transform:translateY(-2px); border-color:var(--gold);"><div style="font-size:15px; font-weight:600; margin-bottom:4px;">{{ pubMark }} {{ t.publicT }}</div><div style="font-size:13px; color:var(--text-tertiary);">{{ t.publicD }}</div></div>
-                  <div onClick="{{ pickPrivate }}" style="cursor:pointer; flex:1 1 180px; border:{{ privBd }}; background:{{ privBg }}; border-radius:12px; padding:15px;" style-hover="transform:translateY(-2px); border-color:var(--gold);"><div style="font-size:15px; font-weight:600; margin-bottom:4px;">{{ privMark }} {{ t.privateT }}</div><div style="font-size:13px; color:var(--text-tertiary);">{{ t.privateD }}</div></div>
+                  <div onClick="{{ pickPublic }}" style="cursor:pointer; flex:1 1 180px; border:{{ pubBd }}; background:{{ pubBg }}; border-radius:var(--radius-card); padding:15px;" style-hover="transform:translateY(-2px); border-color:var(--gold);"><div style="font-size:var(--font-size-xl); font-weight:var(--font-weight-semibold); margin-bottom:4px;">{{ pubMark }} {{ t.publicT }}</div><div style="font-size:var(--font-size-md); color:var(--text-tertiary);">{{ t.publicD }}</div></div>
+                  <div onClick="{{ pickPrivate }}" style="cursor:pointer; flex:1 1 180px; border:{{ privBd }}; background:{{ privBg }}; border-radius:var(--radius-card); padding:15px;" style-hover="transform:translateY(-2px); border-color:var(--gold);"><div style="font-size:var(--font-size-xl); font-weight:var(--font-weight-semibold); margin-bottom:4px;">{{ privMark }} {{ t.privateT }}</div><div style="font-size:var(--font-size-md); color:var(--text-tertiary);">{{ t.privateD }}</div></div>
                 </div>
               </div>
               <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
-                <button onClick="{{ doCreate }}" style="cursor:pointer; border:none; font-size:15px; font-weight:700; color:var(--gold-ink); background:var(--gold); padding:13px 30px; border-radius:12px;" style-hover="background:var(--gold-hover);">{{ t.createBtn }}</button>
+                <button onClick="{{ doCreate }}" style="cursor:pointer; border:none; font-size:var(--font-size-xl); font-weight:var(--font-weight-bold); color:var(--gold-ink); background:var(--gold); padding:13px 30px; border-radius:var(--radius-card);" style-hover="background:var(--gold-hover);">{{ t.createBtn }}</button>
                 <sc-if value="{{ createdNote }}" hint-placeholder-val="{{ false }}">
-                  <span style="font-size:13px; color:var(--success);">{{ t.createdNote }}</span>
+                  <span style="font-size:var(--font-size-md); color:var(--success);">{{ t.createdNote }}</span>
                 </sc-if>
               </div>
               <div style="border-top:1px solid var(--border-faint); padding-top:20px; display:flex; flex-direction:column; gap:10px;">
-                <div style="font-size:14px; font-weight:600; color:var(--text-secondary);">{{ t.notAllowedLbl }}</div>
-                <div style="font-size:13px; line-height:1.9; color:var(--text-tertiary);">
+                <div style="font-size:var(--font-size-lg); font-weight:var(--font-weight-semibold); color:var(--text-secondary);">{{ t.notAllowedLbl }}</div>
+                <div style="font-size:var(--font-size-md); line-height:1.9; color:var(--text-tertiary);">
                   <div>· {{ t.rule1 }}</div>
                   <div>· {{ t.rule2 }}</div>
                   <div>· {{ t.rule3 }}</div>
@@ -520,23 +521,23 @@ button:active, *[style*="cursor:pointer"]:active { filter: brightness(.94); }
               </div>
             </div>
             <div style="flex:1 1 300px; max-width:460px; padding:clamp(20px,3vw,34px) clamp(16px,3vw,30px); background:var(--surface-1);">
-              <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--text-tertiary); margin-bottom:18px;">{{ t.livePreview }}</div>
+              <div style="font-family:var(--font-mono); font-size:var(--font-size-xs); letter-spacing:.14em; text-transform:uppercase; color:var(--text-tertiary); margin-bottom:18px;">{{ t.livePreview }}</div>
               <div style="display:flex; flex-direction:column; gap:16px;">
-                <div style="position:relative; aspect-ratio:4/5; max-width:320px; border-radius:12px; overflow:hidden; border:1px solid var(--border-1); background:var(--placeholder-hatch),var(--placeholder-fill); display:flex; align-items:center; justify-content:center;"><span style="font-family:'Newsreader',serif; font-size:120px; color:var(--text-faint);">{{ pInitial }}</span></div>
+                <div style="position:relative; aspect-ratio:var(--card-media-ratio); max-width:320px; border-radius:var(--character-card-radius); overflow:hidden; border:1px solid var(--character-card-media-border); background:var(--character-card-media-bg); display:flex; align-items:center; justify-content:center;"><span style="font-family:var(--font-display); font-size:120px; color:var(--character-card-initial);">{{ pInitial }}</span></div>
                 <div>
-                  <div style="font-family:'Newsreader',serif; font-size:23px; font-weight:500;">{{ pName }}</div>
-                  <p style="font-size:14px; line-height:1.5; color:var(--text-tertiary); margin:8px 0 12px;">{{ pIntro }}</p>
+                  <div style="font-family:var(--font-display); font-size:23px; font-weight:var(--font-weight-medium);">{{ pName }}</div>
+                  <p style="font-size:var(--font-size-lg); line-height:var(--line-height-copy); color:var(--text-tertiary); margin:8px 0 12px;">{{ pIntro }}</p>
                   <div style="display:flex; gap:7px; flex-wrap:wrap;">
                     <sc-for list="{{ cTags }}" as="tag" hint-placeholder-count="2">
-                      <span style="font-size:12px; color:var(--text-secondary); border:1px solid var(--border-strong); padding:3px 10px; border-radius:999px;">{{ tag }}</span>
+                      <span style="font-size:var(--font-size-sm); color:var(--text-secondary); border:1px solid var(--border-strong); padding:3px 10px; border-radius:var(--radius-pill);">{{ tag }}</span>
                     </sc-for>
                   </div>
                 </div>
                 <div>
-                  <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--text-muted); margin-bottom:8px;">{{ t.firstMsg }}</div>
-                  <div style="background:var(--surface-2); border:1px solid var(--border-faint); border-radius:4px 16px 16px 16px; padding:13px 16px; font-size:14px; line-height:1.5; color:var(--text-secondary);">{{ pGreet }}</div>
+                  <div style="font-family:var(--font-mono); font-size:var(--font-size-2xs); letter-spacing:.14em; text-transform:uppercase; color:var(--text-muted); margin-bottom:8px;">{{ t.firstMsg }}</div>
+                  <div style="background:var(--message-ai-bg); border:1px solid var(--message-ai-border); border-radius:var(--message-radius-ai); padding:13px 16px; font:var(--type-supporting); color:var(--message-ai-text);">{{ pGreet }}</div>
                 </div>
-                <div style="border:1px solid var(--magenta-border); background:linear-gradient(160deg,var(--magenta-soft),transparent); border-radius:12px; padding:14px 16px; font-size:13px; line-height:1.5; color:var(--text-secondary);"><span style="color:var(--magenta-light); font-weight:600;">{{ t.tipLbl }} · </span>{{ t.tipTxt }}</div>
+                <div style="border:1px solid var(--magenta-border); background:linear-gradient(160deg,var(--magenta-soft),transparent); border-radius:var(--radius-card); padding:14px 16px; font-size:var(--font-size-md); line-height:var(--line-height-copy); color:var(--text-secondary);"><span style="color:var(--magenta-light); font-weight:var(--font-weight-semibold);">{{ t.tipLbl }} · </span>{{ t.tipTxt }}</div>
               </div>
             </div>
           </div>
@@ -547,72 +548,72 @@ button:active, *[style*="cursor:pointer"]:active { filter: brightness(.94); }
     <!-- PROFILE -->
     <sc-if value="{{ isProfile }}" hint-placeholder-val="{{ false }}">
       <div data-screen-label="Profile" style="flex:1; min-height:0; overflow:auto;">
-        <div style="max-width:1400px; margin:0 auto;">
+        <div style="max-width:var(--layout-max); margin:0 auto;">
           <div style="padding:clamp(20px,3vw,30px) clamp(16px,3vw,40px); border-bottom:1px solid var(--border-faint); display:flex; align-items:center; gap:18px; flex-wrap:wrap;">
-            <div style="width:60px; height:60px; border-radius:16px; background:var(--avatar-fill); border:1px solid var(--border-3); display:flex; align-items:center; justify-content:center; font-family:'Newsreader',serif; font-size:24px; color:var(--text-secondary);">M</div>
-            <div><h2 style="font-family:'Newsreader',serif; font-weight:500; font-size:clamp(24px,3vw,30px); margin:0;">max.bortnikov</h2><div style="font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--text-tertiary);">{{ t.memberSince }}</div></div>
+            <div style="width:60px; height:60px; border-radius:16px; background:var(--avatar-fill); border:1px solid var(--border-3); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:24px; color:var(--text-secondary);">M</div>
+            <div><h2 style="font-family:var(--font-display); font-weight:var(--font-weight-medium); font-size:clamp(24px,3vw,30px); margin:0;">max.bortnikov</h2><div style="font-family:var(--font-mono); font-size:var(--font-size-sm); color:var(--text-tertiary);">{{ t.memberSince }}</div></div>
             <sc-if value="{{ premium }}" hint-placeholder-val="{{ false }}">
-              <span style="margin-left:auto; font-size:13px; font-weight:700; color:var(--premium-ink); background:var(--premium-cta); padding:9px 18px; border-radius:999px;">✦ Premium</span>
+              <span style="margin-left:auto; font-size:var(--font-size-md); font-weight:var(--font-weight-bold); color:var(--premium-ink); background:var(--premium-cta); padding:9px 18px; border-radius:var(--radius-pill);">✦ Premium</span>
             </sc-if>
           </div>
           <div style="display:flex; flex-wrap:wrap;">
             <div style="flex:1 1 380px; min-width:0; padding:clamp(20px,3vw,34px) clamp(16px,3vw,40px); border-right:1px solid var(--border-faint); display:flex; flex-direction:column; gap:20px;">
-              <div style="font-family:'Newsreader',serif; font-size:20px;">{{ t.accountLbl }}</div>
-              <div><label style="font-size:13px; font-weight:600; color:var(--text-secondary); display:block; margin-bottom:7px;">{{ t.usernameLbl }}</label><input value="bortnikov" style="width:100%; background:var(--surface-1); border:1px solid var(--border-2); border-radius:11px; padding:13px 16px; font-size:16px; color:var(--text-primary); outline:none;"></div>
-              <div><label style="font-size:13px; font-weight:600; color:var(--text-secondary); display:block; margin-bottom:7px;">Email</label><input value="max.bortnikov@gmail.com" style="width:100%; background:var(--surface-1); border:1px solid var(--border-2); border-radius:11px; padding:13px 16px; font-size:16px; color:var(--text-primary); outline:none;"></div>
-              <div><label style="font-size:13px; font-weight:600; color:var(--text-secondary); display:block; margin-bottom:7px;">{{ t.highlightsLbl }} <span style="font-weight:500; color:var(--text-tertiary);">{{ t.highlightsSub }}</span></label><textarea placeholder="{{ t.highlightsPh }}" rows="3" style="width:100%; resize:vertical; background:var(--surface-1); border:1px solid var(--border-2); border-radius:11px; padding:13px 16px; font-size:16px; color:var(--text-primary); outline:none;"></textarea></div>
+              <div style="font-family:var(--font-display); font-size:20px;">{{ t.accountLbl }}</div>
+              <div><label style="font-size:var(--font-size-md); font-weight:var(--font-weight-semibold); color:var(--text-secondary); display:block; margin-bottom:var(--sp-2);">{{ t.usernameLbl }}</label><input value="bortnikov" style="width:100%; background:var(--field-background); border:1px solid var(--field-border); border-radius:var(--field-radius); padding:var(--field-padding); font-size:var(--field-font-size); color:var(--field-text); outline:none;"></div>
+              <div><label style="font-size:var(--font-size-md); font-weight:var(--font-weight-semibold); color:var(--text-secondary); display:block; margin-bottom:var(--sp-2);">Email</label><input value="max.bortnikov@gmail.com" style="width:100%; background:var(--field-background); border:1px solid var(--field-border); border-radius:var(--field-radius); padding:var(--field-padding); font-size:var(--field-font-size); color:var(--field-text); outline:none;"></div>
+              <div><label style="font-size:var(--font-size-md); font-weight:var(--font-weight-semibold); color:var(--text-secondary); display:block; margin-bottom:var(--sp-2);">{{ t.highlightsLbl }} <span style="font-weight:var(--font-weight-medium); color:var(--text-tertiary);">{{ t.highlightsSub }}</span></label><textarea placeholder="{{ t.highlightsPh }}" rows="3" style="width:100%; resize:vertical; background:var(--field-background); border:1px solid var(--field-border); border-radius:var(--field-radius); padding:var(--field-padding); font-size:var(--field-font-size); color:var(--field-text); outline:none;"></textarea></div>
               <div style="display:flex; gap:12px; flex-wrap:wrap;">
-                <button style="cursor:pointer; border:none; font-size:15px; font-weight:700; color:var(--gold-ink); background:var(--gold); padding:12px 28px; border-radius:12px;" style-hover="background:var(--gold-hover);">{{ t.saveProfile }}</button>
-                <button onClick="{{ logout }}" style="cursor:pointer; background:transparent; font-size:15px; color:var(--text-secondary); border:1px solid var(--border-strong); padding:12px 24px; border-radius:12px;">{{ t.logout }}</button>
+                <button style="cursor:pointer; border:none; font-size:var(--font-size-xl); font-weight:var(--font-weight-bold); color:var(--gold-ink); background:var(--gold); padding:12px 28px; border-radius:var(--radius-card);" style-hover="background:var(--gold-hover);">{{ t.saveProfile }}</button>
+                <button onClick="{{ logout }}" style="cursor:pointer; background:transparent; font-size:var(--font-size-xl); color:var(--text-secondary); border:1px solid var(--border-strong); padding:12px 24px; border-radius:var(--radius-card);">{{ t.logout }}</button>
               </div>
-              <div style="font-size:13px; color:var(--danger); margin-top:6px; cursor:pointer;">{{ t.deleteAcc }}</div>
+              <div style="font-size:var(--font-size-md); color:var(--danger); margin-top:6px; cursor:pointer;">{{ t.deleteAcc }}</div>
               <div style="border-top:1px solid var(--border-faint); padding-top:22px;">
-                <div style="font-family:'Newsreader',serif; font-size:20px; margin-bottom:6px;">{{ t.personasLbl }}</div>
-                <p style="font-size:13px; color:var(--text-tertiary); margin:0 0 16px; line-height:1.5;">{{ t.personasSub }}</p>
+                <div style="font-family:var(--font-display); font-size:20px; margin-bottom:6px;">{{ t.personasLbl }}</div>
+                <p style="font-size:var(--font-size-md); color:var(--text-tertiary); margin:0 0 16px; line-height:var(--line-height-copy);">{{ t.personasSub }}</p>
                 <div style="display:flex; flex-direction:column; gap:8px;">
                   <sc-for list="{{ personaCards }}" as="pc" hint-placeholder-count="2">
-                    <div onClick="{{ pc.select }}" style="cursor:pointer; display:flex; align-items:center; gap:12px; background:{{ pc.bg }}; border:1px solid {{ pc.bd }}; border-radius:12px; padding:11px 14px;" style-hover="transform:translateY(-2px); border-color:var(--gold);">
-                      <div style="width:36px; height:36px; flex-shrink:0; border-radius:9px; background:var(--avatar-fill); display:flex; align-items:center; justify-content:center; font-family:'Newsreader',serif; font-size:15px; color:var(--text-secondary);">{{ pc.initial }}</div>
-                      <div style="flex:1; font-size:14px;">{{ pc.label }}</div>
-                      <sc-if value="{{ pc.active }}" hint-placeholder-val="{{ false }}"><span style="font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:700; color:var(--gold-ink); background:var(--gold); padding:3px 9px; border-radius:999px;">{{ t.activeLbl2 }}</span></sc-if>
+                    <div onClick="{{ pc.select }}" style="cursor:pointer; display:flex; align-items:center; gap:12px; background:{{ pc.bg }}; border:1px solid {{ pc.bd }}; border-radius:var(--radius-card); padding:11px 14px;" style-hover="transform:translateY(-2px); border-color:var(--gold);">
+                      <div style="width:36px; height:36px; flex-shrink:0; border-radius:9px; background:var(--avatar-fill); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:var(--font-size-xl); color:var(--text-secondary);">{{ pc.initial }}</div>
+                      <div style="flex:1; font-size:var(--font-size-lg);">{{ pc.label }}</div>
+                      <sc-if value="{{ pc.active }}" hint-placeholder-val="{{ false }}"><span style="font-family:var(--font-mono); font-size:var(--font-size-2xs); font-weight:var(--font-weight-bold); color:var(--gold-ink); background:var(--gold); padding:3px 9px; border-radius:var(--radius-pill);">{{ t.activeLbl2 }}</span></sc-if>
                     </div>
                   </sc-for>
                 </div>
-                <span onClick="{{ addPersona }}" style="cursor:pointer; display:inline-flex; margin-top:10px; font-size:13px; color:var(--gold);" style-hover="color:var(--gold-hover);">+ {{ t.addPersona }}</span>
+                <span onClick="{{ addPersona }}" style="cursor:pointer; display:inline-flex; margin-top:10px; font-size:var(--font-size-md); color:var(--gold);" style-hover="color:var(--gold-hover);">+ {{ t.addPersona }}</span>
               </div>
             </div>
             <div style="flex:1 1 380px; min-width:0; padding:clamp(20px,3vw,34px) clamp(16px,3vw,40px); display:flex; flex-direction:column; gap:26px;">
               <sc-if value="{{ premium }}" hint-placeholder-val="{{ false }}">
                 <div style="border:1px solid var(--magenta-border); background:linear-gradient(160deg,var(--magenta-soft),transparent); border-radius:16px; padding:24px;">
-                  <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:16px; flex-wrap:wrap;"><div style="font-family:'Newsreader',serif; font-size:22px;">Premium · Have a Taste</div><span style="font-size:12px; font-weight:600; color:var(--success); background:var(--success-soft); padding:5px 12px; border-radius:999px;">{{ t.activeLbl }}</span></div>
+                  <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:16px; flex-wrap:wrap;"><div style="font-family:var(--font-display); font-size:var(--font-size-title-md);">Premium · Have a Taste</div><span style="font-size:var(--font-size-sm); font-weight:var(--font-weight-semibold); color:var(--success); background:var(--success-soft); padding:5px 12px; border-radius:var(--radius-pill);">{{ t.activeLbl }}</span></div>
                   <div style="display:flex; flex-direction:column; gap:9px; margin-bottom:18px;">
-                    <div style="display:flex; align-items:center; gap:10px; font-size:14px; color:var(--text-secondary);"><span style="color:var(--magenta-light);">✓</span> {{ t.f1 }}</div>
-                    <div style="display:flex; align-items:center; gap:10px; font-size:14px; color:var(--text-secondary);"><span style="color:var(--magenta-light);">✓</span> {{ t.f2 }}</div>
-                    <div style="display:flex; align-items:center; gap:10px; font-size:14px; color:var(--text-secondary);"><span style="color:var(--magenta-light);">✓</span> {{ t.f3 }}</div>
+                    <div style="display:flex; align-items:center; gap:10px; font-size:var(--font-size-lg); color:var(--text-secondary);"><span style="color:var(--magenta-light);">✓</span> {{ t.f1 }}</div>
+                    <div style="display:flex; align-items:center; gap:10px; font-size:var(--font-size-lg); color:var(--text-secondary);"><span style="color:var(--magenta-light);">✓</span> {{ t.f2 }}</div>
+                    <div style="display:flex; align-items:center; gap:10px; font-size:var(--font-size-lg); color:var(--text-secondary);"><span style="color:var(--magenta-light);">✓</span> {{ t.f3 }}</div>
                   </div>
-                  <div style="font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--text-tertiary); margin-bottom:16px;">{{ t.sinceLbl }}</div>
-                  <div style="display:flex; gap:10px; flex-wrap:wrap;"><button onClick="{{ openPaywall }}" style="cursor:pointer; border:none; font-size:14px; font-weight:700; color:var(--premium-ink); background:var(--magenta); padding:10px 22px; border-radius:11px;">{{ t.manage }}</button><button onClick="{{ unsub }}" style="cursor:pointer; background:transparent; font-size:14px; color:var(--text-secondary); border:1px solid var(--border-strong); padding:10px 20px; border-radius:11px;">{{ t.unsub }}</button></div>
+                  <div style="font-family:var(--font-mono); font-size:var(--font-size-sm); color:var(--text-tertiary); margin-bottom:16px;">{{ t.sinceLbl }}</div>
+                  <div style="display:flex; gap:10px; flex-wrap:wrap;"><button onClick="{{ openPaywall }}" style="cursor:pointer; border:none; font-size:var(--font-size-lg); font-weight:var(--font-weight-bold); color:var(--premium-ink); background:var(--magenta); padding:10px 22px; border-radius:var(--radius-md);">{{ t.manage }}</button><button onClick="{{ unsub }}" style="cursor:pointer; background:transparent; font-size:var(--font-size-lg); color:var(--text-secondary); border:1px solid var(--border-strong); padding:10px 20px; border-radius:var(--radius-md);">{{ t.unsub }}</button></div>
                 </div>
               </sc-if>
               <sc-if value="{{ notPremium }}" hint-placeholder-val="{{ false }}">
                 <div style="border:1px solid var(--magenta-border); background:linear-gradient(160deg,var(--magenta-soft),transparent); border-radius:16px; padding:24px;">
-                  <div style="font-family:'Newsreader',serif; font-size:22px; margin-bottom:8px;">{{ t.freeTitle }}</div>
-                  <p style="font-size:14px; line-height:1.5; color:var(--text-secondary); margin:0 0 18px;">{{ t.freeSub }}</p>
-                  <button onClick="{{ openPaywall }}" style="cursor:pointer; border:none; font-size:14px; font-weight:700; color:var(--premium-ink); background:var(--magenta); padding:11px 24px; border-radius:11px;" style-hover="background:var(--magenta-light);">{{ t.upgradeBtn }}</button>
+                  <div style="font-family:var(--font-display); font-size:var(--font-size-title-md); margin-bottom:8px;">{{ t.freeTitle }}</div>
+                  <p style="font-size:var(--font-size-lg); line-height:var(--line-height-copy); color:var(--text-secondary); margin:0 0 18px;">{{ t.freeSub }}</p>
+                  <button onClick="{{ openPaywall }}" style="cursor:pointer; border:none; font-size:var(--font-size-lg); font-weight:var(--font-weight-bold); color:var(--premium-ink); background:var(--magenta); padding:11px 24px; border-radius:var(--radius-md);" style-hover="background:var(--magenta-light);">{{ t.upgradeBtn }}</button>
                 </div>
               </sc-if>
               <div style="border:1px solid var(--border-2); border-radius:14px; padding:18px 20px; display:flex; flex-direction:column; gap:6px;">
-                <div style="font-size:14px; font-weight:600;">{{ t.helpTitle }}</div>
-                <p style="font-size:13px; line-height:1.6; color:var(--text-tertiary); margin:0;">{{ t.helpBody }} <a href="mailto:support@aigirl.one">support@aigirl.one</a>.</p>
+                <div style="font-size:var(--font-size-lg); font-weight:var(--font-weight-semibold);">{{ t.helpTitle }}</div>
+                <p style="font-size:var(--font-size-md); line-height:1.6; color:var(--text-tertiary); margin:0;">{{ t.helpBody }} <a href="mailto:support@aigirl.one">support@aigirl.one</a>.</p>
               </div>
               <div>
-                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;"><div style="font-family:'Newsreader',serif; font-size:20px;">{{ t.myCharsLbl }}</div><span onClick="{{ goCreate }}" style="font-size:13px; color:var(--gold); cursor:pointer;">{{ t.createNew }}</span></div>
+                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;"><div style="font-family:var(--font-display); font-size:20px;">{{ t.myCharsLbl }}</div><span onClick="{{ goCreate }}" style="font-size:var(--font-size-md); color:var(--gold); cursor:pointer;">{{ t.createNew }}</span></div>
                 <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:14px;">
                   <sc-for list="{{ myChars }}" as="c" hint-placeholder-count="4">
-                    <div onClick="{{ c.open }}" style="cursor:pointer; display:flex; align-items:center; gap:12px; background:var(--surface-1); border:1px solid var(--border-faint); border-radius:12px; padding:11px;" style-hover="border-color:var(--gold); transform:translateY(-2px);">
-                      <div style="width:44px; height:44px; flex-shrink:0; border-radius:10px; background:var(--avatar-fill); display:flex; align-items:center; justify-content:center; font-family:'Newsreader',serif; font-size:18px; color:var(--text-secondary);">{{ c.initial }}</div>
-                      <div style="min-width:0; flex:1;"><div style="font-family:'Newsreader',serif; font-size:16px;">{{ c.name }}</div><div style="font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text-tertiary);">▷ {{ c.views }}</div></div>
-                      <span style="color:var(--text-tertiary); font-size:15px;">✎</span>
+                    <div onClick="{{ c.open }}" style="cursor:pointer; display:flex; align-items:center; gap:12px; background:var(--surface-1); border:1px solid var(--border-faint); border-radius:var(--radius-card); padding:11px;" style-hover="border-color:var(--gold); transform:translateY(-2px);">
+                      <div style="width:44px; height:44px; flex-shrink:0; border-radius:10px; background:var(--avatar-fill); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:var(--font-size-title-sm); color:var(--text-secondary);">{{ c.initial }}</div>
+                      <div style="min-width:0; flex:1;"><div style="font-family:var(--font-display); font-size:var(--font-size-input);">{{ c.name }}</div><div style="font-family:var(--font-mono); font-size:var(--font-size-xs); color:var(--text-tertiary);">▷ {{ c.views }}</div></div>
+                      <span style="color:var(--text-tertiary); font-size:var(--font-size-xl);">✎</span>
                     </div>
                   </sc-for>
                 </div>
@@ -629,24 +630,24 @@ button:active, *[style*="cursor:pointer"]:active { filter: brightness(.94); }
   <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
     <div style="position:fixed; inset:0; z-index:60; background:var(--overlay-backdrop); display:flex; flex-direction:column; padding:16px;">
       <div style="display:flex; align-items:center; justify-content:space-between;">
-        <div style="font-family:'Newsreader',serif; font-size:22px; font-weight:600;">AI<span style="color:var(--gold);">Girl</span></div>
+        <div style="font-family:var(--font-display); font-size:var(--font-size-title-md); font-weight:var(--font-weight-semibold);">AI<span style="color:var(--gold);">Girl</span></div>
         <span onClick="{{ toggleMenu }}" style="cursor:pointer; font-size:20px; color:var(--text-secondary); min-width:44px; min-height:44px; display:flex; align-items:center; justify-content:center;">✕</span>
       </div>
       <div style="display:flex; flex-direction:column; gap:6px; margin-top:28px;">
-        <div onClick="{{ goExplore }}" style="cursor:pointer; font-family:'Newsreader',serif; font-size:28px; padding:12px 8px; border-bottom:1px solid var(--border-faint);" style-hover="color:var(--gold); padding-left:20px;">{{ t.explore }}</div>
-        <div onClick="{{ goChats }}" style="cursor:pointer; font-family:'Newsreader',serif; font-size:28px; padding:12px 8px; border-bottom:1px solid var(--border-faint);" style-hover="color:var(--gold); padding-left:20px;">{{ t.chats }}</div>
-        <div onClick="{{ goCreate }}" style="cursor:pointer; font-family:'Newsreader',serif; font-size:28px; padding:12px 8px; border-bottom:1px solid var(--border-faint);" style-hover="color:var(--gold); padding-left:20px;">{{ t.create }}</div>
-        <div onClick="{{ goProfile }}" style="cursor:pointer; font-family:'Newsreader',serif; font-size:28px; padding:12px 8px; border-bottom:1px solid var(--border-faint);" style-hover="color:var(--gold); padding-left:20px;">{{ t.profile }}</div>
-        <div onClick="{{ openPaywall }}" style="cursor:pointer; font-family:'Newsreader',serif; font-size:28px; padding:12px 8px; color:var(--magenta);" style-hover="padding-left:20px;">{{ premiumLabel }}</div>
+        <div onClick="{{ goExplore }}" style="cursor:pointer; font-family:var(--font-display); font-size:28px; padding:12px 8px; border-bottom:1px solid var(--border-faint);" style-hover="color:var(--gold); padding-left:20px;">{{ t.explore }}</div>
+        <div onClick="{{ goChats }}" style="cursor:pointer; font-family:var(--font-display); font-size:28px; padding:12px 8px; border-bottom:1px solid var(--border-faint);" style-hover="color:var(--gold); padding-left:20px;">{{ t.chats }}</div>
+        <div onClick="{{ goCreate }}" style="cursor:pointer; font-family:var(--font-display); font-size:28px; padding:12px 8px; border-bottom:1px solid var(--border-faint);" style-hover="color:var(--gold); padding-left:20px;">{{ t.create }}</div>
+        <div onClick="{{ goProfile }}" style="cursor:pointer; font-family:var(--font-display); font-size:28px; padding:12px 8px; border-bottom:1px solid var(--border-faint);" style-hover="color:var(--gold); padding-left:20px;">{{ t.profile }}</div>
+        <div onClick="{{ openPaywall }}" style="cursor:pointer; font-family:var(--font-display); font-size:28px; padding:12px 8px; color:var(--magenta);" style-hover="padding-left:20px;">{{ premiumLabel }}</div>
       </div>
       <div style="margin-top:auto; display:flex; align-items:flex-end; gap:8px;">
-      <button onClick="{{ toggleTheme }}" aria-label="{{ themeLabel }}" title="{{ themeLabel }}" style="cursor:pointer; min-width:44px; height:36px; padding:0 12px; border-radius:999px; border:1px solid var(--border-strong); background:var(--surface-1); color:var(--text-high); font-size:13px; display:inline-flex; align-items:center; gap:7px;"><span style="font-size:15px;">{{ themeIcon }}</span>{{ themeShort }}</button>
+      <button onClick="{{ toggleTheme }}" aria-label="{{ themeLabel }}" title="{{ themeLabel }}" style="cursor:pointer; min-width:44px; height:36px; padding:0 12px; border-radius:var(--radius-pill); border:1px solid var(--border-strong); background:var(--surface-1); color:var(--text-high); font-size:var(--font-size-md); display:inline-flex; align-items:center; gap:7px;"><span style="font-size:var(--font-size-xl);">{{ themeIcon }}</span>{{ themeShort }}</button>
       <div style="position:relative;">
-        <span onClick="{{ toggleLangMenu }}" style="cursor:pointer; font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.05em; padding:7px 14px; border-radius:999px; border:1px solid var(--border-strong); color:var(--text-secondary); display:inline-flex; align-items:center; gap:6px;" style-hover="border-color:var(--gold); color:var(--text-primary); background:var(--gold-soft); transform:translateY(-1px);">{{ langCode }} ▾</span>
+        <span onClick="{{ toggleLangMenu }}" style="cursor:pointer; font-family:var(--font-mono); font-size:var(--font-size-sm); letter-spacing:.05em; padding:7px 14px; border-radius:var(--radius-pill); border:1px solid var(--border-strong); color:var(--text-secondary); display:inline-flex; align-items:center; gap:6px;" style-hover="border-color:var(--gold); color:var(--text-primary); background:var(--gold-soft); transform:translateY(-1px);">{{ langCode }} ▾</span>
         <sc-if value="{{ langMenuOpen }}" hint-placeholder-val="{{ false }}">
-          <div style="position:absolute; bottom:calc(100% + 6px); left:0; background:var(--surface-panel); border:1px solid var(--border-3); border-radius:12px; padding:4px; display:flex; flex-direction:column; gap:2px; min-width:84px; box-shadow:var(--shadow-float); z-index:80;">
+          <div style="position:absolute; bottom:calc(100% + 6px); left:0; background:var(--surface-panel); border:1px solid var(--border-3); border-radius:var(--radius-card); padding:4px; display:flex; flex-direction:column; gap:2px; min-width:84px; box-shadow:var(--shadow-float); z-index:80;">
             <sc-for list="{{ langOptions }}" as="lo" hint-placeholder-count="7">
-              <span onClick="{{ lo.pick }}" style="cursor:pointer; font-family:'JetBrains Mono',monospace; font-size:12px; padding:8px 12px; border-radius:8px; color:{{ lo.fg }}; background:{{ lo.bg }};" style-hover="background:var(--surface-3);">{{ lo.label }}</span>
+              <span onClick="{{ lo.pick }}" style="cursor:pointer; font-family:var(--font-mono); font-size:var(--font-size-sm); padding:8px 12px; border-radius:var(--radius-sm); color:{{ lo.fg }}; background:{{ lo.bg }};" style-hover="background:var(--surface-3);">{{ lo.label }}</span>
             </sc-for>
           </div>
         </sc-if>
@@ -660,10 +661,10 @@ button:active, *[style*="cursor:pointer"]:active { filter: brightness(.94); }
     <div style="position:fixed; inset:0; z-index:70; background:var(--bg); overflow:auto;">
       <div data-screen-label="Paywall" style="max-width:1200px; margin:0 auto; padding:clamp(24px,4vw,48px) clamp(16px,3vw,40px) 60px; display:flex; flex-direction:column; gap:clamp(24px,4vw,36px);">
         <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;">
-          <span onClick="{{ closePaywall }}" style="cursor:pointer; font-size:14px; color:var(--gold);" style-hover="color:var(--gold-hover);">← {{ t.pwContinueLimit }}</span>
-          <div style="display:flex; gap:6px; background:var(--surface-1); border:1px solid var(--border-2); border-radius:12px; padding:5px;">
+          <span onClick="{{ closePaywall }}" style="cursor:pointer; font-size:var(--font-size-lg); color:var(--gold);" style-hover="color:var(--gold-hover);">← {{ t.pwContinueLimit }}</span>
+          <div style="display:flex; gap:6px; background:var(--surface-1); border:1px solid var(--border-2); border-radius:var(--radius-card); padding:5px;">
             <sc-for list="{{ billingOptions }}" as="bo" hint-placeholder-count="3">
-              <span onClick="{{ bo.pick }}" style="cursor:pointer; display:flex; align-items:center; gap:8px; font-size:14px; font-weight:600; padding:9px 16px; border-radius:9px; color:{{ bo.fg }}; background:{{ bo.bg }};" style-hover="background:var(--surface-3);">{{ bo.label }}<sc-if value="{{ bo.badge }}" hint-placeholder-val="{{ false }}"><span style="font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700; color:var(--gold-ink); background:var(--gold); padding:2px 7px; border-radius:6px;">{{ bo.badge }}</span></sc-if></span>
+              <span onClick="{{ bo.pick }}" style="cursor:pointer; display:flex; align-items:center; gap:8px; font-size:var(--font-size-lg); font-weight:var(--font-weight-semibold); padding:9px 16px; border-radius:9px; color:{{ bo.fg }}; background:{{ bo.bg }};" style-hover="background:var(--surface-3);">{{ bo.label }}<sc-if value="{{ bo.badge }}" hint-placeholder-val="{{ false }}"><span style="font-family:var(--font-mono); font-size:var(--font-size-xs); font-weight:var(--font-weight-bold); color:var(--gold-ink); background:var(--gold); padding:2px 7px; border-radius:var(--radius-xs);">{{ bo.badge }}</span></sc-if></span>
             </sc-for>
           </div>
         </div>
@@ -672,21 +673,21 @@ button:active, *[style*="cursor:pointer"]:active { filter: brightness(.94); }
           <sc-for list="{{ tiers }}" as="tr" hint-placeholder-count="3">
             <div style="position:relative; border-radius:18px; overflow:hidden; background:var(--surface-panel); border:{{ tr.border }};">
               <sc-if value="{{ tr.popular }}" hint-placeholder-val="{{ false }}">
-                <div style="position:absolute; top:16px; right:-34px; transform:rotate(45deg); background:var(--gold); color:var(--gold-ink); font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700; letter-spacing:.05em; padding:5px 40px; z-index:2;">{{ t.mostPopular }}</div>
+                <div style="position:absolute; top:16px; right:-34px; transform:rotate(45deg); background:var(--gold); color:var(--gold-ink); font-family:var(--font-mono); font-size:var(--font-size-xs); font-weight:var(--font-weight-bold); letter-spacing:.05em; padding:5px 40px; z-index:2;">{{ t.mostPopular }}</div>
               </sc-if>
               <div style="aspect-ratio:16/9; background:var(--placeholder-hatch),var(--placeholder-fill); display:flex; align-items:center; justify-content:center; border-bottom:1px solid var(--border-faint);">
-                <span style="font-family:'Newsreader',serif; font-size:56px; color:var(--text-faint); font-weight:600;">✦</span>
+                <span style="font-family:var(--font-display); font-size:56px; color:var(--text-faint); font-weight:var(--font-weight-semibold);">✦</span>
               </div>
               <div style="padding:26px; display:flex; flex-direction:column; gap:16px;">
                 <div style="text-align:center;">
-                  <div style="font-family:'Newsreader',serif; font-size:22px; font-weight:500;">{{ tr.name }}</div>
-                  <div style="font-family:'Newsreader',serif; font-size:38px; font-weight:500; margin-top:8px;">{{ tr.price }}<span style="font-size:15px; color:var(--text-tertiary); font-weight:500;">/{{ t.perMonth }}</span></div>
-                  <sc-if value="{{ tr.showSub }}" hint-placeholder-val="{{ false }}"><div style="font-size:13px; color:var(--text-tertiary); margin-top:4px;">{{ tr.subPrice }}</div></sc-if>
-                  <div style="font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:700; color:var(--gold); margin-top:6px;">{{ tr.saveLabel }}</div>
+                  <div style="font-family:var(--font-display); font-size:var(--font-size-title-md); font-weight:var(--font-weight-medium);">{{ tr.name }}</div>
+                  <div style="font-family:var(--font-display); font-size:38px; font-weight:var(--font-weight-medium); margin-top:8px;">{{ tr.price }}<span style="font-size:var(--font-size-xl); color:var(--text-tertiary); font-weight:var(--font-weight-medium);">/{{ t.perMonth }}</span></div>
+                  <sc-if value="{{ tr.showSub }}" hint-placeholder-val="{{ false }}"><div style="font-size:var(--font-size-md); color:var(--text-tertiary); margin-top:4px;">{{ tr.subPrice }}</div></sc-if>
+                  <div style="font-family:var(--font-mono); font-size:var(--font-size-sm); font-weight:var(--font-weight-bold); color:var(--gold); margin-top:6px;">{{ tr.saveLabel }}</div>
                 </div>
                 <div style="display:flex; flex-direction:column; gap:11px;">
                   <sc-for list="{{ tr.features }}" as="f" hint-placeholder-count="3">
-                    <div style="display:flex; align-items:center; gap:10px; font-size:14px; color:var(--text-high);">
+                    <div style="display:flex; align-items:center; gap:10px; font-size:var(--font-size-lg); color:var(--text-high);">
                       <span style="display:flex; gap:3px; flex-shrink:0;">
                         <span style="width:14px; height:5px; border-radius:3px; background:var(--gold);"></span>
                         <span style="width:14px; height:5px; border-radius:3px; background:{{ f.bar2 }};"></span>
@@ -695,17 +696,17 @@ button:active, *[style*="cursor:pointer"]:active { filter: brightness(.94); }
                       {{ f.label }}
                     </div>
                   </sc-for>
-                  <div style="font-size:13px; color:var(--text-secondary); line-height:1.5; padding-top:4px; border-top:1px solid var(--border-faint); display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                  <div style="font-size:var(--font-size-md); color:var(--text-secondary); line-height:var(--line-height-copy); padding-top:4px; border-top:1px solid var(--border-faint); display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
                     <span>◈ {{ tr.coins }} {{ t.coinsTxt }}</span>
-                    <span style="font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:700; color:var(--success); background:var(--success-soft); padding:2px 8px; border-radius:999px;">{{ t.newBadge }}</span>
+                    <span style="font-family:var(--font-mono); font-size:var(--font-size-2xs); font-weight:var(--font-weight-bold); color:var(--success); background:var(--success-soft); padding:2px 8px; border-radius:var(--radius-pill);">{{ t.newBadge }}</span>
                   </div>
                 </div>
-                <button onClick="{{ tr.pick }}" style="cursor:pointer; border:none; width:100%; font-size:15px; font-weight:700; color:var(--premium-ink); background:var(--premium-cta); padding:14px; border-radius:11px; margin-top:4px;" style-hover="filter:brightness(1.15);">{{ t.payCta }}</button>
+                <button onClick="{{ tr.pick }}" style="cursor:pointer; border:none; width:100%; font-size:var(--font-size-xl); font-weight:var(--font-weight-bold); color:var(--premium-ink); background:var(--premium-cta); padding:14px; border-radius:var(--radius-md); margin-top:4px;" style-hover="filter:brightness(1.15);">{{ t.payCta }}</button>
               </div>
             </div>
           </sc-for>
         </div>
-        <div style="text-align:center; font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text-muted);">{{ t.pwCancel }}</div>
+        <div style="text-align:center; font-family:var(--font-mono); font-size:var(--font-size-xs); color:var(--text-muted);">{{ t.pwCancel }}</div>
       </div>
     </div>
   </sc-if>
@@ -1112,7 +1113,7 @@ class Component extends DCLogic {
     const gridColsEstimate = Math.max(1, Math.floor((gridAvail + gridGap) / (gridMinCol + gridGap)));
     const gridCols = s.w < 480 ? 2 : s.w < 768 ? 3 : s.w < 1200 ? 4 : (s.measuredCols || gridColsEstimate);
     const gridTemplateCols = s.w < 480 ? 'repeat(2, 1fr)' : s.w < 768 ? 'repeat(3, 1fr)' : s.w < 1200 ? 'repeat(4, 1fr)' : 'repeat(auto-fill,minmax(min(220px,46vw),1fr))';
-    const gridGapCss = isMobile ? '12px' : 'clamp(18px,2.4vw,26px)';
+    const gridGapCss = isMobile ? 'var(--layout-grid-gap-compact)' : 'var(--layout-grid-gap)';
     const blurbClamp = isMobile ? 1 : 2;
     const gridFullRows = Math.floor(gridChars.length / gridCols);
     const gridCharsPadded = gridChars.slice(0, Math.max(gridCols, gridFullRows * gridCols));

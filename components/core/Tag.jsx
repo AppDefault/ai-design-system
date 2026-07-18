@@ -9,9 +9,9 @@ export function Tag({ children, style = {}, ...rest }) {
     <span
       style={{
         display: 'inline-flex', alignItems: 'center',
-        fontFamily: 'var(--font-sans)', fontSize: 12, lineHeight: 1.2,
-        color: 'var(--text-secondary)', border: '1px solid var(--border-strong)',
-        padding: '3px 10px', borderRadius: 'var(--radius-pill)', whiteSpace: 'nowrap',
+        fontFamily: 'var(--font-sans)', fontSize: 'var(--font-size-sm)', lineHeight: 1.2,
+        color: 'var(--tag-text)', border: '1px solid var(--tag-border)',
+        padding: 'var(--tag-padding)', borderRadius: 'var(--tag-radius)', whiteSpace: 'nowrap',
         ...style,
       }}
       {...rest}

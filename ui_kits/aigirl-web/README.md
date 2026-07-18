@@ -1,5 +1,7 @@
 # AIGirl Web — UI kit
 
+For canonical component choice, token roles, anatomy and states, read [`../../DESIGN_SYSTEM.md`](../../DESIGN_SYSTEM.md). This UI kit is an implementation example; `index.html` at the repository root is the visual and behavioral reference.
+
 Interactive, high-fidelity recreation of the **AIGirl "Noir Editorial"** web redesign. Open `index.html` for the click-through demo.
 
 ## Flow
