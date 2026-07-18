@@ -6,7 +6,7 @@ function Field({ label, hint, children }) {
   return (
     <div>
       <label style={{ display: 'block', fontSize: 13, fontWeight: 600,
-        color: 'rgba(255,255,255,.85)', marginBottom: 8 }}>{label}</label>
+        color: 'var(--text-high)', marginBottom: 8 }}>{label}</label>
       {children}
       {hint && <div style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 7, lineHeight: 1.45 }}>{hint}</div>}
     </div>
@@ -19,7 +19,7 @@ function StepHead({ n, title }) {
       <span style={{ width: 26, height: 26, borderRadius: 'var(--radius-sm)', background: 'var(--gold)',
         color: 'var(--gold-ink)', fontWeight: 700, fontSize: 14, display: 'flex', alignItems: 'center',
         justifyContent: 'center' }}>{n}</span>
-      <span style={{ font: 'var(--display-sm)', fontSize: 20, color: '#fff' }}>{title}</span>
+      <span style={{ font: 'var(--display-sm)', fontSize: 20, color: 'var(--text-primary)' }}>{title}</span>
     </div>
   );
 }
@@ -41,7 +41,7 @@ function Create() {
         <div>
           <div style={{ font: 'var(--kicker)', letterSpacing: '.14em', textTransform: 'uppercase',
             color: 'var(--gold)', marginBottom: 8 }}>Studio</div>
-          <h2 style={{ font: 'var(--display-xl)', color: '#fff', margin: 0,
+          <h2 style={{ font: 'var(--display-xl)', color: 'var(--text-primary)', margin: 0,
             letterSpacing: 'var(--tracking-snug)' }}>Create your character</h2>
         </div>
         <span style={{ fontSize: 13, color: 'var(--gold)', cursor: 'pointer' }}>Read the full guide →</span>
@@ -102,7 +102,7 @@ function Create() {
                     display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     {vis === id && <span style={{ width: 8, height: 8, borderRadius: '999px', background: 'var(--gold)' }} />}
                   </span>
-                  <span style={{ fontSize: 15, color: '#fff' }}><b>{t}:</b> <span style={{ color: 'var(--text-secondary)' }}>{d}</span></span>
+                  <span style={{ fontSize: 15, color: 'var(--text-primary)' }}><b>{t}:</b> <span style={{ color: 'var(--text-secondary)' }}>{d}</span></span>
                 </div>
               ))}
             </div>

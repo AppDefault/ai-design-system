@@ -7,7 +7,7 @@ Interactive, high-fidelity recreation of the **AIGirl "Noir Editorial"** web red
 - **Chat** — three-pane layout: recent conversations rail · message thread · character detail panel. The composer sends real messages (type + Enter or the send button); the character replies after a beat.
 - **Create** — the character studio: avatar dropzone, name/intro fields, tag chips, greeting & personality textareas, visibility radios, and a **live preview** `CharacterCard` that updates as you type.
 
-Nav: **Explore / My Chats / Create** in the top bar; the logo and back affordances return to Explore.
+Nav: **Explore / My Chats / Create** in the top bar; the logo and back affordances return to Explore. The Light/Dark control switches the semantic token set and persists the preference between visits.
 
 ## Composition
 Screens compose the design-system primitives — `Button`, `Chip`, `Tag`, `Badge`, `Input`, `Textarea`, `Avatar`, `CharacterCard` — from `_ds_bundle.js`. Layout-only shell pieces (`TopNav`, screen bodies) live here as small JSX files loaded via Babel. Icons are **Lucide** (CDN). All character imagery uses the brand placeholder motif (no real portraits).

@@ -15,7 +15,7 @@ export function Chip({ active = false, children, style = {}, ...rest }) {
         transition: 'transform var(--dur-fast) var(--ease-spring), border-color var(--dur-fast) ease, color var(--dur-fast) ease',
         ...(active
           ? { background: 'var(--gold)', color: 'var(--gold-ink)', fontWeight: 700, border: '1px solid transparent' }
-          : { background: 'transparent', color: 'rgba(255,255,255,.7)', fontWeight: 500, border: '1px solid var(--border-3)' }),
+          : { background: 'transparent', color: 'var(--text-secondary)', fontWeight: 500, border: '1px solid var(--border-3)' }),
         ...style,
       }}
       onMouseEnter={(e) => { if (!active) { e.currentTarget.style.borderColor = 'rgba(250,204,21,.6)'; e.currentTarget.style.transform = 'translateY(-1px)'; } }}

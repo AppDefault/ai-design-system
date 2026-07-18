@@ -16,7 +16,7 @@ function Explore({ onOpenChat }) {
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ font: 'var(--kicker)', letterSpacing: 'var(--kicker-tracking)',
             textTransform: 'uppercase', color: 'var(--gold)', marginBottom: 14 }}>18+ · Chat &amp; Roleplay</div>
-          <h1 style={{ font: 'var(--display-hero)', color: '#fff', margin: '0 0 26px',
+          <h1 style={{ font: 'var(--display-hero)', color: 'var(--text-primary)', margin: '0 0 26px',
             letterSpacing: 'var(--tracking-tight)' }}>Meet a character worth<br/>talking to tonight.</h1>
           <div style={{ display: 'flex', gap: 12, marginBottom: 22, maxWidth: 620 }}>
             <Input placeholder="Search characters by name or mood…" icon={<Icon name="search" size={16} />} />
@@ -26,7 +26,7 @@ function Explore({ onOpenChat }) {
             {stats.map((s, i) => (
               <div key={i}>
                 <div style={{ font: 'var(--display-lg)', fontWeight: 500,
-                  color: s.gold ? 'var(--gold)' : '#fff' }}>{s.v}</div>
+                  color: s.gold ? 'var(--gold)' : 'var(--text-primary)' }}>{s.v}</div>
                 <div style={{ font: 'var(--meta)', letterSpacing: 'var(--meta-tracking)',
                   textTransform: 'uppercase', color: 'var(--text-muted)' }}>{s.l}</div>
               </div>

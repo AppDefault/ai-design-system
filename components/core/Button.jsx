@@ -29,11 +29,11 @@ export function Button({
       border: '1px solid transparent', fontWeight: 700,
     },
     secondary: {
-      background: 'transparent', color: 'rgba(255,255,255,.8)',
+      background: 'transparent', color: 'var(--text-high)',
       border: '1px solid var(--border-strong)', fontWeight: 500,
     },
     premium: {
-      background: 'var(--premium-cta)', color: '#fff',
+      background: 'var(--premium-cta)', color: 'var(--premium-ink)',
       border: '1px solid transparent', fontWeight: 700,
     },
     ghost: {

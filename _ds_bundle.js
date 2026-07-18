@@ -36,7 +36,7 @@ function Badge({
       fontSize: 11,
       fontWeight: 600,
       letterSpacing: '.08em',
-      color: '#fff',
+      color: 'var(--premium-ink)',
       background: 'var(--magenta-badge)',
       padding: '4px 9px',
       borderRadius: 'var(--radius-xs)'
@@ -44,7 +44,7 @@ function Badge({
     stat: {
       fontFamily: 'var(--font-mono)',
       fontSize: 12,
-      color: 'rgba(255,255,255,.8)',
+      color: 'var(--overlay-text)',
       background: 'var(--overlay-scrim)',
       backdropFilter: 'blur(4px)',
       padding: '4px 9px',
@@ -118,13 +118,13 @@ function Button({
     },
     secondary: {
       background: 'transparent',
-      color: 'rgba(255,255,255,.8)',
+      color: 'var(--text-high)',
       border: '1px solid var(--border-strong)',
       fontWeight: 500
     },
     premium: {
       background: 'var(--premium-cta)',
-      color: '#fff',
+      color: 'var(--premium-ink)',
       border: '1px solid transparent',
       fontWeight: 700
     },
@@ -205,7 +205,7 @@ function Chip({
         border: '1px solid transparent'
       } : {
         background: 'transparent',
-        color: 'rgba(255,255,255,.7)',
+        color: 'var(--text-secondary)',
         fontWeight: 500,
         border: '1px solid var(--border-3)'
       }),
@@ -396,7 +396,7 @@ function Avatar({
       fontFamily: 'var(--font-display)',
       fontWeight: 600,
       fontSize: Math.round(size * 0.44),
-      color: 'rgba(255,255,255,.55)'
+      color: 'var(--text-secondary)'
     }
   }, initial));
 }
@@ -642,7 +642,7 @@ function Chat({
       fontFamily: 'var(--font-display)',
       fontSize: 22,
       fontWeight: 600,
-      color: '#fff',
+      color: 'var(--text-primary)',
       cursor: 'pointer'
     }
   }, "AI", /*#__PURE__*/React.createElement("span", {
@@ -706,7 +706,7 @@ function Chat({
     style: {
       fontSize: 14,
       fontWeight: 600,
-      color: '#fff'
+      color: 'var(--text-primary)'
     }
   }, r.name), /*#__PURE__*/React.createElement("div", {
     style: {
@@ -752,7 +752,7 @@ function Chat({
   }), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     style: {
       font: 'var(--display-md)',
-      color: '#fff'
+      color: 'var(--text-primary)'
     }
   }, c.name), /*#__PURE__*/React.createElement("div", {
     style: {
@@ -843,7 +843,7 @@ function Chat({
     style: {
       fontSize: 15,
       lineHeight: 1.55,
-      color: 'rgba(255,255,255,.9)'
+      color: 'var(--text-high)'
     }
   }, m.text))) : /*#__PURE__*/React.createElement("div", {
     key: i,
@@ -897,7 +897,7 @@ function Chat({
       outline: 'none',
       fontFamily: 'var(--font-sans)',
       fontSize: 15,
-      color: '#fff'
+      color: 'var(--text-primary)'
     }
   }), /*#__PURE__*/React.createElement("span", {
     onClick: send,
@@ -945,7 +945,7 @@ function Chat({
   }, c.initial)), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     style: {
       font: 'var(--display-lg)',
-      color: '#fff'
+      color: 'var(--text-primary)'
     }
   }, c.name), /*#__PURE__*/React.createElement("div", {
     style: {
@@ -1026,7 +1026,7 @@ function Field({
       display: 'block',
       fontSize: 13,
       fontWeight: 600,
-      color: 'rgba(255,255,255,.85)',
+      color: 'var(--text-high)',
       marginBottom: 8
     }
   }, label), children, hint && /*#__PURE__*/React.createElement("div", {
@@ -1066,7 +1066,7 @@ function StepHead({
     style: {
       font: 'var(--display-sm)',
       fontSize: 20,
-      color: '#fff'
+      color: 'var(--text-primary)'
     }
   }, title));
 }
@@ -1098,7 +1098,7 @@ function Create() {
   }, "Studio"), /*#__PURE__*/React.createElement("h2", {
     style: {
       font: 'var(--display-xl)',
-      color: '#fff',
+      color: 'var(--text-primary)',
       margin: 0,
       letterSpacing: 'var(--tracking-snug)'
     }
@@ -1248,7 +1248,7 @@ function Create() {
   })), /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 15,
-      color: '#fff'
+      color: 'var(--text-primary)'
     }
   }, /*#__PURE__*/React.createElement("b", null, t, ":"), " ", /*#__PURE__*/React.createElement("span", {
     style: {
@@ -1339,7 +1339,7 @@ function Explore({
   }, "18+ \xB7 Chat & Roleplay"), /*#__PURE__*/React.createElement("h1", {
     style: {
       font: 'var(--display-hero)',
-      color: '#fff',
+      color: 'var(--text-primary)',
       margin: '0 0 26px',
       letterSpacing: 'var(--tracking-tight)'
     }
@@ -1370,7 +1370,7 @@ function Explore({
     style: {
       font: 'var(--display-lg)',
       fontWeight: 500,
-      color: s.gold ? 'var(--gold)' : '#fff'
+      color: s.gold ? 'var(--gold)' : 'var(--text-primary)'
     }
   }, s.v), /*#__PURE__*/React.createElement("div", {
     style: {
@@ -1470,7 +1470,7 @@ function TopNav({
       fontFamily: 'var(--font-display)',
       fontSize: 26,
       fontWeight: 600,
-      color: '#fff',
+      color: 'var(--text-primary)',
       letterSpacing: '-.01em',
       cursor: 'pointer'
     }
@@ -1490,11 +1490,11 @@ function TopNav({
     onClick: () => onNavigate(l.id),
     style: {
       cursor: 'pointer',
-      color: route === l.id ? '#fff' : 'var(--text-secondary)',
+      color: route === l.id ? 'var(--text-primary)' : 'var(--text-secondary)',
       transition: 'color var(--dur) ease'
     },
-    onMouseEnter: e => e.currentTarget.style.color = '#fff',
-    onMouseLeave: e => e.currentTarget.style.color = route === l.id ? '#fff' : 'var(--text-secondary)'
+    onMouseEnter: e => e.currentTarget.style.color = 'var(--text-primary)',
+    onMouseLeave: e => e.currentTarget.style.color = route === l.id ? 'var(--text-primary)' : 'var(--text-secondary)'
   }, l.label)))), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',

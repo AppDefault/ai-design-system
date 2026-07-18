@@ -1,6 +1,6 @@
 # AIGirl — Noir Editorial Design System
 
-A dark, editorial design system for **AIGirl**, an 18+ AI companion / character-chat product (chat & roleplay with created and featured characters). This system captures the **"Noir Editorial"** redesign direction: a warm near-black canvas, a serif/mono editorial voice, and a single confident gold accent, with magenta reserved for premium.
+A dual-theme editorial design system for **AIGirl**, an 18+ AI companion / character-chat product (chat & roleplay with created and featured characters). The default **"Noir Editorial"** direction keeps its warm near-black canvas; the companion light theme translates the same hierarchy to warm paper surfaces, dark ink, deeper gold and restrained magenta.
 
 > **Product context.** AIGirl (aigirl.one, operated by SIGNLAB STUDIO CORP) lets users browse a catalogue of AI characters, chat/roleplay with them, create their own, manage personas, and upgrade to Premium tiers for unlimited messages, deeper memory, and image-generation coins. This design system is a *redesign* of that product — it keeps the product's structure and copy patterns but replaces the stock-dark UI with the Noir Editorial look. **All character imagery in this system is a neutral placeholder motif, never explicit content.**
 
@@ -29,28 +29,34 @@ How AIGirl writes.
 
 ## Visual foundations
 
-**Overall vibe.** Noir editorial: a warm, almost-black stage where serif headlines and mono labels do the talking and a single gold accent points at the one thing to do next. Spacious, cinematic, quiet — closer to a film title sequence than a typical SaaS dashboard.
+**Overall vibe.** Editorial and cinematic in both modes: dark uses a warm near-black stage, while light uses quiet paper and ink. Serif headlines, mono labels and a single gold action accent preserve the same hierarchy across themes.
 
-**Color.** Base is warm near-black `--bg #07060a`; panels sit one step up at `--surface-panel #0a0910`. All other neutrals are **white-alpha layers** (`.04 → .14`) for fills and hairline borders — never solid greys. Text is white stepped down through alpha (`1 → .55 → .35`). **Gold `#facc15` is the one action accent** (primary buttons, active filters, the "Girl" in the logo, live/stat highlights). **Magenta `#d946ef` is reserved for premium / PRO** (upgrade CTA gradient, PRO badges). Semantics: green `#4ade80` (online/active), red `#f87171` (destructive). Rule of thumb: at most gold **or** magenta as the loud color in a given region — never both competing.
+**Color.** Dark mode uses warm near-black surfaces and white-alpha neutral layers. Light mode uses warm paper, an ivory panel, brown-alpha structure and dark ink. The same semantic variables power both themes; gold remains the action accent and magenta remains reserved for premium / PRO. Rule of thumb: at most gold **or** magenta as the loud color in a given region — never both competing.
 
 **Type.** Three families. **Newsreader** (serif, 400/500/600) for display, headings, and character names — headings favour weight 500 with tight tracking (`-.02em`). **Manrope** (sans, 400–800) for all body and UI text. **JetBrains Mono** (400/500/600) for kickers, meta, counts, and category labels — always uppercase with `.08–.24em` tracking. The serif-headline / mono-label pairing is the signature move.
 
-**Spacing & layout.** Generous and editorial: panel gutters at 40px, section rhythm at 34–48px, grid gaps at 20px. Desktop content is framed in a centered **1360px panel** with a 20px radius and one deep soft shadow, floating on the black stage (40px page margin). The Explore grid is 5-up desktop / 2-up mobile. Layouts are calm and single-column-of-attention; no dense multi-rail dashboards.
+**Spacing & layout.** Generous and editorial: panel gutters at 40px, section rhythm at 34–48px, grid gaps at 20px. Desktop content is framed in a centered **1360px panel** with a 20px radius and one deep soft shadow, floating on the theme canvas (40px page margin). The Explore grid is 5-up desktop / 2-up mobile. Layouts are calm and single-column-of-attention; no dense multi-rail dashboards.
 
-**Backgrounds & imagery.** Flat near-black — **no photographic or illustrated backgrounds**. The only ambient treatment is a faint magenta radial glow behind the hero and chat (`--glow-magenta`). Character imagery, when absent, uses the **placeholder motif**: a warm violet→black gradient (`#1b1626 → #0d0b12`), a 135° hairline diagonal hatch, and the character's initial in giant near-invisible serif (white `.055`). Real portraits, when present, fill 4:5 (cards) or 1:1 (panel) frames with dark scrim overlays for legibility.
+**Backgrounds & imagery.** Theme canvases stay flat and image-light: near-black in dark mode, warm paper in light mode, with only a faint magenta ambient glow. The character placeholder motif also has dark and light variants, while real portraits keep a theme-independent scrim for legibility.
 
-**Corners & cards.** Radii: badges/overlays **6px**, controls/inputs **11–12px**, cards **12px**, large tiles **16px**, panels **20px**, pills **full**. Cards are **flat** — a 1px white-alpha border and the placeholder fill, no per-card drop shadow; only the top-level panel carries `--shadow-panel` (`0 40px 120px rgba(0,0,0,.55)`). No colored left-border accent cards, no heavy inner shadows.
+**Corners & cards.** Radii: badges/overlays **6px**, controls/inputs **11–12px**, cards **12px**, large tiles **16px**, panels **20px**, pills **full**. Cards are **flat** — a 1px semantic hairline border and the placeholder fill, no per-card drop shadow; only the top-level panel carries `--shadow-panel` (`0 40px 120px rgba(0,0,0,.55)`). No colored left-border accent cards, no heavy inner shadows.
 
 **Borders, transparency & blur.** Structure is drawn almost entirely with hairline white-alpha borders (`.06–.14`) rather than fills. Blur appears only on scrim overlays (`backdrop-filter: blur(4px)` behind count badges on imagery). Message bubbles use asymmetric radii (AI: `4px 16px 16px 16px`; user: `16px 4px 16px 16px`) — the flat corner points back at the speaker.
 
 **Motion & states.** One spring curve everywhere interactive: `cubic-bezier(.34,1.56,.64,1)` over ~130ms. **Hover** = `filter: brightness(1.22)` plus a role accent (chips gain a gold border and lift 1px; cards lift 4px; menu links slide right and go gold). **Press** = `scale(.94)` + slight dim. Fades are quick (`.13–.15s`); no bounce-in entrances, no parallax, no long easing. Restrained and snappy.
 
-**Buttons.** Gold primary (dark ink, weight 700) is the single strongest CTA per view; secondary is a hairline outline; premium is the magenta gradient; ghost is bare text for low-priority actions (Report).
+**Buttons.** Gold primary (high-contrast ink, weight 700) is the single strongest CTA per view; secondary is a hairline outline; premium is the magenta gradient; ghost is bare text for low-priority actions (Report).
 
 **Mobile implementation note.** Any `<input>`/`<textarea>` must use `font-size: 16px` or larger — below that, iOS Safari auto-zooms on focus and visually shifts the page sideways when the keyboard opens. Keep `overflow-x: hidden` on `html`/`body` as a safeguard.
 
 ---
 
+## Theme usage
+Dark is the default, so existing consumers do not change. Apply data-theme="light" to the html element or an app shell to opt into the light palette.
+
+Components use semantic tokens only, so changing the attribute updates surfaces, text, borders, accents, placeholders, overlays and shadows without changing behavior. The interactive prototypes include a persisted light/dark switch.
+
+---
 ## Iconography
 - **System: [Lucide](https://lucide.dev) line icons (CDN).** The redesign source itself uses a light, uniform line-icon set plus a few functional Unicode glyphs; **Lucide is the closest clean, CDN-available match** (thin, consistent 2px stroke) and is used throughout the UI kit (`search, plus, chevron-left/down, sparkles, more-horizontal, image, mic, send, pencil, rotate-ccw, flag, flame`). *This is a flagged substitution — if AIGirl has a specific licensed icon set, drop it in and swap the `Icon` source.*
 - **Functional glyphs** carried from the product: `✦` (premium/spark), `●` (online status, in `--success`). Keep these two; they read as brand shorthand.
@@ -59,7 +65,7 @@ How AIGirl writes.
 - Icons inherit `currentColor`; size 14–20px in UI. Pair a leading icon with a label for actions; standalone icons only for universally-understood controls (send, more, back).
 
 ## Assets
-- **No logo file was provided.** The AIGirl mark is always **set in type** — Newsreader 600, "AI" in white and "Girl" in gold (`#facc15`). See the *Wordmark* brand card. Do not substitute or reconstruct a logo image.
+- **No logo file was provided.** The AIGirl mark is always **set in type** — Newsreader 600, "AI" in the primary text color and "Girl" in gold (`#facc15`). See the *Wordmark* brand card. Do not substitute or reconstruct a logo image.
 - No brand photography or illustration assets exist; the system is intentionally image-light and uses the placeholder motif in their place.
 
 ---

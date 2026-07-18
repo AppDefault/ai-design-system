@@ -23,7 +23,7 @@ export function Avatar({ initial = 'A', src = null, size = 40, shape = 'rounded'
       {!src && (
         <span style={{
           fontFamily: 'var(--font-display)', fontWeight: 600,
-          fontSize: Math.round(size * 0.44), color: 'rgba(255,255,255,.55)',
+          fontSize: Math.round(size * 0.44), color: 'var(--text-secondary)',
         }}>{initial}</span>
       )}
     </div>

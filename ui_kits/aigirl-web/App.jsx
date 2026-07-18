@@ -1,10 +1,19 @@
 // App shell — routing between Explore, Chat, and Create.
-const { useState } = React;
+const { useEffect, useState } = React;
 
 function App() {
   const [route, setRoute] = useState('explore');
   const [character, setCharacter] = useState(null);
+  const [theme, setTheme] = useState(() => {
+    try { return window.localStorage.getItem('aigirl-theme') === 'light' ? 'light' : 'dark'; }
+    catch (_) { return 'dark'; }
+  });
   useLucide();
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    try { window.localStorage.setItem('aigirl-theme', theme); } catch (_) {}
+  }, [theme]);
 
   function openChat(c) { setCharacter(c); setRoute('chat'); }
   function navigate(id) {
@@ -19,13 +28,14 @@ function App() {
   };
 
   return (
-    <div style={{ background: 'var(--bg)', minHeight: '100vh', padding: 40,
+    <div data-theme={theme} style={{ background: 'var(--bg)', minHeight: '100vh', padding: 40,
       fontFamily: 'var(--font-sans)' }}>
       <div style={panel}>
         {route === 'chat'
           ? <Chat character={character} onBack={() => setRoute('explore')} />
           : (<>
-              <TopNav route={route} onNavigate={navigate} />
+              <TopNav route={route} onNavigate={navigate} theme={theme}
+                onToggleTheme={() => setTheme(theme === 'dark' ? 'light' : 'dark')} />
               {route === 'create' ? <Create /> : <Explore onOpenChat={openChat} />}
             </>)}
       </div>

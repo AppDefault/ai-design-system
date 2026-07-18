@@ -14,12 +14,12 @@ export function Badge({ variant = 'pro', children, style = {}, ...rest }) {
   const variants = {
     pro: {
       fontFamily: 'var(--font-mono)', fontSize: 11, fontWeight: 600, letterSpacing: '.08em',
-      color: '#fff', background: 'var(--magenta-badge)',
+      color: 'var(--premium-ink)', background: 'var(--magenta-badge)',
       padding: '4px 9px', borderRadius: 'var(--radius-xs)',
     },
     stat: {
       fontFamily: 'var(--font-mono)', fontSize: 12,
-      color: 'rgba(255,255,255,.8)', background: 'var(--overlay-scrim)',
+      color: 'var(--overlay-text)', background: 'var(--overlay-scrim)',
       backdropFilter: 'blur(4px)', padding: '4px 9px', borderRadius: 'var(--radius-xs)',
     },
     premium: {

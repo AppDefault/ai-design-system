@@ -27,7 +27,7 @@ function Chat({ character, onBack }) {
       <div style={{ width: 250, flexShrink: 0, borderRight: '1px solid var(--border-faint)',
         display: 'flex', flexDirection: 'column' }}>
         <div onClick={onBack} style={{ padding: '20px 22px', borderBottom: '1px solid var(--border-faint)',
-          fontFamily: 'var(--font-display)', fontSize: 22, fontWeight: 600, color: '#fff', cursor: 'pointer' }}>
+          fontFamily: 'var(--font-display)', fontSize: 22, fontWeight: 600, color: 'var(--text-primary)', cursor: 'pointer' }}>
           AI<span style={{ color: 'var(--gold)' }}>Girl</span>
         </div>
         <div style={{ padding: '16px 18px' }}>
@@ -44,7 +44,7 @@ function Chat({ character, onBack }) {
               onMouseLeave={e => { if (r.name !== c.name) e.currentTarget.style.background = 'transparent'; }}>
               <Avatar initial={r.initial} size={38} />
               <div style={{ minWidth: 0, flex: 1 }}>
-                <div style={{ fontSize: 14, fontWeight: 600, color: '#fff' }}>{r.name}</div>
+                <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-primary)' }}>{r.name}</div>
                 <div style={{ fontSize: 12, color: 'var(--text-tertiary)', whiteSpace: 'nowrap',
                   overflow: 'hidden', textOverflow: 'ellipsis' }}>{r.snippet}</div>
               </div>
@@ -62,7 +62,7 @@ function Chat({ character, onBack }) {
             <Icon name="chevron-left" size={20} /></span>
           <Avatar initial={c.initial} size={40} />
           <div>
-            <div style={{ font: 'var(--display-md)', color: '#fff' }}>{c.name}</div>
+            <div style={{ font: 'var(--display-md)', color: 'var(--text-primary)' }}>{c.name}</div>
             <div style={{ fontSize: 12, color: 'var(--success)' }}>● online</div>
           </div>
           <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -88,7 +88,7 @@ function Chat({ character, onBack }) {
                 borderRadius: '4px 16px 16px 16px', padding: '14px 18px' }}>
                 {m.hasAction && <div style={{ fontStyle: 'italic', fontSize: 14,
                   color: 'var(--text-muted)', marginBottom: 6 }}>{m.action}</div>}
-                <div style={{ fontSize: 15, lineHeight: 1.55, color: 'rgba(255,255,255,.9)' }}>{m.text}</div>
+                <div style={{ fontSize: 15, lineHeight: 1.55, color: 'var(--text-high)' }}>{m.text}</div>
               </div>
             </div>
           ) : (
@@ -108,7 +108,7 @@ function Chat({ character, onBack }) {
             <input value={draft} onChange={e => setDraft(e.target.value)}
               onKeyDown={e => e.key === 'Enter' && send()} placeholder={`Message ${c.name}…`}
               style={{ flex: 1, background: 'transparent', border: 'none', outline: 'none',
-                fontFamily: 'var(--font-sans)', fontSize: 15, color: '#fff' }} />
+                fontFamily: 'var(--font-sans)', fontSize: 15, color: 'var(--text-primary)' }} />
             <span onClick={send} style={{ width: 38, height: 38, borderRadius: 'var(--radius-md)',
               background: 'var(--gold)', color: 'var(--gold-ink)', display: 'flex', alignItems: 'center',
               justifyContent: 'center', cursor: 'pointer' }}><Icon name="send" size={16} /></span>
@@ -125,7 +125,7 @@ function Chat({ character, onBack }) {
           <span style={{ fontFamily: 'var(--font-display)', fontSize: 96, color: 'var(--text-faint)' }}>{c.initial}</span>
         </div>
         <div>
-          <div style={{ font: 'var(--display-lg)', color: '#fff' }}>{c.name}</div>
+          <div style={{ font: 'var(--display-lg)', color: 'var(--text-primary)' }}>{c.name}</div>
           <div style={{ font: 'var(--meta)', fontSize: 12, color: 'var(--text-tertiary)' }}>
             @{c.name.toLowerCase().replace(/\s+/g, '')} · {c.views} chats</div>
         </div>
