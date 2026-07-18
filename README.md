@@ -33,7 +33,7 @@ How AIGirl writes.
 
 **Color.** Dark mode uses warm near-black surfaces and white-alpha neutral layers. Light mode uses warm paper, an ivory panel, brown-alpha structure and dark ink. The same semantic variables power both themes; gold remains the action accent and magenta remains reserved for premium / PRO. Rule of thumb: at most gold **or** magenta as the loud color in a given region — never both competing.
 
-**Type.** Three families. **Newsreader** (serif, 400/500/600) for display, headings, and character names — headings favour weight 500 with tight tracking (`-.02em`). **Manrope** (sans, 400–800) for all body and UI text. **JetBrains Mono** (400/500/600) for kickers, meta, counts, and category labels — always uppercase with `.08–.24em` tracking. The serif-headline / mono-label pairing is the signature move.
+**Type.** Three families. **Newsreader** (serif, 400/500/600) for display, headings, and character names — headings favour weight 500 with tight tracking (`-.02em`). **Manrope** (sans, 400–800) for all body and UI text; the applied baseline is weight **500 in both themes**, including the `--body-*`, supporting-copy and meta-weight tokens. **JetBrains Mono** (400/500/600) for kickers, meta, counts, and category labels — normally uppercase with `.08–.24em` tracking and an applied weight of 500. The serif-headline / mono-label pairing is the signature move.
 
 **Spacing & layout.** Generous and editorial: panel gutters at 40px, section rhythm at 34–48px, grid gaps at 20px. Desktop content is framed in a centered **1360px panel** with a 20px radius and one deep soft shadow, floating on the theme canvas (40px page margin). The Explore grid is 5-up desktop / 2-up mobile. Layouts are calm and single-column-of-attention; no dense multi-rail dashboards.
 
@@ -43,7 +43,9 @@ How AIGirl writes.
 
 **Borders, transparency & blur.** Structure is drawn almost entirely with hairline white-alpha borders (`.06–.14`) rather than fills. Blur appears only on scrim overlays (`backdrop-filter: blur(4px)` behind count badges on imagery). Message bubbles use asymmetric radii (AI: `4px 16px 16px 16px`; user: `16px 4px 16px 16px`) — the flat corner points back at the speaker.
 
-**Motion & states.** One spring curve everywhere interactive: `cubic-bezier(.34,1.56,.64,1)` over ~130ms. **Hover** = `filter: brightness(1.22)` plus a role accent (chips gain a gold border and lift 1px; cards lift 4px; menu links slide right and go gold). **Press** = `scale(.94)` + slight dim. Fades are quick (`.13–.15s`); no bounce-in entrances, no parallax, no long easing. Restrained and snappy.
+**Motion & states.** One spring curve everywhere interactive: `cubic-bezier(.34,1.56,.64,1)` over ~130ms. **Hover** normally uses `filter: brightness(1.22)` plus a role accent, but character cards are an explicit exception: they lift 4px by animating relative `top`, with `filter:none`, rather than transforming/filtering the full card. This preserves normal text antialiasing and prevents the subtle Chromium blur seen when text is promoted to a composited layer. **Press** = `scale(.94)` + slight dim. Fades are quick (`.13–.15s`); no bounce-in entrances, no parallax, no long easing. Restrained and snappy.
+
+**Text-link and menu hover contract.** Links do not underline. Journal titles and footer links use `--text-primary` at rest and turn gold on hover/focus. Other text links use the semantic link-hover color. Options inside the **More** and **Trending** menus use gold text, `--gold-soft`, and a thin inset gold border on hover. In pagination, inactive page numbers turn gold; arrows turn gold together with their border; the active page keeps its filled high-contrast state.
 
 **Buttons.** Gold primary (high-contrast ink, weight 700) is the single strongest CTA per view; secondary is a hairline outline; premium is the magenta gradient; ghost is bare text for low-priority actions (Report).
 
@@ -54,7 +56,7 @@ How AIGirl writes.
 ## Theme usage
 Dark is the default, so existing consumers do not change. Apply data-theme="light" to the html element or an app shell to opt into the light palette.
 
-Components use semantic tokens only, so changing the attribute updates surfaces, text, borders, accents, placeholders, overlays and shadows without changing behavior. The interactive prototypes include a persisted light/dark switch.
+Components use semantic tokens only, so changing the attribute updates surfaces, text, borders, accents, placeholders, overlays and shadows without changing behavior. The interactive prototypes include a persisted light/dark switch. The light text ramp is intentionally stronger (`--text-secondary: .72`, `--text-tertiary: .62`, `--text-muted: .52`) for comfortable reading on the warm-paper background.
 
 ---
 ## Iconography

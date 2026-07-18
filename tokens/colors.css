@@ -26,10 +26,13 @@
   --text-faint: rgba(255,255,255,.055);
   --text-high: rgba(255,255,255,.85);
   --text-on-media: rgba(255,255,255,.90);
+  --text-supporting-weight: 500;
+  --text-meta-weight: 500;
 
   /* — Gold — */
   --gold: #facc15;
   --gold-hover: #fde047;
+  --link-hover: #ffffff;
   --gold-ink: #07060a;
   --gold-soft: rgba(250,204,21,.14);
   --gold-soft-border: rgba(250,204,21,.30);
@@ -79,15 +82,18 @@
   --border-strong: rgba(67,47,31,.22);
 
   --text-primary: #241a14;
-  --text-secondary: rgba(36,26,20,.68);
-  --text-tertiary: rgba(36,26,20,.54);
-  --text-muted: rgba(36,26,20,.44);
+  --text-secondary: rgba(36,26,20,.72);
+  --text-tertiary: rgba(36,26,20,.62);
+  --text-muted: rgba(36,26,20,.52);
   --text-faint: rgba(36,26,20,.075);
   --text-high: rgba(36,26,20,.88);
   --text-on-media: rgba(255,255,255,.92);
+  --text-supporting-weight: 500;
+  --text-meta-weight: 500;
 
   --gold: #b67a00;
   --gold-hover: #936200;
+  --link-hover: #5d3e00;
   --gold-ink: #fffdf8;
   --gold-soft: rgba(182,122,0,.11);
   --gold-soft-border: rgba(182,122,0,.28);

@@ -29,7 +29,7 @@ function App() {
 
   return (
     <div data-theme={theme} style={{ background: 'var(--bg)', minHeight: '100vh', padding: 40,
-      fontFamily: 'var(--font-sans)' }}>
+      fontFamily: 'var(--font-sans)', fontWeight: 500 }}>
       <div style={panel}>
         {route === 'chat'
           ? <Chat character={character} onBack={() => setRoute('explore')} />

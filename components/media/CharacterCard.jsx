@@ -23,10 +23,11 @@ export function CharacterCard({
   const letter = initial || (name ? name[0].toUpperCase() : 'A');
   return (
     <div
-      style={{ display: 'flex', flexDirection: 'column', gap: 11, cursor: 'pointer',
-        transition: 'transform var(--dur-fast) var(--ease-spring)', ...style }}
-      onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-4px)'; }}
-      onMouseLeave={(e) => { e.currentTarget.style.transform = 'none'; }}
+      className="character-card"
+      style={{ position: 'relative', top: 0, filter: 'none', display: 'flex', flexDirection: 'column', gap: 11,
+        cursor: 'pointer', transition: 'top var(--dur-fast) var(--ease-spring)', ...style }}
+      onMouseEnter={(e) => { e.currentTarget.style.top = '-4px'; }}
+      onMouseLeave={(e) => { e.currentTarget.style.top = '0'; }}
       {...rest}
     >
       <div style={{
@@ -52,7 +53,8 @@ export function CharacterCard({
             textTransform: 'uppercase', color: 'var(--gold)', whiteSpace: 'nowrap' }}>{category}</span>
         </div>
         {blurb && (
-          <p style={{ font: 'var(--body-xs)', color: 'var(--text-secondary)', margin: '6px 0 10px',
+          <p style={{ font: 'var(--body-xs)', fontWeight: 'var(--text-supporting-weight)',
+            color: 'var(--text-secondary)', margin: '6px 0 10px',
             display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{blurb}</p>
         )}
         {tags.length > 0 && (

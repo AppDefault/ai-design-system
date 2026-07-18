@@ -28,7 +28,7 @@ function Explore({ onOpenChat }) {
                 <div style={{ font: 'var(--display-lg)', fontWeight: 500,
                   color: s.gold ? 'var(--gold)' : 'var(--text-primary)' }}>{s.v}</div>
                 <div style={{ font: 'var(--meta)', letterSpacing: 'var(--meta-tracking)',
-                  textTransform: 'uppercase', color: 'var(--text-muted)' }}>{s.l}</div>
+                  textTransform: 'uppercase', color: 'var(--text-tertiary)' }}>{s.l}</div>
               </div>
             ))}
           </div>

@@ -426,19 +426,23 @@ function CharacterCard({
 }) {
   const letter = initial || (name ? name[0].toUpperCase() : 'A');
   return /*#__PURE__*/React.createElement("div", _extends({
+    className: "character-card",
     style: {
+      position: 'relative',
+      top: 0,
+      filter: 'none',
       display: 'flex',
       flexDirection: 'column',
       gap: 11,
       cursor: 'pointer',
-      transition: 'transform var(--dur-fast) var(--ease-spring)',
+      transition: 'top var(--dur-fast) var(--ease-spring)',
       ...style
     },
     onMouseEnter: e => {
-      e.currentTarget.style.transform = 'translateY(-4px)';
+      e.currentTarget.style.top = '-4px';
     },
     onMouseLeave: e => {
-      e.currentTarget.style.transform = 'none';
+      e.currentTarget.style.top = '0';
     }
   }, rest), /*#__PURE__*/React.createElement("div", {
     style: {
@@ -504,6 +508,7 @@ function CharacterCard({
   }, category)), blurb && /*#__PURE__*/React.createElement("p", {
     style: {
       font: 'var(--body-xs)',
+      fontWeight: 'var(--text-supporting-weight)',
       color: 'var(--text-secondary)',
       margin: '6px 0 10px',
       display: '-webkit-box',
@@ -558,7 +563,8 @@ function App() {
       background: 'var(--bg)',
       minHeight: '100vh',
       padding: 40,
-      fontFamily: 'var(--font-sans)'
+      fontFamily: 'var(--font-sans)',
+      fontWeight: 500
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: panel
@@ -719,7 +725,7 @@ function Chat({
   }, r.snippet)), /*#__PURE__*/React.createElement("span", {
     style: {
       font: 'var(--meta)',
-      color: 'var(--text-muted)'
+      color: 'var(--text-tertiary)'
     }
   }, r.time))))), /*#__PURE__*/React.createElement("div", {
     style: {
